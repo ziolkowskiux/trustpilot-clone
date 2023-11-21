@@ -1,0 +1,283 @@
+.companyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: var(--token-jgohepLVeKvh);
+  position: relative;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 0px;
+  border: 1px solid var(--token-Pxe4wDL2kJpb);
+}
+.basicInformation {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  cursor: pointer;
+  min-width: 0;
+  padding: 16px;
+}
+.basicInformation > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - 16px);
+  width: calc(100% + 16px);
+}
+.basicInformation > :global(.__wab_flex-container) > *,
+.basicInformation > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.basicInformation > :global(.__wab_flex-container) > picture > img,
+.basicInformation
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 16px;
+}
+.companyLogo {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+}
+.companyLogo > picture > img {
+  object-fit: cover;
+}
+.freeBox__zzX70 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__zzX70 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 2px);
+  height: calc(100% + 2px);
+}
+.freeBox__zzX70 > :global(.__wab_flex-container) > *,
+.freeBox__zzX70 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__zzX70 > :global(.__wab_flex-container) > picture > img,
+.freeBox__zzX70
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 2px;
+}
+.companyName {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+}
+.freeBox__c2Gs {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__c2Gs > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - 16px);
+  width: calc(100% + 16px);
+}
+.freeBox__c2Gs > :global(.__wab_flex-container) > *,
+.freeBox__c2Gs > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__c2Gs > :global(.__wab_flex-container) > picture > img,
+.freeBox__c2Gs
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 16px;
+}
+.trustScore {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  color: var(--token-kzT08fQBAHgz);
+}
+.reviewsCount {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  color: var(--token-kzT08fQBAHgz);
+}
+.location {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  color: var(--token-kzT08fQBAHgz);
+}
+.freeBox__dRgSp {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  background: var(--token-LN1YkB123lXQ);
+  border-radius: 2px;
+  padding: 4px 8px;
+}
+.label {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  font-size: 12px;
+  font-weight: 600;
+}
+.footer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 16px;
+  border-top: 1px solid var(--token-Pxe4wDL2kJpb);
+}
+.footer > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.footer > :global(.__wab_flex-container) > *,
+.footer > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.footer > :global(.__wab_flex-container) > picture > img,
+.footer
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.freeBox__bfX {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-right: 8px;
+  min-width: 0;
+  padding: 0px;
+}
+.button:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+}
+.text {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-pRs3-4jrQ4XQ);
+  min-width: 0;
+}
+.reviews:global(.__wab_instance) {
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  object-fit: cover;
+  position: relative;
+  max-height: 147px;
+  min-width: 0;
+  display: none;
+}
+.reviewsreviewsVisible:global(.__wab_instance) {
+  display: flex;
+}
+.freeBox__nNOgs {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
+.img__b87A5 {
+  object-fit: cover;
+  max-width: 100%;
+}
+.img__b87A5 > picture > img {
+  object-fit: cover;
+}
+.freeBox__byWmA {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.img__llJti {
+  object-fit: cover;
+  max-width: 100%;
+}
+.img__llJti > picture > img {
+  object-fit: cover;
+}
+.freeBox__tfW3G {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.img__afEEk {
+  object-fit: cover;
+  max-width: 100%;
+}
+.img__afEEk > picture > img {
+  object-fit: cover;
+}

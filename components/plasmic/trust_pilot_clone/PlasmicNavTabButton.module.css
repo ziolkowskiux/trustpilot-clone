@@ -1,0 +1,27 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 60px;
+  max-width: 100%;
+  position: relative;
+  background: var(--token-o1vZGRJWL);
+  padding: 0px 16px;
+  border-style: none;
+}
+.root:hover {
+  cursor: pointer;
+  border-bottom: 4px solid var(--token-Yq556PvPjGii);
+}
+.freeBox {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.slotTargetName {
+  color: var(--token-Yq556PvPjGii);
+}

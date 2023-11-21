@@ -1,0 +1,93 @@
+.writeAReview {
+  background: var(--token-pRIMmkeTa);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  min-width: 0;
+  border-radius: 8px;
+  padding: var(--token-02IfQLozsPKb);
+  border: 1px solid var(--token-Pxe4wDL2kJpb);
+}
+.writeAReview > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  margin-left: calc(0px - var(--token-UEz8jpx4ZeEk));
+  width: calc(100% + var(--token-UEz8jpx4ZeEk));
+}
+.writeAReview > :global(.__wab_flex-container) > *,
+.writeAReview > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.writeAReview > :global(.__wab_flex-container) > picture > img,
+.writeAReview
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-UEz8jpx4ZeEk);
+}
+.freeBox {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 0px;
+}
+.freeBox > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: calc(0px - var(--token-UEz8jpx4ZeEk));
+  width: calc(100% + var(--token-UEz8jpx4ZeEk));
+}
+.freeBox > :global(.__wab_flex-container) > *,
+.freeBox > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox > :global(.__wab_flex-container) > picture > img,
+.freeBox
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-UEz8jpx4ZeEk);
+}
+.usersAvatar {
+  object-fit: cover;
+  max-width: 100%;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.usersAvatar > picture > img {
+  object-fit: cover;
+}
+.userNameAndLink {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 0px;
+}
+.text {
+  font-size: var(--token-7z5Kw5B89TZR);
+  font-weight: 700;
+  color: var(--token-o1vZGRJWL);
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  min-height: 0;
+}
+.link {
+  position: relative;
+}
+.starRating:global(.__wab_instance) {
+  position: relative;
+}

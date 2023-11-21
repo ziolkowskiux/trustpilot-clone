@@ -1,0 +1,29 @@
+.navDropdownItem {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  background: var(--token-o1vZGRJWL);
+  min-width: 0;
+  padding: 16px 8px;
+}
+.navDropdownItem:hover {
+  background: var(--token-6G9-A5vsJlrH);
+}
+.freeBox {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.slotTargetChildren {
+  color: var(--token-pRIMmkeTa);
+}
+.navDropdownItem:hover .slotTargetChildren {
+  color: var(--token-zXou5HA2hb1R);
+}

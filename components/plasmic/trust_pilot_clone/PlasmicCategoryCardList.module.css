@@ -1,0 +1,101 @@
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: var(--token-pRIMmkeTa);
+  position: relative;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 0px;
+  border: 1px solid var(--token--rHJyFFIHSqx);
+}
+.categoryHeader {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 128px;
+  min-width: 0;
+  padding: 24px;
+}
+.categoryHeader > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.categoryHeader > :global(.__wab_flex-container) > *,
+.categoryHeader > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.categoryHeader > :global(.__wab_flex-container) > picture > img,
+.categoryHeader
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.categoryIcon {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.categoryIcon > picture > img {
+  object-fit: cover;
+}
+.categoryName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-top: 0px;
+  text-align: center;
+  min-width: 0;
+}
+.subcategoriesList {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 24px;
+}
+.link {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 12px 0px;
+  border-bottom: 1px solid var(--token-Pxe4wDL2kJpb);
+}
+.link > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.link > :global(.__wab_flex-container) > *,
+.link > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.link > :global(.__wab_flex-container) > picture > img,
+.link > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+  margin-top: 0px;
+}

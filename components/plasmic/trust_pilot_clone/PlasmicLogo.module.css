@@ -1,0 +1,20 @@
+.root {
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  justify-self: flex-start;
+  padding: 0px;
+}
+.text {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-Yq556PvPjGii);
+  font-weight: 600;
+  font-size: 24px;
+}
