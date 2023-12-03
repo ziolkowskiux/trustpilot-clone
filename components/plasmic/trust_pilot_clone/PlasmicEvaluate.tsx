@@ -603,13 +603,14 @@ function PlasmicEvaluate__RenderFunc(props: {
                         const actionArgs = {
                           dataOp: {
                             sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-                            opId: "3296b709-bcb3-4250-b5bb-8a555fd3925e",
+                            opId: "e66fb782-2d72-47bf-9253-897980ae9085",
                             userArgs: {
                               variables: [
                                 $ctx.params.company,
                                 $state.reviewContent.value,
                                 $state.reviewTitle2.value,
                                 $state.date.value,
+                                $state.starRating.trustScore,
                                 $state.starRating.trustScore
                               ]
                             },

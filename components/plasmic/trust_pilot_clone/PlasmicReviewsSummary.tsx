@@ -55,9 +55,13 @@ export type PlasmicReviewsSummary__VariantsArgs = {};
 type VariantPropType = keyof PlasmicReviewsSummary__VariantsArgs;
 export const PlasmicReviewsSummary__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicReviewsSummary__ArgsType = {};
+export type PlasmicReviewsSummary__ArgsType = {
+  overallRating?: string;
+};
 type ArgPropType = keyof PlasmicReviewsSummary__ArgsType;
-export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>();
+export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>(
+  "overallRating"
+);
 
 export type PlasmicReviewsSummary__OverridesType = {
   reviewsSummary?: p.Flex<"div">;
@@ -80,6 +84,7 @@ export type PlasmicReviewsSummary__OverridesType = {
 };
 
 export interface DefaultReviewsSummaryProps {
+  overallRating?: string;
   className?: string;
 }
 
@@ -100,7 +105,16 @@ function PlasmicReviewsSummary__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {
+          overallRating: "0.0"
+        },
+        props.args
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,
@@ -214,7 +228,21 @@ function PlasmicReviewsSummary__RenderFunc(props: {
               sty.headerScore
             )}
           >
-            {"4.9"}
+            <React.Fragment>
+              {(() => {
+                try {
+                  return $props.overallRating;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return "4.9";
+                  }
+                  throw e;
+                }
+              })()}
+            </React.Fragment>
           </div>
         </p.Stack>
         <div

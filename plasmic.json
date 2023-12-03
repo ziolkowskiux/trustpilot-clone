@@ -7,7 +7,7 @@
   },
   "style": {
     "scheme": "css-modules",
-    "defaultStyleCssFilePath": "plasmic/plasmic__default_style.css"
+    "defaultStyleCssFilePath": "plasmic/plasmic__default_style.module.css"
   },
   "images": {
     "scheme": "public-files",
@@ -136,38 +136,38 @@
           "id": "FNIk-CnxQYXU",
           "name": "RichLayout",
           "displayName": "hostless-rich-layout",
-          "componentImportPath": "@plasmicpkgs/plasmic-rich-components"
+          "componentImportPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout"
         },
         {
           "id": "k4RvFQUTZKCU",
           "name": "RichTable",
           "displayName": "hostless-rich-table",
-          "componentImportPath": "@plasmicpkgs/plasmic-rich-components",
+          "componentImportPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-table",
           "helper": {
             "name": "tableHelpers",
-            "importPath": "@plasmicpkgs/plasmic-rich-components"
+            "importPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-table"
           }
         },
         {
           "id": "zV8WqibK3ZnC",
           "name": "RichDetails",
           "displayName": "hostless-rich-details",
-          "componentImportPath": "@plasmicpkgs/plasmic-rich-components"
+          "componentImportPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-details"
         },
         {
           "id": "Hh2OL1EveIF",
           "name": "RichList",
           "displayName": "hostless-rich-list",
-          "componentImportPath": "@plasmicpkgs/plasmic-rich-components"
+          "componentImportPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-list"
         },
         {
           "id": "UzObi2yVH_DH",
           "name": "RichCalendar",
           "displayName": "hostless-rich-calendar",
-          "componentImportPath": "@plasmicpkgs/plasmic-rich-components",
+          "componentImportPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-calendar",
           "helper": {
             "name": "calendarHelpers",
-            "importPath": "@plasmicpkgs/plasmic-rich-components"
+            "importPath": "@plasmicpkgs/plasmic-rich-components/skinny/rich-calendar"
           }
         }
       ],
@@ -1181,6 +1181,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.322",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.322/dist/plasmic.schema.json"
+  "cliVersion": "0.1.323",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.323/dist/plasmic.schema.json"
 }

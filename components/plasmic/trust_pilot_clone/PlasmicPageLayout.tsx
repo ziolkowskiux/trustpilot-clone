@@ -36,7 +36,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import { RichLayout } from "@plasmicpkgs/plasmic-rich-components";
+import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
 import { LoadingBoundary } from "@plasmicpkgs/plasmic-basic-components";
 
 import "@plasmicapp/react-web/lib/plasmic.css";

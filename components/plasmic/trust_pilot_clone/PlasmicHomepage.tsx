@@ -363,12 +363,11 @@ function PlasmicHomepage__RenderFunc(props: {
                   centerMode: false,
                   className: classNames("__wab_instance", sty.sliderCarousel),
                   dots: false,
-                  editingSlide: p.generateStateValueProp($state, [
+                  infinite: false,
+                  initialSlide: p.generateStateValueProp($state, [
                     "sliderCarousel",
                     "currentSlide"
                   ]),
-                  infinite: false,
-                  initialSlide: 0,
                   pauseOnDotsHover: true,
                   ref: ref => {
                     $refs["sliderCarousel"] = ref;
@@ -918,11 +917,10 @@ function PlasmicHomepage__RenderFunc(props: {
                       "__wab_instance",
                       sty.sliderCarousel2
                     ),
-                    editingSlide: p.generateStateValueProp($state, [
+                    initialSlide: p.generateStateValueProp($state, [
                       "sliderCarousel2",
                       "currentSlide"
                     ]),
-                    initialSlide: 0,
                     ref: ref => {
                       $refs["sliderCarousel2"] = ref;
                     },

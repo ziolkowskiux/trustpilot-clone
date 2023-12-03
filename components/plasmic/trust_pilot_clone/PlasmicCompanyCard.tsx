@@ -505,11 +505,10 @@ function PlasmicCompanyCard__RenderFunc(props: {
                 "reviewsVisible"
               )
             }),
-            editingSlide: p.generateStateValueProp($state, [
+            initialSlide: p.generateStateValueProp($state, [
               "reviews",
               "currentSlide"
             ]),
-            initialSlide: 0,
             ref: ref => {
               $refs["reviews"] = ref;
             },

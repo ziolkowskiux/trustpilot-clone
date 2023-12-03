@@ -454,6 +454,19 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"reviewsSummary"}
                   data-plasmic-override={overrides.reviewsSummary}
                   className={classNames("__wab_instance", sty.reviewsSummary)}
+                  overallRating={(() => {
+                    try {
+                      return $queries.fetchCompany.data[0].rating;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
                 />
 
                 <p.Stack
