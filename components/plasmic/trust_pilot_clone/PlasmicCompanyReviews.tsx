@@ -138,11 +138,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
     fetchReviews: usePlasmicDataOp(() => {
       return {
         sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-        opId: "96a75edc-43d2-4f8b-9fd2-37df4989f325",
+        opId: "66f52973-8454-4c45-99fe-42eb46d4434a",
         userArgs: {
           filters: [$ctx.params.company_id]
         },
-        cacheKey: `plasmic.$.96a75edc-43d2-4f8b-9fd2-37df4989f325.$.`,
+        cacheKey: `plasmic.$.66f52973-8454-4c45-99fe-42eb46d4434a.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -155,6 +155,18 @@ function PlasmicCompanyReviews__RenderFunc(props: {
           keys: [$ctx.params.company_id]
         },
         cacheKey: `plasmic.$.01dbb939-6ba7-4ada-b18d-fed02d430db0.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    }),
+    fetchReviewsSummary: usePlasmicDataOp(() => {
+      return {
+        sourceId: "czoZTBwvV8zZJLNVxj78Sv",
+        opId: "8d47c0be-225c-401b-bd4a-4a33450bf3a4",
+        userArgs: {
+          keys: [$ctx.params.company_id]
+        },
+        cacheKey: `plasmic.$.8d47c0be-225c-401b-bd4a-4a33450bf3a4.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -463,6 +475,84 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         e?.plasmicType === "PlasmicUndefinedDataError"
                       ) {
                         return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviews1Star={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_1star;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 10;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviews2Star={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_2star;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 20;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviews3Star={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_3star;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 30;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviews4Star={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_4star;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 20;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviews5Star={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_5star;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 10;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  reviewsTotal={(() => {
+                    try {
+                      return $queries.fetchReviewsSummary.data[0].reviews_total;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return 100;
                       }
                       throw e;
                     }

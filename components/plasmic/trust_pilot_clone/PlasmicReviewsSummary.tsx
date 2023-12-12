@@ -57,10 +57,22 @@ export const PlasmicReviewsSummary__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicReviewsSummary__ArgsType = {
   overallRating?: string;
+  reviews5Star?: number;
+  reviewsTotal?: number;
+  reviews4Star?: number;
+  reviews3Star?: number;
+  reviews2Star?: number;
+  reviews1Star?: number;
 };
 type ArgPropType = keyof PlasmicReviewsSummary__ArgsType;
 export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>(
-  "overallRating"
+  "overallRating",
+  "reviews5Star",
+  "reviewsTotal",
+  "reviews4Star",
+  "reviews3Star",
+  "reviews2Star",
+  "reviews1Star"
 );
 
 export type PlasmicReviewsSummary__OverridesType = {
@@ -85,6 +97,12 @@ export type PlasmicReviewsSummary__OverridesType = {
 
 export interface DefaultReviewsSummaryProps {
   overallRating?: string;
+  reviews5Star?: number;
+  reviewsTotal?: number;
+  reviews4Star?: number;
+  reviews3Star?: number;
+  reviews2Star?: number;
+  reviews1Star?: number;
   className?: string;
 }
 
@@ -109,7 +127,13 @@ function PlasmicReviewsSummary__RenderFunc(props: {
     () =>
       Object.assign(
         {
-          overallRating: "0.0"
+          overallRating: "0.0",
+          reviews5Star: 10,
+          reviewsTotal: 100,
+          reviews4Star: 20,
+          reviews3Star: 30,
+          reviews2Star: 20,
+          reviews1Star: 10
         },
         props.args
       ),
@@ -254,7 +278,21 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             sty.reviewsCount
           )}
         >
-          {"1000 total"}
+          <React.Fragment>
+            {(() => {
+              try {
+                return $props.reviewsTotal + " reviews";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return "1000 total";
+                }
+                throw e;
+              }
+            })()}
+          </React.Fragment>
         </div>
       </div>
       <p.Stack
@@ -268,13 +306,42 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           data-plasmic-name={"_5StarReviews"}
           data-plasmic-override={overrides._5StarReviews}
           className={classNames("__wab_instance", sty._5StarReviews)}
-          fillColor={`#27ae60${undefined}`}
+          fillColor={"#27ae60"}
           label={"5-star"}
           onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
             "_5StarReviews",
             "ratingBarChecked"
           ])}
-          value={"10"}
+          value={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews5Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          valueNum={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews5Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 10;
+              }
+              throw e;
+            }
+          })()}
         />
 
         <ReviewsSummaryPercentageBar
@@ -286,7 +353,36 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_4StarReviews",
             "ratingBarChecked"
           ])}
-          value={"20"}
+          value={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews4Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          valueNum={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews4Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 10;
+              }
+              throw e;
+            }
+          })()}
         />
 
         <ReviewsSummaryPercentageBar
@@ -298,7 +394,36 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_3StarReviews",
             "ratingBarChecked"
           ])}
-          value={"30"}
+          value={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews3Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          valueNum={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews3Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 10;
+              }
+              throw e;
+            }
+          })()}
         />
 
         <ReviewsSummaryPercentageBar
@@ -310,7 +435,36 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_2StarReviews",
             "ratingBarChecked"
           ])}
-          value={"40"}
+          value={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews2Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          valueNum={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews2Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 10;
+              }
+              throw e;
+            }
+          })()}
         />
 
         <ReviewsSummaryPercentageBar
@@ -322,7 +476,36 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_2StarReviews2",
             "ratingBarChecked"
           ])}
-          value={"10"}
+          value={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews1Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          valueNum={(() => {
+            try {
+              return Math.floor(
+                ($props.reviews1Star / $props.reviewsTotal) * 100
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 10;
+              }
+              throw e;
+            }
+          })()}
         />
       </p.Stack>
       <div

@@ -58,6 +58,7 @@ export type PlasmicReviewsSummaryPercentageBar__ArgsType = {
   label?: string;
   value?: string;
   fillColor?: string;
+  valueNum?: number;
 };
 type ArgPropType = keyof PlasmicReviewsSummaryPercentageBar__ArgsType;
 export const PlasmicReviewsSummaryPercentageBar__ArgProps =
@@ -65,7 +66,8 @@ export const PlasmicReviewsSummaryPercentageBar__ArgProps =
     "onRatingBarCheckedChange",
     "label",
     "value",
-    "fillColor"
+    "fillColor",
+    "valueNum"
   );
 
 export type PlasmicReviewsSummaryPercentageBar__OverridesType = {
@@ -82,6 +84,7 @@ export interface DefaultReviewsSummaryPercentageBarProps {
   label?: string;
   value?: string;
   fillColor?: string;
+  valueNum?: number;
   className?: string;
 }
 
@@ -108,7 +111,8 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
         {
           label: "?-star",
           value: "0",
-          fillColor: "#27ae60"
+          fillColor: "#27ae60",
+          valueNum: 10
         },
         props.args
       ),
@@ -263,7 +267,7 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
         <React.Fragment>
           {(() => {
             try {
-              return $props.value.concat("", "%");
+              return String($props.valueNum).concat("", "%");
             } catch (e) {
               if (
                 e instanceof TypeError ||
