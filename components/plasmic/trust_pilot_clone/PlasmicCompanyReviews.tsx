@@ -48,6 +48,8 @@ import WebsiteAddressCard from "../../WebsiteAddressCard"; // plasmic-import: hW
 import WriteAReview from "../../WriteAReview"; // plasmic-import: M5Xk5pdCttsu/component
 import ReviewsSummary from "../../ReviewsSummary"; // plasmic-import: _WBWxb6k6npY/component
 import ReviewCard from "../../ReviewCard"; // plasmic-import: rJiDAmiPUpjj/component
+import { AntdPagination } from "@plasmicpkgs/antd5/skinny/registerPagination";
+import { paginationHelpers as AntdPagination_Helpers } from "@plasmicpkgs/antd5/skinny/registerPagination";
 import Card from "../../Card"; // plasmic-import: I7kjAJ4INnHj/component
 import CompanyActivityTags from "../../CompanyActivityTags"; // plasmic-import: 1RfhwdtRup_T/component
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
@@ -89,6 +91,7 @@ export type PlasmicCompanyReviews__OverridesType = {
   reviewsSummary?: p.Flex<typeof ReviewsSummary>;
   reviewsList?: p.Flex<"div">;
   reviewCard?: p.Flex<typeof ReviewCard>;
+  pagination?: p.Flex<typeof AntdPagination>;
   companyActivity?: p.Flex<typeof Card>;
   link?: p.Flex<"a"> & Partial<LinkProps>;
   companyActivityTags?: p.Flex<typeof CompanyActivityTags>;
@@ -133,16 +136,101 @@ function PlasmicCompanyReviews__RenderFunc(props: {
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
+  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "pagination.currentPage",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 1,
+
+        onMutate: p.generateOnMutateForSpec(
+          "currentPage",
+          AntdPagination_Helpers
+        )
+      },
+      {
+        path: "pagination.pageSize",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 10,
+
+        onMutate: p.generateOnMutateForSpec("pageSize", AntdPagination_Helpers)
+      },
+      {
+        path: "pagination.startIndex",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: p.generateOnMutateForSpec(
+          "startIndex",
+          AntdPagination_Helpers
+        )
+      },
+      {
+        path: "pagination.endIndex",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: p.generateOnMutateForSpec("endIndex", AntdPagination_Helpers)
+      },
+      {
+        path: "reviewsSummary._5StarChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "reviewsSummary._4StarChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "reviewsSummary._3StarChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "reviewsSummary._2StarChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "reviewsSummary._1StarChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = p.useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: $queries,
+    $refs
+  });
+  const dataSourcesCtx = usePlasmicDataSourceContext();
+  const plasmicInvalidate = usePlasmicInvalidate();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
     fetchReviews: usePlasmicDataOp(() => {
       return {
         sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-        opId: "66f52973-8454-4c45-99fe-42eb46d4434a",
+        opId: "9fc31bea-28fd-4149-9525-a65e322fd776",
         userArgs: {
-          filters: [$ctx.params.company_id]
+          query: [
+            $ctx.params.company_id,
+            $state.pagination.pageSize,
+            ($state.pagination.currentPage - 1) * $state.pagination.pageSize
+          ]
         },
-        cacheKey: `plasmic.$.66f52973-8454-4c45-99fe-42eb46d4434a.$.`,
+        cacheKey: `plasmic.$.9fc31bea-28fd-4149-9525-a65e322fd776.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -466,6 +554,50 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"reviewsSummary"}
                   data-plasmic-override={overrides.reviewsSummary}
                   className={classNames("__wab_instance", sty.reviewsSummary)}
+                  on1StarCheckedChange={async (...eventArgs: any) => {
+                    p.generateStateOnChangeProp($state, [
+                      "reviewsSummary",
+                      "_1StarChecked"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["refreshData"] = true
+                        ? (() => {
+                            const actionArgs = { queryInvalidation: [] };
+                            return (async ({ queryInvalidation }) => {
+                              if (!queryInvalidation) {
+                                return;
+                              }
+                              await plasmicInvalidate(queryInvalidation);
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["refreshData"] != null &&
+                        typeof $steps["refreshData"] === "object" &&
+                        typeof $steps["refreshData"].then === "function"
+                      ) {
+                        $steps["refreshData"] = await $steps["refreshData"];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                  on2StarCheckedChange={p.generateStateOnChangeProp($state, [
+                    "reviewsSummary",
+                    "_2StarChecked"
+                  ])}
+                  on3StarCheckedChange={p.generateStateOnChangeProp($state, [
+                    "reviewsSummary",
+                    "_3StarChecked"
+                  ])}
+                  on4StarCheckedChange={p.generateStateOnChangeProp($state, [
+                    "reviewsSummary",
+                    "_4StarChecked"
+                  ])}
+                  on5StarCheckedChange={p.generateStateOnChangeProp($state, [
+                    "reviewsSummary",
+                    "_5StarChecked"
+                  ])}
                   overallRating={(() => {
                     try {
                       return $queries.fetchCompany.data[0].rating;
@@ -644,6 +776,110 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       />
                     );
                   })}
+                  {(() => {
+                    const child$Props = {
+                      className: classNames("__wab_instance", sty.pagination),
+                      current: p.generateStateValueProp($state, [
+                        "pagination",
+                        "currentPage"
+                      ]),
+                      defaultCurrent: 1,
+                      defaultPageSize: 10,
+                      hideOnSinglePage: false,
+                      onChange: async (...eventArgs: any) => {
+                        p.generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "currentPage",
+                          ["pagination", "currentPage"],
+                          AntdPagination_Helpers
+                        ).apply(null, eventArgs);
+                        p.generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "startIndex",
+                          ["pagination", "startIndex"],
+                          AntdPagination_Helpers
+                        ).apply(null, eventArgs);
+                        p.generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "endIndex",
+                          ["pagination", "endIndex"],
+                          AntdPagination_Helpers
+                        ).apply(null, eventArgs);
+                      },
+                      onShowSizeChange:
+                        p.generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "pageSize",
+                          ["pagination", "pageSize"],
+                          AntdPagination_Helpers
+                        ),
+                      pageSize: p.generateStateValueProp($state, [
+                        "pagination",
+                        "pageSize"
+                      ]),
+                      pageSizeOptions: [
+                        { pageSize: 10 },
+                        { pageSize: 20 },
+                        { pageSize: 50 },
+                        { pageSize: 100 }
+                      ],
+                      showLessItems: false,
+                      showQuickJumper: false,
+                      showSizeChanger: false,
+                      showTotal: (total, range) => {
+                        return true;
+                      },
+
+                      simple: false,
+                      size: "default",
+                      total: (() => {
+                        try {
+                          return $queries.fetchReviewsSummary.data[0]
+                            .reviews_total;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    };
+                    p.initializeCodeComponentStates(
+                      $state,
+                      [
+                        {
+                          name: "currentPage",
+                          plasmicStateName: "pagination.currentPage"
+                        },
+                        {
+                          name: "pageSize",
+                          plasmicStateName: "pagination.pageSize"
+                        },
+                        {
+                          name: "startIndex",
+                          plasmicStateName: "pagination.startIndex"
+                        },
+                        {
+                          name: "endIndex",
+                          plasmicStateName: "pagination.endIndex"
+                        }
+                      ],
+                      [],
+                      AntdPagination_Helpers ?? {},
+                      child$Props
+                    );
+
+                    return (
+                      <AntdPagination
+                        data-plasmic-name={"pagination"}
+                        data-plasmic-override={overrides.pagination}
+                        {...child$Props}
+                      />
+                    );
+                  })()}
                 </p.Stack>
               </p.Stack>
               <p.Stack
@@ -784,6 +1020,7 @@ const PlasmicDescendants = {
     "reviewsSummary",
     "reviewsList",
     "reviewCard",
+    "pagination",
     "companyActivity",
     "link",
     "companyActivityTags",
@@ -808,6 +1045,7 @@ const PlasmicDescendants = {
     "reviewsSummary",
     "reviewsList",
     "reviewCard",
+    "pagination",
     "companyActivity",
     "link",
     "companyActivityTags",
@@ -846,8 +1084,9 @@ const PlasmicDescendants = {
   websiteAddressCard: ["websiteAddressCard"],
   writeAReview: ["writeAReview"],
   reviewsSummary: ["reviewsSummary"],
-  reviewsList: ["reviewsList", "reviewCard"],
+  reviewsList: ["reviewsList", "reviewCard", "pagination"],
   reviewCard: ["reviewCard"],
+  pagination: ["pagination"],
   companyActivity: ["companyActivity", "link", "companyActivityTags"],
   link: ["link"],
   companyActivityTags: ["companyActivityTags"],
@@ -876,6 +1115,7 @@ type NodeDefaultElementType = {
   reviewsSummary: typeof ReviewsSummary;
   reviewsList: "div";
   reviewCard: typeof ReviewCard;
+  pagination: typeof AntdPagination;
   companyActivity: typeof Card;
   link: "a";
   companyActivityTags: typeof CompanyActivityTags;
@@ -1002,6 +1242,7 @@ export const PlasmicCompanyReviews = Object.assign(
     reviewsSummary: makeNodeComponent("reviewsSummary"),
     reviewsList: makeNodeComponent("reviewsList"),
     reviewCard: makeNodeComponent("reviewCard"),
+    pagination: makeNodeComponent("pagination"),
     companyActivity: makeNodeComponent("companyActivity"),
     link: makeNodeComponent("link"),
     companyActivityTags: makeNodeComponent("companyActivityTags"),

@@ -56,6 +56,11 @@ type VariantPropType = keyof PlasmicReviewsSummary__VariantsArgs;
 export const PlasmicReviewsSummary__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicReviewsSummary__ArgsType = {
+  on5StarCheckedChange?: (val: boolean) => void;
+  on4StarCheckedChange?: (val: boolean) => void;
+  on3StarCheckedChange?: (val: boolean) => void;
+  on2StarCheckedChange?: (val: boolean) => void;
+  on1StarCheckedChange?: (val: boolean) => void;
   overallRating?: string;
   reviews5Star?: number;
   reviewsTotal?: number;
@@ -66,6 +71,11 @@ export type PlasmicReviewsSummary__ArgsType = {
 };
 type ArgPropType = keyof PlasmicReviewsSummary__ArgsType;
 export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>(
+  "on5StarCheckedChange",
+  "on4StarCheckedChange",
+  "on3StarCheckedChange",
+  "on2StarCheckedChange",
+  "on1StarCheckedChange",
   "overallRating",
   "reviews5Star",
   "reviewsTotal",
@@ -88,7 +98,7 @@ export type PlasmicReviewsSummary__OverridesType = {
   _4StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
   _3StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
   _2StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  _2StarReviews2?: p.Flex<typeof ReviewsSummaryPercentageBar>;
+  _1StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
   footer?: p.Flex<"div">;
   buttonFilter?: p.Flex<typeof AntdButton>;
   buttonsRight?: p.Flex<"div">;
@@ -96,6 +106,11 @@ export type PlasmicReviewsSummary__OverridesType = {
 };
 
 export interface DefaultReviewsSummaryProps {
+  on5StarCheckedChange?: (val: boolean) => void;
+  on4StarCheckedChange?: (val: boolean) => void;
+  on3StarCheckedChange?: (val: boolean) => void;
+  on2StarCheckedChange?: (val: boolean) => void;
+  on1StarCheckedChange?: (val: boolean) => void;
   overallRating?: string;
   reviews5Star?: number;
   reviewsTotal?: number;
@@ -156,33 +171,49 @@ function PlasmicReviewsSummary__RenderFunc(props: {
     () => [
       {
         path: "_5StarReviews.ratingBarChecked",
-        type: "private",
+        type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onChangeProp: "on5StarCheckedChange"
       },
       {
         path: "_4StarReviews.ratingBarChecked",
-        type: "private",
+        type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onChangeProp: "on4StarCheckedChange"
       },
       {
         path: "_3StarReviews.ratingBarChecked",
-        type: "private",
+        type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onChangeProp: "on3StarCheckedChange"
       },
       {
         path: "_2StarReviews.ratingBarChecked",
-        type: "private",
+        type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onChangeProp: "on2StarCheckedChange"
       },
       {
-        path: "_2StarReviews2.ratingBarChecked",
-        type: "private",
+        path: "_1StarReviews.ratingBarChecked",
+        type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onChangeProp: "on1StarCheckedChange"
+      },
+      {
+        path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -468,12 +499,12 @@ function PlasmicReviewsSummary__RenderFunc(props: {
         />
 
         <ReviewsSummaryPercentageBar
-          data-plasmic-name={"_2StarReviews2"}
-          data-plasmic-override={overrides._2StarReviews2}
-          className={classNames("__wab_instance", sty._2StarReviews2)}
+          data-plasmic-name={"_1StarReviews"}
+          data-plasmic-override={overrides._1StarReviews}
+          className={classNames("__wab_instance", sty._1StarReviews)}
           label={"1-star"}
           onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
-            "_2StarReviews2",
+            "_1StarReviews",
             "ratingBarChecked"
           ])}
           value={(() => {
@@ -583,7 +614,7 @@ const PlasmicDescendants = {
     "_4StarReviews",
     "_3StarReviews",
     "_2StarReviews",
-    "_2StarReviews2",
+    "_1StarReviews",
     "footer",
     "buttonFilter",
     "buttonsRight",
@@ -608,13 +639,13 @@ const PlasmicDescendants = {
     "_4StarReviews",
     "_3StarReviews",
     "_2StarReviews",
-    "_2StarReviews2"
+    "_1StarReviews"
   ],
   _5StarReviews: ["_5StarReviews"],
   _4StarReviews: ["_4StarReviews"],
   _3StarReviews: ["_3StarReviews"],
   _2StarReviews: ["_2StarReviews"],
-  _2StarReviews2: ["_2StarReviews2"],
+  _1StarReviews: ["_1StarReviews"],
   footer: ["footer", "buttonFilter", "buttonsRight", "buttonSort"],
   buttonFilter: ["buttonFilter"],
   buttonsRight: ["buttonsRight", "buttonSort"],
@@ -636,7 +667,7 @@ type NodeDefaultElementType = {
   _4StarReviews: typeof ReviewsSummaryPercentageBar;
   _3StarReviews: typeof ReviewsSummaryPercentageBar;
   _2StarReviews: typeof ReviewsSummaryPercentageBar;
-  _2StarReviews2: typeof ReviewsSummaryPercentageBar;
+  _1StarReviews: typeof ReviewsSummaryPercentageBar;
   footer: "div";
   buttonFilter: typeof AntdButton;
   buttonsRight: "div";
@@ -714,7 +745,7 @@ export const PlasmicReviewsSummary = Object.assign(
     _4StarReviews: makeNodeComponent("_4StarReviews"),
     _3StarReviews: makeNodeComponent("_3StarReviews"),
     _2StarReviews: makeNodeComponent("_2StarReviews"),
-    _2StarReviews2: makeNodeComponent("_2StarReviews2"),
+    _1StarReviews: makeNodeComponent("_1StarReviews"),
     footer: makeNodeComponent("footer"),
     buttonFilter: makeNodeComponent("buttonFilter"),
     buttonsRight: makeNodeComponent("buttonsRight"),

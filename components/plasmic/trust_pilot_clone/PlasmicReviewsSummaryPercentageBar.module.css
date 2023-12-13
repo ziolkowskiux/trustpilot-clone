@@ -5,6 +5,8 @@
   height: auto;
   max-width: 100%;
   position: relative;
+  cursor: pointer;
+  pointer-events: none;
   min-width: 0;
   padding: 0px;
   border-width: 0px;
@@ -28,7 +30,7 @@
   > img {
   margin-left: var(--token-UEz8jpx4ZeEk);
 }
-.checkbox:global(.__wab_instance) {
+.ratingBar:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: 73px;

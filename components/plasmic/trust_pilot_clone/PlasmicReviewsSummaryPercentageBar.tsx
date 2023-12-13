@@ -72,7 +72,7 @@ export const PlasmicReviewsSummaryPercentageBar__ArgProps =
 
 export type PlasmicReviewsSummaryPercentageBar__OverridesType = {
   withRating?: p.Flex<"label">;
-  checkbox?: p.Flex<typeof AntdCheckbox>;
+  ratingBar?: p.Flex<typeof AntdCheckbox>;
   text?: p.Flex<"div">;
   bar?: p.Flex<"div">;
   percentageBar?: p.Flex<"div">;
@@ -134,10 +134,10 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
   const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "checkbox.checked",
+        path: "ratingBar.checked",
         type: "readonly",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+        initFunc: ({ $props, $state, $queries, $ctx }) => false,
 
         onChangeProp: "onRatingBarCheckedChange"
       }
@@ -180,11 +180,12 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
       data-plasmic-trigger-props={[triggerWithRatingHoverProps]}
     >
       <AntdCheckbox
-        data-plasmic-name={"checkbox"}
-        data-plasmic-override={overrides.checkbox}
-        checked={p.generateStateValueProp($state, ["checkbox", "checked"])}
-        className={classNames("__wab_instance", sty.checkbox)}
-        onChange={p.generateStateOnChangeProp($state, ["checkbox", "checked"])}
+        data-plasmic-name={"ratingBar"}
+        data-plasmic-override={overrides.ratingBar}
+        checked={p.generateStateValueProp($state, ["ratingBar", "checked"])}
+        className={classNames("__wab_instance", sty.ratingBar)}
+        defaultChecked={false}
+        onChange={p.generateStateOnChangeProp($state, ["ratingBar", "checked"])}
       >
         <div
           data-plasmic-name={"text"}
@@ -287,13 +288,13 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
 const PlasmicDescendants = {
   withRating: [
     "withRating",
-    "checkbox",
+    "ratingBar",
     "text",
     "bar",
     "percentageBar",
     "percentageValue"
   ],
-  checkbox: ["checkbox", "text"],
+  ratingBar: ["ratingBar", "text"],
   text: ["text"],
   bar: ["bar", "percentageBar"],
   percentageBar: ["percentageBar"],
@@ -304,7 +305,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   withRating: "label";
-  checkbox: typeof AntdCheckbox;
+  ratingBar: typeof AntdCheckbox;
   text: "div";
   bar: "div";
   percentageBar: "div";
@@ -375,7 +376,7 @@ export const PlasmicReviewsSummaryPercentageBar = Object.assign(
   makeNodeComponent("withRating"),
   {
     // Helper components rendering sub-elements
-    checkbox: makeNodeComponent("checkbox"),
+    ratingBar: makeNodeComponent("ratingBar"),
     text: makeNodeComponent("text"),
     bar: makeNodeComponent("bar"),
     percentageBar: makeNodeComponent("percentageBar"),
