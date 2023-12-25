@@ -222,15 +222,21 @@ function PlasmicCompanyReviews__RenderFunc(props: {
     fetchReviews: usePlasmicDataOp(() => {
       return {
         sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-        opId: "9fc31bea-28fd-4149-9525-a65e322fd776",
+        opId: "7a26a7bb-d504-4cf6-a845-6dd920b8e9ef",
         userArgs: {
           query: [
             $ctx.params.company_id,
+            Object.keys($state.reviewsSummary).map((key, index) => {
+              if ($state.reviewsSummary[key] == true) return index + 1;
+            }),
+            Object.keys($state.reviewsSummary).filter(
+              item => $state.reviewsSummary[item] === true
+            ).length === 0,
             $state.pagination.pageSize,
             ($state.pagination.currentPage - 1) * $state.pagination.pageSize
           ]
         },
-        cacheKey: `plasmic.$.9fc31bea-28fd-4149-9525-a65e322fd776.$.`,
+        cacheKey: `plasmic.$.7a26a7bb-d504-4cf6-a845-6dd920b8e9ef.$.`,
         invalidatedKeys: null,
         roleId: null
       };

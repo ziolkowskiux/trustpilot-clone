@@ -38,6 +38,11 @@ import {
 } from "@plasmicapp/react-web";
 import ReviewsSummaryPercentageBar from "../../ReviewsSummaryPercentageBar"; // plasmic-import: _vOq5FSptHrw/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+import Drawer from "../../Drawer"; // plasmic-import: EpDSeZhugMDG/component
+import Button2 from "../../Button2"; // plasmic-import: UXSIw5rr6ki/component
+import { AntdRadioGroup } from "@plasmicpkgs/antd5/skinny/registerRadio";
+import { AntdRadio } from "@plasmicpkgs/antd5/skinny/registerRadio";
+import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -47,6 +52,8 @@ import projectcss from "./plasmic_trust_pilot_clone.module.css"; // plasmic-impo
 import sty from "./PlasmicReviewsSummary.module.css"; // plasmic-import: _WBWxb6k6npY/css
 
 import StarSolidIcon from "./icons/PlasmicIcon__StarSolid"; // plasmic-import: VAVaJQX6lOKe/icon
+import CheckIcon from "./icons/PlasmicIcon__Check"; // plasmic-import: -OYr8taNvSY/icon
+import ArrowRightIcon from "./icons/PlasmicIcon__ArrowRight"; // plasmic-import: 8fXDFb6NDoN/icon
 
 createPlasmicElementProxy;
 
@@ -101,6 +108,12 @@ export type PlasmicReviewsSummary__OverridesType = {
   _1StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
   footer?: p.Flex<"div">;
   buttonFilter?: p.Flex<typeof AntdButton>;
+  drawer?: p.Flex<typeof Drawer>;
+  button2?: p.Flex<typeof Button2>;
+  freeBox?: p.Flex<"div">;
+  rating?: p.Flex<typeof AntdRadioGroup>;
+  checkbox?: p.Flex<typeof AntdCheckbox>;
+  checkbox2?: p.Flex<typeof AntdCheckbox>;
   buttonsRight?: p.Flex<"div">;
   buttonSort?: p.Flex<typeof AntdButton>;
 };
@@ -214,6 +227,30 @@ function PlasmicReviewsSummary__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "drawer.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "rating.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox2.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -312,7 +349,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           <React.Fragment>
             {(() => {
               try {
-                return $props.reviewsTotal + " reviews";
+                return $props.reviewsTotal + " total";
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -562,6 +599,168 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             {"Filter"}
           </div>
         </AntdButton>
+        <Drawer
+          data-plasmic-name={"drawer"}
+          data-plasmic-override={overrides.drawer}
+          className={classNames("__wab_instance", sty.drawer)}
+          onOpenChange={p.generateStateOnChangeProp($state, ["drawer", "open"])}
+          open={p.generateStateValueProp($state, ["drawer", "open"])}
+          slot={
+            <p.Stack
+              as={"div"}
+              data-plasmic-name={"freeBox"}
+              data-plasmic-override={overrides.freeBox}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox)}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__onpNj
+                )}
+              >
+                {"Rating"}
+              </div>
+              <AntdRadioGroup
+                data-plasmic-name={"rating"}
+                data-plasmic-override={overrides.rating}
+                className={classNames("__wab_instance", sty.rating)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "rating",
+                  "value"
+                ])}
+                optionType={"button"}
+                options={(() => {
+                  const __composite = [
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null }
+                  ];
+                  __composite["0"]["value"] = "5";
+                  __composite["0"]["label"] = "5";
+                  __composite["1"]["value"] = "4";
+                  __composite["1"]["label"] = "4";
+                  __composite["2"]["value"] = "3";
+                  __composite["2"]["label"] = "3";
+                  __composite["3"]["value"] = "2";
+                  __composite["3"]["label"] = "2";
+                  __composite["4"]["value"] = "1";
+                  __composite["4"]["label"] = "1";
+                  return __composite;
+                })()}
+                value={p.generateStateValueProp($state, ["rating", "value"])}
+              >
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__ocJht)}
+                  value={"op1"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__xQkxa
+                    )}
+                  >
+                    {"Option 1"}
+                  </div>
+                </AntdRadio>
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__sz6Nd)}
+                  value={"op2"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ieVna
+                    )}
+                  >
+                    {"Option 2"}
+                  </div>
+                </AntdRadio>
+              </AntdRadioGroup>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__brYxa
+                )}
+              >
+                {"Recommended"}
+              </div>
+              <AntdCheckbox
+                data-plasmic-name={"checkbox"}
+                data-plasmic-override={overrides.checkbox}
+                checked={p.generateStateValueProp($state, [
+                  "checkbox",
+                  "checked"
+                ])}
+                className={classNames("__wab_instance", sty.checkbox)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "checkbox",
+                  "checked"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__aatJe
+                  )}
+                >
+                  {"Verified"}
+                </div>
+              </AntdCheckbox>
+              <AntdCheckbox
+                data-plasmic-name={"checkbox2"}
+                data-plasmic-override={overrides.checkbox2}
+                checked={p.generateStateValueProp($state, [
+                  "checkbox2",
+                  "checked"
+                ])}
+                className={classNames("__wab_instance", sty.checkbox2)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "checkbox2",
+                  "checked"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__o36V1
+                  )}
+                >
+                  {"Replies"}
+                </div>
+              </AntdCheckbox>
+            </p.Stack>
+          }
+          trigger={
+            <Button2
+              data-plasmic-name={"button2"}
+              data-plasmic-override={overrides.button2}
+              color={"white"}
+              shape={"rounded"}
+              size={"compact"}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__c2WCo
+                )}
+              >
+                {"Filter"}
+              </div>
+            </Button2>
+          }
+        >
+          {"Filter By"}
+        </Drawer>
         <p.Stack
           as={"div"}
           data-plasmic-name={"buttonsRight"}
@@ -617,6 +816,12 @@ const PlasmicDescendants = {
     "_1StarReviews",
     "footer",
     "buttonFilter",
+    "drawer",
+    "button2",
+    "freeBox",
+    "rating",
+    "checkbox",
+    "checkbox2",
     "buttonsRight",
     "buttonSort"
   ],
@@ -646,8 +851,25 @@ const PlasmicDescendants = {
   _3StarReviews: ["_3StarReviews"],
   _2StarReviews: ["_2StarReviews"],
   _1StarReviews: ["_1StarReviews"],
-  footer: ["footer", "buttonFilter", "buttonsRight", "buttonSort"],
+  footer: [
+    "footer",
+    "buttonFilter",
+    "drawer",
+    "button2",
+    "freeBox",
+    "rating",
+    "checkbox",
+    "checkbox2",
+    "buttonsRight",
+    "buttonSort"
+  ],
   buttonFilter: ["buttonFilter"],
+  drawer: ["drawer", "button2", "freeBox", "rating", "checkbox", "checkbox2"],
+  button2: ["button2"],
+  freeBox: ["freeBox", "rating", "checkbox", "checkbox2"],
+  rating: ["rating"],
+  checkbox: ["checkbox"],
+  checkbox2: ["checkbox2"],
   buttonsRight: ["buttonsRight", "buttonSort"],
   buttonSort: ["buttonSort"]
 } as const;
@@ -670,6 +892,12 @@ type NodeDefaultElementType = {
   _1StarReviews: typeof ReviewsSummaryPercentageBar;
   footer: "div";
   buttonFilter: typeof AntdButton;
+  drawer: typeof Drawer;
+  button2: typeof Button2;
+  freeBox: "div";
+  rating: typeof AntdRadioGroup;
+  checkbox: typeof AntdCheckbox;
+  checkbox2: typeof AntdCheckbox;
   buttonsRight: "div";
   buttonSort: typeof AntdButton;
 };
@@ -748,6 +976,12 @@ export const PlasmicReviewsSummary = Object.assign(
     _1StarReviews: makeNodeComponent("_1StarReviews"),
     footer: makeNodeComponent("footer"),
     buttonFilter: makeNodeComponent("buttonFilter"),
+    drawer: makeNodeComponent("drawer"),
+    button2: makeNodeComponent("button2"),
+    freeBox: makeNodeComponent("freeBox"),
+    rating: makeNodeComponent("rating"),
+    checkbox: makeNodeComponent("checkbox"),
+    checkbox2: makeNodeComponent("checkbox2"),
     buttonsRight: makeNodeComponent("buttonsRight"),
     buttonSort: makeNodeComponent("buttonSort"),
 
