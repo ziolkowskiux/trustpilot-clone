@@ -53,6 +53,14 @@ import { paginationHelpers as AntdPagination_Helpers } from "@plasmicpkgs/antd5/
 import Card from "../../Card"; // plasmic-import: I7kjAJ4INnHj/component
 import CompanyActivityTags from "../../CompanyActivityTags"; // plasmic-import: 1RfhwdtRup_T/component
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
+import { AntdDrawer } from "@plasmicpkgs/antd5/skinny/registerDrawer";
+import { AntdRadioGroup } from "@plasmicpkgs/antd5/skinny/registerRadio";
+import { AntdRadio } from "@plasmicpkgs/antd5/skinny/registerRadio";
+import { AntdCheckboxGroup } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
+import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
+import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -61,6 +69,8 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostl
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic_trust_pilot_clone.module.css"; // plasmic-import: uzL7MLDrNkZiDQaUBve1wf/projectcss
 import sty from "./PlasmicCompanyReviews.module.css"; // plasmic-import: HZaKTNznB8MJ/css
+
+import XIcon from "./icons/PlasmicIcon__X"; // plasmic-import: GLcyIp_DFO/icon
 
 createPlasmicElementProxy;
 
@@ -98,6 +108,23 @@ export type PlasmicCompanyReviews__OverridesType = {
   companyInfo?: p.Flex<typeof Card>;
   trustpilotExperience?: p.Flex<typeof Card>;
   footer?: p.Flex<typeof Footer>;
+  drawer?: p.Flex<typeof AntdDrawer>;
+  label?: p.Flex<"div">;
+  rating?: p.Flex<typeof AntdRadioGroup>;
+  labelRecommended?: p.Flex<"div">;
+  recommended?: p.Flex<typeof AntdCheckboxGroup>;
+  checkbox?: p.Flex<typeof AntdCheckbox>;
+  checkbox2?: p.Flex<typeof AntdCheckbox>;
+  label3?: p.Flex<"div">;
+  datePosted?: p.Flex<typeof AntdRadioGroup>;
+  label4?: p.Flex<"div">;
+  searchBar?: p.Flex<typeof AntdInput>;
+  label5?: p.Flex<"div">;
+  language?: p.Flex<typeof AntdRadioGroup>;
+  reset?: p.Flex<typeof AntdButton>;
+  showFiltered?: p.Flex<typeof AntdButton>;
+  button?: p.Flex<"button">;
+  svg?: p.Flex<"svg">;
 };
 
 export interface DefaultCompanyReviewsProps {}
@@ -204,6 +231,56 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         path: "reviewsSummary._1StarChecked",
         type: "private",
         variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "drawer.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "rating.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "recommended.value",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox2.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "datePosted.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "searchBar.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "language.value",
+        type: "private",
+        variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
@@ -560,6 +637,45 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"reviewsSummary"}
                   data-plasmic-override={overrides.reviewsSummary}
                   className={classNames("__wab_instance", sty.reviewsSummary)}
+                  filterOnClick={async () => {
+                    const $steps = {};
+
+                    $steps["updateDrawerOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["drawer", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = p.get(objRoot, variablePath);
+                            p.set(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateDrawerOpen"] != null &&
+                      typeof $steps["updateDrawerOpen"] === "object" &&
+                      typeof $steps["updateDrawerOpen"].then === "function"
+                    ) {
+                      $steps["updateDrawerOpen"] = await $steps[
+                        "updateDrawerOpen"
+                      ];
+                    }
+                  }}
                   on1StarCheckedChange={async (...eventArgs: any) => {
                     p.generateStateOnChangeProp($state, [
                       "reviewsSummary",
@@ -1001,6 +1117,406 @@ function PlasmicCompanyReviews__RenderFunc(props: {
             data-plasmic-override={overrides.footer}
             className={classNames("__wab_instance", sty.footer)}
           />
+
+          <AntdDrawer
+            data-plasmic-name={"drawer"}
+            data-plasmic-override={overrides.drawer}
+            className={classNames("__wab_instance", sty.drawer)}
+            closeIcon={
+              <button
+                data-plasmic-name={"button"}
+                data-plasmic-override={overrides.button}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.button,
+                  sty.button
+                )}
+              >
+                <XIcon
+                  data-plasmic-name={"svg"}
+                  data-plasmic-override={overrides.svg}
+                  className={classNames(projectcss.all, sty.svg)}
+                  role={"img"}
+                />
+              </button>
+            }
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            )}
+            drawerScopeClassName={sty["drawer__drawer"]}
+            footer={
+              <div className={classNames(projectcss.all, sty.freeBox__omrr0)}>
+                <AntdButton
+                  data-plasmic-name={"reset"}
+                  data-plasmic-override={overrides.reset}
+                  className={classNames("__wab_instance", sty.reset)}
+                  type={"ghost"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__mBaaX
+                    )}
+                  >
+                    {"Reset"}
+                  </div>
+                </AntdButton>
+                <AntdButton
+                  data-plasmic-name={"showFiltered"}
+                  data-plasmic-override={overrides.showFiltered}
+                  className={classNames("__wab_instance", sty.showFiltered)}
+                  type={"primary"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__mwEeh
+                    )}
+                  >
+                    {"Show"}
+                  </div>
+                </AntdButton>
+              </div>
+            }
+            forceRender={false}
+            onOpenChange={p.generateStateOnChangeProp($state, [
+              "drawer",
+              "open"
+            ])}
+            open={p.generateStateValueProp($state, ["drawer", "open"])}
+            title={"Filter by"}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__yyQbp)}>
+              <div
+                data-plasmic-name={"label"}
+                data-plasmic-override={overrides.label}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.label
+                )}
+              >
+                {"Rating"}
+              </div>
+              <AntdRadioGroup
+                data-plasmic-name={"rating"}
+                data-plasmic-override={overrides.rating}
+                className={classNames("__wab_instance", sty.rating)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "rating",
+                  "value"
+                ])}
+                optionType={"button"}
+                options={(() => {
+                  const __composite = [
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null }
+                  ];
+                  __composite["0"]["value"] = "1";
+                  __composite["0"]["label"] = "1";
+                  __composite["1"]["value"] = "2";
+                  __composite["1"]["label"] = "2";
+                  __composite["2"]["value"] = "3";
+                  __composite["2"]["label"] = "3";
+                  __composite["3"]["value"] = "4";
+                  __composite["3"]["label"] = "4";
+                  __composite["4"]["value"] = "5";
+                  __composite["4"]["label"] = "5";
+                  return __composite;
+                })()}
+                value={p.generateStateValueProp($state, ["rating", "value"])}
+              >
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__tvTff)}
+                  value={"op1"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__u4IU4
+                    )}
+                  >
+                    {"Option 1"}
+                  </div>
+                </AntdRadio>
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__w6Ee1)}
+                  value={"op2"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__nYmVw
+                    )}
+                  >
+                    {"Option 2"}
+                  </div>
+                </AntdRadio>
+              </AntdRadioGroup>
+              <div
+                data-plasmic-name={"labelRecommended"}
+                data-plasmic-override={overrides.labelRecommended}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.labelRecommended
+                )}
+              >
+                {"Recommended"}
+              </div>
+              <AntdCheckboxGroup
+                data-plasmic-name={"recommended"}
+                data-plasmic-override={overrides.recommended}
+                className={classNames("__wab_instance", sty.recommended)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "recommended",
+                  "value"
+                ])}
+                value={p.generateStateValueProp($state, [
+                  "recommended",
+                  "value"
+                ])}
+              >
+                <AntdCheckbox
+                  data-plasmic-name={"checkbox"}
+                  data-plasmic-override={overrides.checkbox}
+                  autoFocus={false}
+                  checked={p.generateStateValueProp($state, [
+                    "checkbox",
+                    "checked"
+                  ])}
+                  className={classNames("__wab_instance", sty.checkbox)}
+                  indeterminate={false}
+                  onChange={p.generateStateOnChangeProp($state, [
+                    "checkbox",
+                    "checked"
+                  ])}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___8Qlg1
+                    )}
+                  >
+                    {"Verified"}
+                  </div>
+                </AntdCheckbox>
+                <AntdCheckbox
+                  data-plasmic-name={"checkbox2"}
+                  data-plasmic-override={overrides.checkbox2}
+                  checked={p.generateStateValueProp($state, [
+                    "checkbox2",
+                    "checked"
+                  ])}
+                  className={classNames("__wab_instance", sty.checkbox2)}
+                  onChange={p.generateStateOnChangeProp($state, [
+                    "checkbox2",
+                    "checked"
+                  ])}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ny3Ha
+                    )}
+                  >
+                    {"Replies"}
+                  </div>
+                </AntdCheckbox>
+              </AntdCheckboxGroup>
+              <div
+                data-plasmic-name={"label3"}
+                data-plasmic-override={overrides.label3}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.label3
+                )}
+              >
+                {"Date posted"}
+              </div>
+              <AntdRadioGroup
+                data-plasmic-name={"datePosted"}
+                data-plasmic-override={overrides.datePosted}
+                className={classNames("__wab_instance", sty.datePosted)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "datePosted",
+                  "value"
+                ])}
+                options={(() => {
+                  const __composite = [
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null },
+                    { value: null, label: null }
+                  ];
+                  __composite["0"]["value"] = "true";
+                  __composite["0"]["label"] = "All reviews";
+                  __composite["1"]["value"] = "30";
+                  __composite["1"]["label"] = "Last 30 days";
+                  __composite["2"]["value"] = "90";
+                  __composite["2"]["label"] = "Last 3 months";
+                  __composite["3"]["value"] = "120";
+                  __composite["3"]["label"] = "Last 6 months";
+                  __composite["4"]["value"] = "365";
+                  __composite["4"]["label"] = "Last 12 months";
+                  return __composite;
+                })()}
+                value={p.generateStateValueProp($state, [
+                  "datePosted",
+                  "value"
+                ])}
+              >
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__s5Xgt)}
+                  value={"op1"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__cQrSb
+                    )}
+                  >
+                    {"Option 1"}
+                  </div>
+                </AntdRadio>
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__rcamx)}
+                  value={"op2"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__qBcW8
+                    )}
+                  >
+                    {"Option 2"}
+                  </div>
+                </AntdRadio>
+              </AntdRadioGroup>
+              <div
+                data-plasmic-name={"label4"}
+                data-plasmic-override={overrides.label4}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.label4
+                )}
+              >
+                {"Search reviews"}
+              </div>
+              {(() => {
+                const child$Props = {
+                  allowClear: true,
+                  className: classNames("__wab_instance", sty.searchBar),
+                  onChange: p.generateStateOnChangePropForCodeComponents(
+                    $state,
+                    "value",
+                    ["searchBar", "value"],
+                    AntdInput_Helpers
+                  ),
+                  placeholder: "Search by keyword",
+                  value: p.generateStateValueProp($state, [
+                    "searchBar",
+                    "value"
+                  ])
+                };
+                p.initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "searchBar.value"
+                    }
+                  ],
+                  [],
+                  AntdInput_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdInput
+                    data-plasmic-name={"searchBar"}
+                    data-plasmic-override={overrides.searchBar}
+                    {...child$Props}
+                  />
+                );
+              })()}
+              <div
+                data-plasmic-name={"label5"}
+                data-plasmic-override={overrides.label5}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.label5
+                )}
+              >
+                {"Language"}
+              </div>
+              <AntdRadioGroup
+                data-plasmic-name={"language"}
+                data-plasmic-override={overrides.language}
+                className={classNames("__wab_instance", sty.language)}
+                onChange={p.generateStateOnChangeProp($state, [
+                  "language",
+                  "value"
+                ])}
+                options={(() => {
+                  const __composite = [{ value: null, label: null }];
+                  __composite["0"]["value"] = "true";
+                  __composite["0"]["label"] = "All languages";
+                  return __composite;
+                })()}
+                value={p.generateStateValueProp($state, ["language", "value"])}
+              >
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__iGg5R)}
+                  value={"op1"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__aJlN
+                    )}
+                  >
+                    {"Option 1"}
+                  </div>
+                </AntdRadio>
+                <AntdRadio
+                  className={classNames("__wab_instance", sty.radio__ahp6E)}
+                  value={"op2"}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__iRuJy
+                    )}
+                  >
+                    {"Option 2"}
+                  </div>
+                </AntdRadio>
+              </AntdRadioGroup>
+            </div>
+          </AntdDrawer>
         </div>
       </div>
     </React.Fragment>
@@ -1032,7 +1548,24 @@ const PlasmicDescendants = {
     "companyActivityTags",
     "companyInfo",
     "trustpilotExperience",
-    "footer"
+    "footer",
+    "drawer",
+    "label",
+    "rating",
+    "labelRecommended",
+    "recommended",
+    "checkbox",
+    "checkbox2",
+    "label3",
+    "datePosted",
+    "label4",
+    "searchBar",
+    "label5",
+    "language",
+    "reset",
+    "showFiltered",
+    "button",
+    "svg"
   ],
   mainNavigation: ["mainNavigation"],
   content: [
@@ -1098,7 +1631,42 @@ const PlasmicDescendants = {
   companyActivityTags: ["companyActivityTags"],
   companyInfo: ["companyInfo"],
   trustpilotExperience: ["trustpilotExperience"],
-  footer: ["footer"]
+  footer: ["footer"],
+  drawer: [
+    "drawer",
+    "label",
+    "rating",
+    "labelRecommended",
+    "recommended",
+    "checkbox",
+    "checkbox2",
+    "label3",
+    "datePosted",
+    "label4",
+    "searchBar",
+    "label5",
+    "language",
+    "reset",
+    "showFiltered",
+    "button",
+    "svg"
+  ],
+  label: ["label"],
+  rating: ["rating"],
+  labelRecommended: ["labelRecommended"],
+  recommended: ["recommended", "checkbox", "checkbox2"],
+  checkbox: ["checkbox"],
+  checkbox2: ["checkbox2"],
+  label3: ["label3"],
+  datePosted: ["datePosted"],
+  label4: ["label4"],
+  searchBar: ["searchBar"],
+  label5: ["label5"],
+  language: ["language"],
+  reset: ["reset"],
+  showFiltered: ["showFiltered"],
+  button: ["button", "svg"],
+  svg: ["svg"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -1128,6 +1696,23 @@ type NodeDefaultElementType = {
   companyInfo: typeof Card;
   trustpilotExperience: typeof Card;
   footer: typeof Footer;
+  drawer: typeof AntdDrawer;
+  label: "div";
+  rating: typeof AntdRadioGroup;
+  labelRecommended: "div";
+  recommended: typeof AntdCheckboxGroup;
+  checkbox: typeof AntdCheckbox;
+  checkbox2: typeof AntdCheckbox;
+  label3: "div";
+  datePosted: typeof AntdRadioGroup;
+  label4: "div";
+  searchBar: typeof AntdInput;
+  label5: "div";
+  language: typeof AntdRadioGroup;
+  reset: typeof AntdButton;
+  showFiltered: typeof AntdButton;
+  button: "button";
+  svg: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1255,6 +1840,23 @@ export const PlasmicCompanyReviews = Object.assign(
     companyInfo: makeNodeComponent("companyInfo"),
     trustpilotExperience: makeNodeComponent("trustpilotExperience"),
     footer: makeNodeComponent("footer"),
+    drawer: makeNodeComponent("drawer"),
+    label: makeNodeComponent("label"),
+    rating: makeNodeComponent("rating"),
+    labelRecommended: makeNodeComponent("labelRecommended"),
+    recommended: makeNodeComponent("recommended"),
+    checkbox: makeNodeComponent("checkbox"),
+    checkbox2: makeNodeComponent("checkbox2"),
+    label3: makeNodeComponent("label3"),
+    datePosted: makeNodeComponent("datePosted"),
+    label4: makeNodeComponent("label4"),
+    searchBar: makeNodeComponent("searchBar"),
+    label5: makeNodeComponent("label5"),
+    language: makeNodeComponent("language"),
+    reset: makeNodeComponent("reset"),
+    showFiltered: makeNodeComponent("showFiltered"),
+    button: makeNodeComponent("button"),
+    svg: makeNodeComponent("svg"),
 
     // Metadata about props expected for PlasmicCompanyReviews
     internalVariantProps: PlasmicCompanyReviews__VariantProps,
