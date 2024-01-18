@@ -203,6 +203,44 @@ function PlasmicLogIn__RenderFunc(props: {
                 </h5>
                 <AntdButton
                   className={classNames("__wab_instance", sty.button__eLrVs)}
+                  onClick={async () => {
+                    const $steps = {};
+
+                    $steps["updateInputValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["input", "value"]
+                            },
+                            operation: 0
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            p.set(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateInputValue"] != null &&
+                      typeof $steps["updateInputValue"] === "object" &&
+                      typeof $steps["updateInputValue"].then === "function"
+                    ) {
+                      $steps["updateInputValue"] = await $steps[
+                        "updateInputValue"
+                      ];
+                    }
+                  }}
                   shape={"round"}
                   size={"large"}
                 >

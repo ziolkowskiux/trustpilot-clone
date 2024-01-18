@@ -175,8 +175,7 @@
           }
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "ohDidvG9XsCeFumugENU3J",
@@ -1035,6 +1034,19 @@
           "cssFilePath": "plasmic/trust_pilot_clone/PlasmicDrawer.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "829KtCjh8CIv",
+          "name": "PathBreadcrumb",
+          "type": "managed",
+          "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+          "renderModuleFilePath": "plasmic/trust_pilot_clone/PlasmicPathBreadcrumb.tsx",
+          "importSpec": {
+            "modulePath": "PathBreadcrumb.tsx"
+          },
+          "cssFilePath": "plasmic/trust_pilot_clone/PlasmicPathBreadcrumb.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1316,6 +1328,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.325",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.325/dist/plasmic.schema.json"
+  "cliVersion": "0.1.326",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.326/dist/plasmic.schema.json"
 }

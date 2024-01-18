@@ -56,10 +56,15 @@ type VariantPropType = keyof PlasmicReviewsSummary__VariantsArgs;
 export const PlasmicReviewsSummary__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicReviewsSummary__ArgsType = {
+  _5StarChecked?: boolean;
   on5StarCheckedChange?: (val: boolean) => void;
+  _4StarChecked?: boolean;
   on4StarCheckedChange?: (val: boolean) => void;
+  _3StarChecked?: boolean;
   on3StarCheckedChange?: (val: boolean) => void;
+  _2StarChecked?: boolean;
   on2StarCheckedChange?: (val: boolean) => void;
+  _1StarChecked?: boolean;
   on1StarCheckedChange?: (val: boolean) => void;
   overallRating?: string;
   reviews5Star?: number;
@@ -72,10 +77,15 @@ export type PlasmicReviewsSummary__ArgsType = {
 };
 type ArgPropType = keyof PlasmicReviewsSummary__ArgsType;
 export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>(
+  "_5StarChecked",
   "on5StarCheckedChange",
+  "_4StarChecked",
   "on4StarCheckedChange",
+  "_3StarChecked",
   "on3StarCheckedChange",
+  "_2StarChecked",
   "on2StarCheckedChange",
+  "_1StarChecked",
   "on1StarCheckedChange",
   "overallRating",
   "reviews5Star",
@@ -108,10 +118,15 @@ export type PlasmicReviewsSummary__OverridesType = {
 };
 
 export interface DefaultReviewsSummaryProps {
+  _5StarChecked?: boolean;
   on5StarCheckedChange?: (val: boolean) => void;
+  _4StarChecked?: boolean;
   on4StarCheckedChange?: (val: boolean) => void;
+  _3StarChecked?: boolean;
   on3StarCheckedChange?: (val: boolean) => void;
+  _2StarChecked?: boolean;
   on2StarCheckedChange?: (val: boolean) => void;
+  _1StarChecked?: boolean;
   on1StarCheckedChange?: (val: boolean) => void;
   overallRating?: string;
   reviews5Star?: number;
@@ -174,42 +189,42 @@ function PlasmicReviewsSummary__RenderFunc(props: {
     () => [
       {
         path: "_5StarReviews.ratingBarChecked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
+        valueProp: "_5StarChecked",
         onChangeProp: "on5StarCheckedChange"
       },
       {
         path: "_4StarReviews.ratingBarChecked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
+        valueProp: "_4StarChecked",
         onChangeProp: "on4StarCheckedChange"
       },
       {
         path: "_3StarReviews.ratingBarChecked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
+        valueProp: "_3StarChecked",
         onChangeProp: "on3StarCheckedChange"
       },
       {
         path: "_2StarReviews.ratingBarChecked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
+        valueProp: "_2StarChecked",
         onChangeProp: "on2StarCheckedChange"
       },
       {
         path: "_1StarReviews.ratingBarChecked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
+        valueProp: "_1StarChecked",
         onChangeProp: "on1StarCheckedChange"
       },
       {
@@ -346,6 +361,10 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_5StarReviews",
             "ratingBarChecked"
           ])}
+          ratingBarChecked={p.generateStateValueProp($state, [
+            "_5StarReviews",
+            "ratingBarChecked"
+          ])}
           value={(() => {
             try {
               return Math.floor(
@@ -384,6 +403,10 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           className={classNames("__wab_instance", sty._4StarReviews)}
           label={"4-star"}
           onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+            "_4StarReviews",
+            "ratingBarChecked"
+          ])}
+          ratingBarChecked={p.generateStateValueProp($state, [
             "_4StarReviews",
             "ratingBarChecked"
           ])}
@@ -428,6 +451,10 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_3StarReviews",
             "ratingBarChecked"
           ])}
+          ratingBarChecked={p.generateStateValueProp($state, [
+            "_3StarReviews",
+            "ratingBarChecked"
+          ])}
           value={(() => {
             try {
               return Math.floor(
@@ -469,6 +496,10 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             "_2StarReviews",
             "ratingBarChecked"
           ])}
+          ratingBarChecked={p.generateStateValueProp($state, [
+            "_2StarReviews",
+            "ratingBarChecked"
+          ])}
           value={(() => {
             try {
               return Math.floor(
@@ -507,6 +538,10 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           className={classNames("__wab_instance", sty._1StarReviews)}
           label={"1-star"}
           onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+            "_1StarReviews",
+            "ratingBarChecked"
+          ])}
+          ratingBarChecked={p.generateStateValueProp($state, [
             "_1StarReviews",
             "ratingBarChecked"
           ])}

@@ -48,6 +48,10 @@
   width: auto;
   height: auto;
   max-width: 100%;
+  transition-property: all;
+  transition-duration: 1s;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 1s;
   padding: 8px;
 }
 @media (min-width: 0px) and (max-width: 768px) {

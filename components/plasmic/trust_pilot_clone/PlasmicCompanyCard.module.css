@@ -211,73 +211,43 @@
   color: var(--token-pRs3-4jrQ4XQ);
   min-width: 0;
 }
-.reviews:global(.__wab_instance) {
-  width: 100%;
-  max-width: 100%;
-  flex-direction: column;
-  object-fit: cover;
+.reviews {
   position: relative;
-  max-height: 147px;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-bottom: var(--token-UEz8jpx4ZeEk);
+  overflow-x: auto;
   min-width: 0;
   display: none;
 }
-.reviewsreviewsVisible:global(.__wab_instance) {
-  display: flex;
-}
-.freeBox__nNOgs {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
+.reviews > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
   justify-content: flex-start;
-  align-items: flex-start;
   min-width: 0;
-  padding: 8px;
+  margin-left: calc(0px - var(--token-UEz8jpx4ZeEk));
+  width: calc(100% + var(--token-UEz8jpx4ZeEk));
 }
-.img__b87A5 {
-  object-fit: cover;
-  max-width: 100%;
+.reviews > :global(.__wab_flex-container) > *,
+.reviews > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.reviews > :global(.__wab_flex-container) > picture > img,
+.reviews
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-UEz8jpx4ZeEk);
 }
-.img__b87A5 > picture > img {
-  object-fit: cover;
-}
-.freeBox__byWmA {
+.reviewsreviewsVisible {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
 }
-.img__llJti {
-  object-fit: cover;
-  max-width: 100%;
+.reviewCard:global(.__wab_instance) {
+  max-width: 320px;
+  height: 100%;
+  flex-shrink: 0;
 }
-.img__llJti > picture > img {
-  object-fit: cover;
-}
-.freeBox__tfW3G {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.img__afEEk {
-  object-fit: cover;
-  max-width: 100%;
-}
-.img__afEEk > picture > img {
-  object-fit: cover;
+.reviewCardreviewsVisible:global(.__wab_instance) {
+  flex-shrink: 0;
 }

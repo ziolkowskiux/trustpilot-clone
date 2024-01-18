@@ -44,6 +44,7 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
+import PathBreadcrumb from "../../PathBreadcrumb"; // plasmic-import: 829KtCjh8CIv/component
 import WebsiteAddressCard from "../../WebsiteAddressCard"; // plasmic-import: hWfONOgVJn4L/component
 import WriteAReview from "../../WriteAReview"; // plasmic-import: M5Xk5pdCttsu/component
 import ReviewsSummary from "../../ReviewsSummary"; // plasmic-import: _WBWxb6k6npY/component
@@ -54,10 +55,10 @@ import Card from "../../Card"; // plasmic-import: I7kjAJ4INnHj/component
 import CompanyActivityTags from "../../CompanyActivityTags"; // plasmic-import: 1RfhwdtRup_T/component
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
 import { AntdDrawer } from "@plasmicpkgs/antd5/skinny/registerDrawer";
+import Label from "../../Label"; // plasmic-import: W1OlkHb9N4/component
+import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
 import { AntdRadioGroup } from "@plasmicpkgs/antd5/skinny/registerRadio";
 import { AntdRadio } from "@plasmicpkgs/antd5/skinny/registerRadio";
-import { AntdCheckboxGroup } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
-import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
@@ -88,7 +89,7 @@ export type PlasmicCompanyReviews__OverridesType = {
   mainNavigation?: p.Flex<typeof MainNavigation>;
   content?: p.Flex<"div">;
   header?: p.Flex<"div">;
-  breadcrumb?: p.Flex<"div">;
+  pathBreadcrumb?: p.Flex<typeof PathBreadcrumb>;
   basicInfo?: p.Flex<"div">;
   companyLogo?: p.Flex<typeof p.PlasmicImg>;
   companyName?: p.Flex<"div">;
@@ -109,17 +110,33 @@ export type PlasmicCompanyReviews__OverridesType = {
   trustpilotExperience?: p.Flex<typeof Card>;
   footer?: p.Flex<typeof Footer>;
   drawer?: p.Flex<typeof AntdDrawer>;
-  label?: p.Flex<"div">;
-  rating?: p.Flex<typeof AntdRadioGroup>;
-  labelRecommended?: p.Flex<"div">;
-  recommended?: p.Flex<typeof AntdCheckboxGroup>;
-  checkbox?: p.Flex<typeof AntdCheckbox>;
-  checkbox2?: p.Flex<typeof AntdCheckbox>;
-  label3?: p.Flex<"div">;
+  sectionRating?: p.Flex<"div">;
+  sectionTitle?: p.Flex<"div">;
+  options2?: p.Flex<"div">;
+  rating1?: p.Flex<typeof Label>;
+  rating2?: p.Flex<typeof Label>;
+  rating3?: p.Flex<typeof Label>;
+  rating4?: p.Flex<typeof Label>;
+  rating5?: p.Flex<typeof Label>;
+  sectionRecommended?: p.Flex<"div">;
+  sectionTitle2?: p.Flex<"div">;
+  options?: p.Flex<"div">;
+  checkboxVerified?: p.Flex<"div">;
+  verified?: p.Flex<typeof AntdCheckbox>;
+  captionVerified2?: p.Flex<"div">;
+  captionVerified?: p.Flex<"div">;
+  checkboxReplies?: p.Flex<"div">;
+  replies?: p.Flex<typeof AntdCheckbox>;
+  captionReplies2?: p.Flex<"div">;
+  captionReplies?: p.Flex<"div">;
+  sectionDatePosted?: p.Flex<"div">;
+  sectionTitle3?: p.Flex<"div">;
   datePosted?: p.Flex<typeof AntdRadioGroup>;
-  label4?: p.Flex<"div">;
+  sectionSearch?: p.Flex<"div">;
+  sectionTitle4?: p.Flex<"div">;
   searchBar?: p.Flex<typeof AntdInput>;
-  label5?: p.Flex<"div">;
+  sectionLanguages?: p.Flex<"div">;
+  sectionTitle5?: p.Flex<"div">;
   language?: p.Flex<typeof AntdRadioGroup>;
   reset?: p.Flex<typeof AntdButton>;
   showFiltered?: p.Flex<typeof AntdButton>;
@@ -207,61 +224,102 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         path: "reviewsSummary._5StarChecked",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["5-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "reviewsSummary._4StarChecked",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["4-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "reviewsSummary._3StarChecked",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["3-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "reviewsSummary._2StarChecked",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["2-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "reviewsSummary._1StarChecked",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["1-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "drawer.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "rating.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "recommended.value",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "checkbox.checked",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "checkbox2.checked",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "datePosted.value",
@@ -282,6 +340,155 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "verified.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "replies.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rating1.isSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["1-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "rating1.labelValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rating2.isSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["2-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "rating2.labelValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rating3.isSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["3-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "rating3.labelValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rating4.isSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["4-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "rating4.labelValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rating5.isSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.ratingFilters["5-star"];
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "rating5.labelValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ratingFilters",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({
+          "1-star": false,
+          "2-star": false,
+          "3-star": false,
+          "4-star": false,
+          "5-star": false
+        })
       }
     ],
     [$props, $ctx, $refs]
@@ -292,8 +499,6 @@ function PlasmicCompanyReviews__RenderFunc(props: {
     $queries: $queries,
     $refs
   });
-  const dataSourcesCtx = usePlasmicDataSourceContext();
-  const plasmicInvalidate = usePlasmicInvalidate();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
     fetchReviews: usePlasmicDataOp(() => {
@@ -410,17 +615,12 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__umnrs)}
               >
-                <div
-                  data-plasmic-name={"breadcrumb"}
-                  data-plasmic-override={overrides.breadcrumb}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.breadcrumb
-                  )}
-                >
-                  {"breadcrumb"}
-                </div>
+                <PathBreadcrumb
+                  data-plasmic-name={"pathBreadcrumb"}
+                  data-plasmic-override={overrides.pathBreadcrumb}
+                  className={classNames("__wab_instance", sty.pathBreadcrumb)}
+                />
+
                 <p.Stack
                   as={"div"}
                   data-plasmic-name={"basicInfo"}
@@ -636,6 +836,26 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                 <ReviewsSummary
                   data-plasmic-name={"reviewsSummary"}
                   data-plasmic-override={overrides.reviewsSummary}
+                  _1StarChecked={p.generateStateValueProp($state, [
+                    "reviewsSummary",
+                    "_1StarChecked"
+                  ])}
+                  _2StarChecked={p.generateStateValueProp($state, [
+                    "reviewsSummary",
+                    "_2StarChecked"
+                  ])}
+                  _3StarChecked={p.generateStateValueProp($state, [
+                    "reviewsSummary",
+                    "_3StarChecked"
+                  ])}
+                  _4StarChecked={p.generateStateValueProp($state, [
+                    "reviewsSummary",
+                    "_4StarChecked"
+                  ])}
+                  _5StarChecked={p.generateStateValueProp($state, [
+                    "reviewsSummary",
+                    "_5StarChecked"
+                  ])}
                   className={classNames("__wab_instance", sty.reviewsSummary)}
                   filterOnClick={async () => {
                     const $steps = {};
@@ -647,7 +867,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               objRoot: $state,
                               variablePath: ["drawer", "open"]
                             },
-                            operation: 4
+                            operation: 0,
+                            value: true
                           };
                           return (({
                             variable,
@@ -660,9 +881,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            const oldValue = p.get(objRoot, variablePath);
-                            p.set(objRoot, variablePath, !oldValue);
-                            return !oldValue;
+                            p.set(objRoot, variablePath, value);
+                            return value;
                           })?.apply(null, [actionArgs]);
                         })()
                       : undefined;
@@ -684,42 +904,233 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     (async val => {
                       const $steps = {};
 
-                      $steps["refreshData"] = true
+                      $steps["updateRatingFilters1Star"] = true
                         ? (() => {
-                            const actionArgs = { queryInvalidation: [] };
-                            return (async ({ queryInvalidation }) => {
-                              if (!queryInvalidation) {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["ratingFilters", "1-star"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
                                 return;
                               }
-                              await plasmicInvalidate(queryInvalidation);
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = p.get(objRoot, variablePath);
+                              p.set(objRoot, variablePath, !oldValue);
+                              return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
                         : undefined;
                       if (
-                        $steps["refreshData"] != null &&
-                        typeof $steps["refreshData"] === "object" &&
-                        typeof $steps["refreshData"].then === "function"
+                        $steps["updateRatingFilters1Star"] != null &&
+                        typeof $steps["updateRatingFilters1Star"] ===
+                          "object" &&
+                        typeof $steps["updateRatingFilters1Star"].then ===
+                          "function"
                       ) {
-                        $steps["refreshData"] = await $steps["refreshData"];
+                        $steps["updateRatingFilters1Star"] = await $steps[
+                          "updateRatingFilters1Star"
+                        ];
                       }
                     }).apply(null, eventArgs);
                   }}
-                  on2StarCheckedChange={p.generateStateOnChangeProp($state, [
-                    "reviewsSummary",
-                    "_2StarChecked"
-                  ])}
-                  on3StarCheckedChange={p.generateStateOnChangeProp($state, [
-                    "reviewsSummary",
-                    "_3StarChecked"
-                  ])}
-                  on4StarCheckedChange={p.generateStateOnChangeProp($state, [
-                    "reviewsSummary",
-                    "_4StarChecked"
-                  ])}
-                  on5StarCheckedChange={p.generateStateOnChangeProp($state, [
-                    "reviewsSummary",
-                    "_5StarChecked"
-                  ])}
+                  on2StarCheckedChange={async (...eventArgs: any) => {
+                    p.generateStateOnChangeProp($state, [
+                      "reviewsSummary",
+                      "_2StarChecked"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["updateRatingFilters2Star"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["ratingFilters", "2-star"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = p.get(objRoot, variablePath);
+                              p.set(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateRatingFilters2Star"] != null &&
+                        typeof $steps["updateRatingFilters2Star"] ===
+                          "object" &&
+                        typeof $steps["updateRatingFilters2Star"].then ===
+                          "function"
+                      ) {
+                        $steps["updateRatingFilters2Star"] = await $steps[
+                          "updateRatingFilters2Star"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                  on3StarCheckedChange={async (...eventArgs: any) => {
+                    p.generateStateOnChangeProp($state, [
+                      "reviewsSummary",
+                      "_3StarChecked"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["updateRatingFilters3Star"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["ratingFilters", "3-star"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = p.get(objRoot, variablePath);
+                              p.set(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateRatingFilters3Star"] != null &&
+                        typeof $steps["updateRatingFilters3Star"] ===
+                          "object" &&
+                        typeof $steps["updateRatingFilters3Star"].then ===
+                          "function"
+                      ) {
+                        $steps["updateRatingFilters3Star"] = await $steps[
+                          "updateRatingFilters3Star"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                  on4StarCheckedChange={async (...eventArgs: any) => {
+                    p.generateStateOnChangeProp($state, [
+                      "reviewsSummary",
+                      "_4StarChecked"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["updateRatingFilters4Star"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["ratingFilters", "4-star"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = p.get(objRoot, variablePath);
+                              p.set(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateRatingFilters4Star"] != null &&
+                        typeof $steps["updateRatingFilters4Star"] ===
+                          "object" &&
+                        typeof $steps["updateRatingFilters4Star"].then ===
+                          "function"
+                      ) {
+                        $steps["updateRatingFilters4Star"] = await $steps[
+                          "updateRatingFilters4Star"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                  on5StarCheckedChange={async (...eventArgs: any) => {
+                    p.generateStateOnChangeProp($state, [
+                      "reviewsSummary",
+                      "_5StarChecked"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["updateRatingFilters5Star"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["ratingFilters", "5-star"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = p.get(objRoot, variablePath);
+                              p.set(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateRatingFilters5Star"] != null &&
+                        typeof $steps["updateRatingFilters5Star"] ===
+                          "object" &&
+                        typeof $steps["updateRatingFilters5Star"].then ===
+                          "function"
+                      ) {
+                        $steps["updateRatingFilters5Star"] = await $steps[
+                          "updateRatingFilters5Star"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
                   overallRating={(() => {
                     try {
                       return $queries.fetchCompany.data[0].rating;
@@ -1171,6 +1582,46 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"showFiltered"}
                   data-plasmic-override={overrides.showFiltered}
                   className={classNames("__wab_instance", sty.showFiltered)}
+                  onClick={async () => {
+                    const $steps = {};
+
+                    $steps["updateDrawerOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["drawer", "open"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            p.set(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateDrawerOpen"] != null &&
+                      typeof $steps["updateDrawerOpen"] === "object" &&
+                      typeof $steps["updateDrawerOpen"].then === "function"
+                    ) {
+                      $steps["updateDrawerOpen"] = await $steps[
+                        "updateDrawerOpen"
+                      ];
+                    }
+                  }}
+                  submitsForm={true}
                   type={"primary"}
                 >
                   <div
@@ -1193,329 +1644,746 @@ function PlasmicCompanyReviews__RenderFunc(props: {
             open={p.generateStateValueProp($state, ["drawer", "open"])}
             title={"Filter by"}
           >
-            <div className={classNames(projectcss.all, sty.freeBox__yyQbp)}>
-              <div
-                data-plasmic-name={"label"}
-                data-plasmic-override={overrides.label}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.label
-                )}
+            <p.Stack
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__yyQbp)}
+              id={"drawer-filters"}
+            >
+              <p.Stack
+                as={"div"}
+                data-plasmic-name={"sectionRating"}
+                data-plasmic-override={overrides.sectionRating}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.sectionRating)}
               >
-                {"Rating"}
-              </div>
-              <AntdRadioGroup
-                data-plasmic-name={"rating"}
-                data-plasmic-override={overrides.rating}
-                className={classNames("__wab_instance", sty.rating)}
-                onChange={p.generateStateOnChangeProp($state, [
-                  "rating",
-                  "value"
-                ])}
-                optionType={"button"}
-                options={(() => {
-                  const __composite = [
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null }
-                  ];
-                  __composite["0"]["value"] = "1";
-                  __composite["0"]["label"] = "1";
-                  __composite["1"]["value"] = "2";
-                  __composite["1"]["label"] = "2";
-                  __composite["2"]["value"] = "3";
-                  __composite["2"]["label"] = "3";
-                  __composite["3"]["value"] = "4";
-                  __composite["3"]["label"] = "4";
-                  __composite["4"]["value"] = "5";
-                  __composite["4"]["label"] = "5";
-                  return __composite;
-                })()}
-                value={p.generateStateValueProp($state, ["rating", "value"])}
-              >
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__tvTff)}
-                  value={"op1"}
+                <div
+                  data-plasmic-name={"sectionTitle"}
+                  data-plasmic-override={overrides.sectionTitle}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.sectionTitle
+                  )}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__u4IU4
-                    )}
-                  >
-                    {"Option 1"}
-                  </div>
-                </AntdRadio>
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__w6Ee1)}
-                  value={"op2"}
+                  {"Rating"}
+                </div>
+                <p.Stack
+                  as={"div"}
+                  data-plasmic-name={"options2"}
+                  data-plasmic-override={overrides.options2}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.options2)}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__nYmVw
-                    )}
-                  >
-                    {"Option 2"}
-                  </div>
-                </AntdRadio>
-              </AntdRadioGroup>
-              <div
-                data-plasmic-name={"labelRecommended"}
-                data-plasmic-override={overrides.labelRecommended}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.labelRecommended
-                )}
-              >
-                {"Recommended"}
-              </div>
-              <AntdCheckboxGroup
-                data-plasmic-name={"recommended"}
-                data-plasmic-override={overrides.recommended}
-                className={classNames("__wab_instance", sty.recommended)}
-                onChange={p.generateStateOnChangeProp($state, [
-                  "recommended",
-                  "value"
-                ])}
-                value={p.generateStateValueProp($state, [
-                  "recommended",
-                  "value"
-                ])}
-              >
-                <AntdCheckbox
-                  data-plasmic-name={"checkbox"}
-                  data-plasmic-override={overrides.checkbox}
-                  autoFocus={false}
-                  checked={p.generateStateValueProp($state, [
-                    "checkbox",
-                    "checked"
-                  ])}
-                  className={classNames("__wab_instance", sty.checkbox)}
-                  indeterminate={false}
-                  onChange={p.generateStateOnChangeProp($state, [
-                    "checkbox",
-                    "checked"
-                  ])}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___8Qlg1
-                    )}
-                  >
-                    {"Verified"}
-                  </div>
-                </AntdCheckbox>
-                <AntdCheckbox
-                  data-plasmic-name={"checkbox2"}
-                  data-plasmic-override={overrides.checkbox2}
-                  checked={p.generateStateValueProp($state, [
-                    "checkbox2",
-                    "checked"
-                  ])}
-                  className={classNames("__wab_instance", sty.checkbox2)}
-                  onChange={p.generateStateOnChangeProp($state, [
-                    "checkbox2",
-                    "checked"
-                  ])}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__ny3Ha
-                    )}
-                  >
-                    {"Replies"}
-                  </div>
-                </AntdCheckbox>
-              </AntdCheckboxGroup>
-              <div
-                data-plasmic-name={"label3"}
-                data-plasmic-override={overrides.label3}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.label3
-                )}
-              >
-                {"Date posted"}
-              </div>
-              <AntdRadioGroup
-                data-plasmic-name={"datePosted"}
-                data-plasmic-override={overrides.datePosted}
-                className={classNames("__wab_instance", sty.datePosted)}
-                onChange={p.generateStateOnChangeProp($state, [
-                  "datePosted",
-                  "value"
-                ])}
-                options={(() => {
-                  const __composite = [
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null },
-                    { value: null, label: null }
-                  ];
-                  __composite["0"]["value"] = "true";
-                  __composite["0"]["label"] = "All reviews";
-                  __composite["1"]["value"] = "30";
-                  __composite["1"]["label"] = "Last 30 days";
-                  __composite["2"]["value"] = "90";
-                  __composite["2"]["label"] = "Last 3 months";
-                  __composite["3"]["value"] = "120";
-                  __composite["3"]["label"] = "Last 6 months";
-                  __composite["4"]["value"] = "365";
-                  __composite["4"]["label"] = "Last 12 months";
-                  return __composite;
-                })()}
-                value={p.generateStateValueProp($state, [
-                  "datePosted",
-                  "value"
-                ])}
-              >
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__s5Xgt)}
-                  value={"op1"}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__cQrSb
-                    )}
-                  >
-                    {"Option 1"}
-                  </div>
-                </AntdRadio>
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__rcamx)}
-                  value={"op2"}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__qBcW8
-                    )}
-                  >
-                    {"Option 2"}
-                  </div>
-                </AntdRadio>
-              </AntdRadioGroup>
-              <div
-                data-plasmic-name={"label4"}
-                data-plasmic-override={overrides.label4}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.label4
-                )}
-              >
-                {"Search reviews"}
-              </div>
-              {(() => {
-                const child$Props = {
-                  allowClear: true,
-                  className: classNames("__wab_instance", sty.searchBar),
-                  onChange: p.generateStateOnChangePropForCodeComponents(
-                    $state,
-                    "value",
-                    ["searchBar", "value"],
-                    AntdInput_Helpers
-                  ),
-                  placeholder: "Search by keyword",
-                  value: p.generateStateValueProp($state, [
-                    "searchBar",
-                    "value"
-                  ])
-                };
-                p.initializeCodeComponentStates(
-                  $state,
-                  [
-                    {
-                      name: "value",
-                      plasmicStateName: "searchBar.value"
-                    }
-                  ],
-                  [],
-                  AntdInput_Helpers ?? {},
-                  child$Props
-                );
+                  <Label
+                    data-plasmic-name={"rating1"}
+                    data-plasmic-override={overrides.rating1}
+                    className={classNames("__wab_instance", sty.rating1)}
+                    isSelected={p.generateStateValueProp($state, [
+                      "rating1",
+                      "isSelected"
+                    ])}
+                    label={"1"}
+                    onIsSelectedChange={async (...eventArgs: any) => {
+                      p.generateStateOnChangeProp($state, [
+                        "rating1",
+                        "isSelected"
+                      ]).apply(null, eventArgs);
+                      (async val => {
+                        const $steps = {};
 
-                return (
-                  <AntdInput
-                    data-plasmic-name={"searchBar"}
-                    data-plasmic-override={overrides.searchBar}
-                    {...child$Props}
+                        $steps["updateRatingFilters1Star"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["ratingFilters", "1-star"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = p.get(objRoot, variablePath);
+                                p.set(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateRatingFilters1Star"] != null &&
+                          typeof $steps["updateRatingFilters1Star"] ===
+                            "object" &&
+                          typeof $steps["updateRatingFilters1Star"].then ===
+                            "function"
+                        ) {
+                          $steps["updateRatingFilters1Star"] = await $steps[
+                            "updateRatingFilters1Star"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                      "rating1",
+                      "labelValue"
+                    ])}
+                    selected={(() => {
+                      try {
+                        return $state.ratingFilters["1-star"];
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
                   />
-                );
-              })()}
-              <div
-                data-plasmic-name={"label5"}
-                data-plasmic-override={overrides.label5}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.label5
-                )}
+
+                  <Label
+                    data-plasmic-name={"rating2"}
+                    data-plasmic-override={overrides.rating2}
+                    className={classNames("__wab_instance", sty.rating2)}
+                    isSelected={p.generateStateValueProp($state, [
+                      "rating2",
+                      "isSelected"
+                    ])}
+                    label={"2"}
+                    onIsSelectedChange={async (...eventArgs: any) => {
+                      p.generateStateOnChangeProp($state, [
+                        "rating2",
+                        "isSelected"
+                      ]).apply(null, eventArgs);
+                      (async val => {
+                        const $steps = {};
+
+                        $steps["updateRatingFilters2Star"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["ratingFilters", "2-star"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = p.get(objRoot, variablePath);
+                                p.set(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateRatingFilters2Star"] != null &&
+                          typeof $steps["updateRatingFilters2Star"] ===
+                            "object" &&
+                          typeof $steps["updateRatingFilters2Star"].then ===
+                            "function"
+                        ) {
+                          $steps["updateRatingFilters2Star"] = await $steps[
+                            "updateRatingFilters2Star"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                      "rating2",
+                      "labelValue"
+                    ])}
+                    selected={(() => {
+                      try {
+                        return $state.ratingFilters["2-star"];
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+
+                  <Label
+                    data-plasmic-name={"rating3"}
+                    data-plasmic-override={overrides.rating3}
+                    className={classNames("__wab_instance", sty.rating3)}
+                    isSelected={p.generateStateValueProp($state, [
+                      "rating3",
+                      "isSelected"
+                    ])}
+                    label={"3"}
+                    onIsSelectedChange={async (...eventArgs: any) => {
+                      p.generateStateOnChangeProp($state, [
+                        "rating3",
+                        "isSelected"
+                      ]).apply(null, eventArgs);
+                      (async val => {
+                        const $steps = {};
+
+                        $steps["updateRatingFilters3Star"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["ratingFilters", "3-star"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = p.get(objRoot, variablePath);
+                                p.set(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateRatingFilters3Star"] != null &&
+                          typeof $steps["updateRatingFilters3Star"] ===
+                            "object" &&
+                          typeof $steps["updateRatingFilters3Star"].then ===
+                            "function"
+                        ) {
+                          $steps["updateRatingFilters3Star"] = await $steps[
+                            "updateRatingFilters3Star"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                      "rating3",
+                      "labelValue"
+                    ])}
+                    selected={(() => {
+                      try {
+                        return $state.ratingFilters["3-star"];
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+
+                  <Label
+                    data-plasmic-name={"rating4"}
+                    data-plasmic-override={overrides.rating4}
+                    className={classNames("__wab_instance", sty.rating4)}
+                    isSelected={p.generateStateValueProp($state, [
+                      "rating4",
+                      "isSelected"
+                    ])}
+                    label={"4"}
+                    onIsSelectedChange={async (...eventArgs: any) => {
+                      p.generateStateOnChangeProp($state, [
+                        "rating4",
+                        "isSelected"
+                      ]).apply(null, eventArgs);
+                      (async val => {
+                        const $steps = {};
+
+                        $steps["updateRatingFilters4Star"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["ratingFilters", "4-star"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = p.get(objRoot, variablePath);
+                                p.set(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateRatingFilters4Star"] != null &&
+                          typeof $steps["updateRatingFilters4Star"] ===
+                            "object" &&
+                          typeof $steps["updateRatingFilters4Star"].then ===
+                            "function"
+                        ) {
+                          $steps["updateRatingFilters4Star"] = await $steps[
+                            "updateRatingFilters4Star"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                      "rating4",
+                      "labelValue"
+                    ])}
+                    selected={(() => {
+                      try {
+                        return $state.ratingFilters["4-star"];
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+
+                  <Label
+                    data-plasmic-name={"rating5"}
+                    data-plasmic-override={overrides.rating5}
+                    className={classNames("__wab_instance", sty.rating5)}
+                    isSelected={p.generateStateValueProp($state, [
+                      "rating5",
+                      "isSelected"
+                    ])}
+                    label={"5"}
+                    onIsSelectedChange={async (...eventArgs: any) => {
+                      p.generateStateOnChangeProp($state, [
+                        "rating5",
+                        "isSelected"
+                      ]).apply(null, eventArgs);
+                      (async val => {
+                        const $steps = {};
+
+                        $steps["updateRatingFilters5Star"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["ratingFilters", "5-star"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = p.get(objRoot, variablePath);
+                                p.set(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateRatingFilters5Star"] != null &&
+                          typeof $steps["updateRatingFilters5Star"] ===
+                            "object" &&
+                          typeof $steps["updateRatingFilters5Star"].then ===
+                            "function"
+                        ) {
+                          $steps["updateRatingFilters5Star"] = await $steps[
+                            "updateRatingFilters5Star"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                      "rating5",
+                      "labelValue"
+                    ])}
+                    selected={(() => {
+                      try {
+                        return $state.ratingFilters["5-star"];
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+                </p.Stack>
+              </p.Stack>
+              <p.Stack
+                as={"div"}
+                data-plasmic-name={"sectionRecommended"}
+                data-plasmic-override={overrides.sectionRecommended}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.sectionRecommended)}
               >
-                {"Language"}
-              </div>
-              <AntdRadioGroup
-                data-plasmic-name={"language"}
-                data-plasmic-override={overrides.language}
-                className={classNames("__wab_instance", sty.language)}
-                onChange={p.generateStateOnChangeProp($state, [
-                  "language",
-                  "value"
-                ])}
-                options={(() => {
-                  const __composite = [{ value: null, label: null }];
-                  __composite["0"]["value"] = "true";
-                  __composite["0"]["label"] = "All languages";
-                  return __composite;
+                <div
+                  data-plasmic-name={"sectionTitle2"}
+                  data-plasmic-override={overrides.sectionTitle2}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.sectionTitle2
+                  )}
+                >
+                  {"Recommended"}
+                </div>
+                <p.Stack
+                  as={"div"}
+                  data-plasmic-name={"options"}
+                  data-plasmic-override={overrides.options}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.options)}
+                >
+                  <div
+                    data-plasmic-name={"checkboxVerified"}
+                    data-plasmic-override={overrides.checkboxVerified}
+                    className={classNames(projectcss.all, sty.checkboxVerified)}
+                  >
+                    <AntdCheckbox
+                      data-plasmic-name={"verified"}
+                      data-plasmic-override={overrides.verified}
+                      checked={p.generateStateValueProp($state, [
+                        "verified",
+                        "checked"
+                      ])}
+                      className={classNames("__wab_instance", sty.verified)}
+                      onChange={p.generateStateOnChangeProp($state, [
+                        "verified",
+                        "checked"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__l5HeI
+                        )}
+                      >
+                        {"Verified"}
+                      </div>
+                    </AntdCheckbox>
+                    <div
+                      data-plasmic-name={"captionVerified2"}
+                      data-plasmic-override={overrides.captionVerified2}
+                      className={classNames(
+                        projectcss.all,
+                        sty.captionVerified2
+                      )}
+                    >
+                      <div
+                        data-plasmic-name={"captionVerified"}
+                        data-plasmic-override={overrides.captionVerified}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.captionVerified
+                        )}
+                      >
+                        {
+                          "Reviews are labeled verified when a company automatically invites people to write a review using Trustpilot\u2019s supported invitation methods."
+                        }
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"checkboxReplies"}
+                    data-plasmic-override={overrides.checkboxReplies}
+                    className={classNames(projectcss.all, sty.checkboxReplies)}
+                  >
+                    <AntdCheckbox
+                      data-plasmic-name={"replies"}
+                      data-plasmic-override={overrides.replies}
+                      checked={p.generateStateValueProp($state, [
+                        "replies",
+                        "checked"
+                      ])}
+                      className={classNames("__wab_instance", sty.replies)}
+                      onChange={p.generateStateOnChangeProp($state, [
+                        "replies",
+                        "checked"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__g1JDk
+                        )}
+                      >
+                        {"Replies"}
+                      </div>
+                    </AntdCheckbox>
+                    <div
+                      data-plasmic-name={"captionReplies2"}
+                      data-plasmic-override={overrides.captionReplies2}
+                      className={classNames(
+                        projectcss.all,
+                        sty.captionReplies2
+                      )}
+                    >
+                      <div
+                        data-plasmic-name={"captionReplies"}
+                        data-plasmic-override={overrides.captionReplies}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.captionReplies
+                        )}
+                      >
+                        {"Enter some text"}
+                      </div>
+                    </div>
+                  </div>
+                </p.Stack>
+              </p.Stack>
+              <p.Stack
+                as={"div"}
+                data-plasmic-name={"sectionDatePosted"}
+                data-plasmic-override={overrides.sectionDatePosted}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.sectionDatePosted)}
+              >
+                <div
+                  data-plasmic-name={"sectionTitle3"}
+                  data-plasmic-override={overrides.sectionTitle3}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.sectionTitle3
+                  )}
+                >
+                  {"Date posted"}
+                </div>
+                <AntdRadioGroup
+                  data-plasmic-name={"datePosted"}
+                  data-plasmic-override={overrides.datePosted}
+                  className={classNames("__wab_instance", sty.datePosted)}
+                  onChange={p.generateStateOnChangeProp($state, [
+                    "datePosted",
+                    "value"
+                  ])}
+                  options={(() => {
+                    const __composite = [
+                      { value: null, label: null },
+                      { value: null, label: null },
+                      { value: null, label: null },
+                      { value: null, label: null },
+                      { value: null, label: null }
+                    ];
+                    __composite["0"]["value"] = "true";
+                    __composite["0"]["label"] = "All reviews";
+                    __composite["1"]["value"] = "30";
+                    __composite["1"]["label"] = "Last 30 days";
+                    __composite["2"]["value"] = "90";
+                    __composite["2"]["label"] = "Last 3 months";
+                    __composite["3"]["value"] = "120";
+                    __composite["3"]["label"] = "Last 6 months";
+                    __composite["4"]["value"] = "365";
+                    __composite["4"]["label"] = "Last 12 months";
+                    return __composite;
+                  })()}
+                  value={p.generateStateValueProp($state, [
+                    "datePosted",
+                    "value"
+                  ])}
+                >
+                  <AntdRadio
+                    className={classNames("__wab_instance", sty.radio__s5Xgt)}
+                    value={"op1"}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__cQrSb
+                      )}
+                    >
+                      {"Option 1"}
+                    </div>
+                  </AntdRadio>
+                  <AntdRadio
+                    className={classNames("__wab_instance", sty.radio__rcamx)}
+                    value={"op2"}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__qBcW8
+                      )}
+                    >
+                      {"Option 2"}
+                    </div>
+                  </AntdRadio>
+                </AntdRadioGroup>
+              </p.Stack>
+              <p.Stack
+                as={"div"}
+                data-plasmic-name={"sectionSearch"}
+                data-plasmic-override={overrides.sectionSearch}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.sectionSearch)}
+              >
+                <div
+                  data-plasmic-name={"sectionTitle4"}
+                  data-plasmic-override={overrides.sectionTitle4}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.sectionTitle4
+                  )}
+                >
+                  {"Search reviews"}
+                </div>
+                {(() => {
+                  const child$Props = {
+                    allowClear: true,
+                    className: classNames("__wab_instance", sty.searchBar),
+                    onChange: p.generateStateOnChangePropForCodeComponents(
+                      $state,
+                      "value",
+                      ["searchBar", "value"],
+                      AntdInput_Helpers
+                    ),
+                    placeholder: "Search by keyword",
+                    type: "text",
+                    value: p.generateStateValueProp($state, [
+                      "searchBar",
+                      "value"
+                    ])
+                  };
+                  p.initializeCodeComponentStates(
+                    $state,
+                    [
+                      {
+                        name: "value",
+                        plasmicStateName: "searchBar.value"
+                      }
+                    ],
+                    [],
+                    AntdInput_Helpers ?? {},
+                    child$Props
+                  );
+
+                  return (
+                    <AntdInput
+                      data-plasmic-name={"searchBar"}
+                      data-plasmic-override={overrides.searchBar}
+                      {...child$Props}
+                    />
+                  );
                 })()}
-                value={p.generateStateValueProp($state, ["language", "value"])}
+              </p.Stack>
+              <p.Stack
+                as={"div"}
+                data-plasmic-name={"sectionLanguages"}
+                data-plasmic-override={overrides.sectionLanguages}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.sectionLanguages)}
               >
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__iGg5R)}
-                  value={"op1"}
+                <div
+                  data-plasmic-name={"sectionTitle5"}
+                  data-plasmic-override={overrides.sectionTitle5}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.sectionTitle5
+                  )}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__aJlN
-                    )}
-                  >
-                    {"Option 1"}
-                  </div>
-                </AntdRadio>
-                <AntdRadio
-                  className={classNames("__wab_instance", sty.radio__ahp6E)}
-                  value={"op2"}
+                  {"Language"}
+                </div>
+                <AntdRadioGroup
+                  data-plasmic-name={"language"}
+                  data-plasmic-override={overrides.language}
+                  className={classNames("__wab_instance", sty.language)}
+                  onChange={p.generateStateOnChangeProp($state, [
+                    "language",
+                    "value"
+                  ])}
+                  options={(() => {
+                    const __composite = [{ value: null, label: null }];
+                    __composite["0"]["value"] = "true";
+                    __composite["0"]["label"] = "All languages";
+                    return __composite;
+                  })()}
+                  value={p.generateStateValueProp($state, [
+                    "language",
+                    "value"
+                  ])}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__iRuJy
-                    )}
+                  <AntdRadio
+                    className={classNames("__wab_instance", sty.radio__iGg5R)}
+                    value={"op1"}
                   >
-                    {"Option 2"}
-                  </div>
-                </AntdRadio>
-              </AntdRadioGroup>
-            </div>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__aJlN
+                      )}
+                    >
+                      {"Option 1"}
+                    </div>
+                  </AntdRadio>
+                  <AntdRadio
+                    className={classNames("__wab_instance", sty.radio__ahp6E)}
+                    value={"op2"}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__iRuJy
+                      )}
+                    >
+                      {"Option 2"}
+                    </div>
+                  </AntdRadio>
+                </AntdRadioGroup>
+              </p.Stack>
+            </p.Stack>
           </AntdDrawer>
         </div>
       </div>
@@ -1529,7 +2397,7 @@ const PlasmicDescendants = {
     "mainNavigation",
     "content",
     "header",
-    "breadcrumb",
+    "pathBreadcrumb",
     "basicInfo",
     "companyLogo",
     "companyName",
@@ -1550,17 +2418,33 @@ const PlasmicDescendants = {
     "trustpilotExperience",
     "footer",
     "drawer",
-    "label",
-    "rating",
-    "labelRecommended",
-    "recommended",
-    "checkbox",
-    "checkbox2",
-    "label3",
+    "sectionRating",
+    "sectionTitle",
+    "options2",
+    "rating1",
+    "rating2",
+    "rating3",
+    "rating4",
+    "rating5",
+    "sectionRecommended",
+    "sectionTitle2",
+    "options",
+    "checkboxVerified",
+    "verified",
+    "captionVerified2",
+    "captionVerified",
+    "checkboxReplies",
+    "replies",
+    "captionReplies2",
+    "captionReplies",
+    "sectionDatePosted",
+    "sectionTitle3",
     "datePosted",
-    "label4",
+    "sectionSearch",
+    "sectionTitle4",
     "searchBar",
-    "label5",
+    "sectionLanguages",
+    "sectionTitle5",
     "language",
     "reset",
     "showFiltered",
@@ -1571,7 +2455,7 @@ const PlasmicDescendants = {
   content: [
     "content",
     "header",
-    "breadcrumb",
+    "pathBreadcrumb",
     "basicInfo",
     "companyLogo",
     "companyName",
@@ -1593,7 +2477,7 @@ const PlasmicDescendants = {
   ],
   header: [
     "header",
-    "breadcrumb",
+    "pathBreadcrumb",
     "basicInfo",
     "companyLogo",
     "companyName",
@@ -1603,7 +2487,7 @@ const PlasmicDescendants = {
     "trustScore",
     "websiteAddressCard"
   ],
-  breadcrumb: ["breadcrumb"],
+  pathBreadcrumb: ["pathBreadcrumb"],
   basicInfo: [
     "basicInfo",
     "companyLogo",
@@ -1634,34 +2518,107 @@ const PlasmicDescendants = {
   footer: ["footer"],
   drawer: [
     "drawer",
-    "label",
-    "rating",
-    "labelRecommended",
-    "recommended",
-    "checkbox",
-    "checkbox2",
-    "label3",
+    "sectionRating",
+    "sectionTitle",
+    "options2",
+    "rating1",
+    "rating2",
+    "rating3",
+    "rating4",
+    "rating5",
+    "sectionRecommended",
+    "sectionTitle2",
+    "options",
+    "checkboxVerified",
+    "verified",
+    "captionVerified2",
+    "captionVerified",
+    "checkboxReplies",
+    "replies",
+    "captionReplies2",
+    "captionReplies",
+    "sectionDatePosted",
+    "sectionTitle3",
     "datePosted",
-    "label4",
+    "sectionSearch",
+    "sectionTitle4",
     "searchBar",
-    "label5",
+    "sectionLanguages",
+    "sectionTitle5",
     "language",
     "reset",
     "showFiltered",
     "button",
     "svg"
   ],
-  label: ["label"],
-  rating: ["rating"],
-  labelRecommended: ["labelRecommended"],
-  recommended: ["recommended", "checkbox", "checkbox2"],
-  checkbox: ["checkbox"],
-  checkbox2: ["checkbox2"],
-  label3: ["label3"],
+  sectionRating: [
+    "sectionRating",
+    "sectionTitle",
+    "options2",
+    "rating1",
+    "rating2",
+    "rating3",
+    "rating4",
+    "rating5"
+  ],
+  sectionTitle: ["sectionTitle"],
+  options2: ["options2", "rating1", "rating2", "rating3", "rating4", "rating5"],
+  rating1: ["rating1"],
+  rating2: ["rating2"],
+  rating3: ["rating3"],
+  rating4: ["rating4"],
+  rating5: ["rating5"],
+  sectionRecommended: [
+    "sectionRecommended",
+    "sectionTitle2",
+    "options",
+    "checkboxVerified",
+    "verified",
+    "captionVerified2",
+    "captionVerified",
+    "checkboxReplies",
+    "replies",
+    "captionReplies2",
+    "captionReplies"
+  ],
+  sectionTitle2: ["sectionTitle2"],
+  options: [
+    "options",
+    "checkboxVerified",
+    "verified",
+    "captionVerified2",
+    "captionVerified",
+    "checkboxReplies",
+    "replies",
+    "captionReplies2",
+    "captionReplies"
+  ],
+  checkboxVerified: [
+    "checkboxVerified",
+    "verified",
+    "captionVerified2",
+    "captionVerified"
+  ],
+  verified: ["verified"],
+  captionVerified2: ["captionVerified2", "captionVerified"],
+  captionVerified: ["captionVerified"],
+  checkboxReplies: [
+    "checkboxReplies",
+    "replies",
+    "captionReplies2",
+    "captionReplies"
+  ],
+  replies: ["replies"],
+  captionReplies2: ["captionReplies2", "captionReplies"],
+  captionReplies: ["captionReplies"],
+  sectionDatePosted: ["sectionDatePosted", "sectionTitle3", "datePosted"],
+  sectionTitle3: ["sectionTitle3"],
   datePosted: ["datePosted"],
-  label4: ["label4"],
+  sectionSearch: ["sectionSearch", "sectionTitle4", "searchBar"],
+  sectionTitle4: ["sectionTitle4"],
   searchBar: ["searchBar"],
-  label5: ["label5"],
+  sectionLanguages: ["sectionLanguages", "sectionTitle5", "language"],
+  sectionTitle5: ["sectionTitle5"],
   language: ["language"],
   reset: ["reset"],
   showFiltered: ["showFiltered"],
@@ -1676,7 +2633,7 @@ type NodeDefaultElementType = {
   mainNavigation: typeof MainNavigation;
   content: "div";
   header: "div";
-  breadcrumb: "div";
+  pathBreadcrumb: typeof PathBreadcrumb;
   basicInfo: "div";
   companyLogo: typeof p.PlasmicImg;
   companyName: "div";
@@ -1697,17 +2654,33 @@ type NodeDefaultElementType = {
   trustpilotExperience: typeof Card;
   footer: typeof Footer;
   drawer: typeof AntdDrawer;
-  label: "div";
-  rating: typeof AntdRadioGroup;
-  labelRecommended: "div";
-  recommended: typeof AntdCheckboxGroup;
-  checkbox: typeof AntdCheckbox;
-  checkbox2: typeof AntdCheckbox;
-  label3: "div";
+  sectionRating: "div";
+  sectionTitle: "div";
+  options2: "div";
+  rating1: typeof Label;
+  rating2: typeof Label;
+  rating3: typeof Label;
+  rating4: typeof Label;
+  rating5: typeof Label;
+  sectionRecommended: "div";
+  sectionTitle2: "div";
+  options: "div";
+  checkboxVerified: "div";
+  verified: typeof AntdCheckbox;
+  captionVerified2: "div";
+  captionVerified: "div";
+  checkboxReplies: "div";
+  replies: typeof AntdCheckbox;
+  captionReplies2: "div";
+  captionReplies: "div";
+  sectionDatePosted: "div";
+  sectionTitle3: "div";
   datePosted: typeof AntdRadioGroup;
-  label4: "div";
+  sectionSearch: "div";
+  sectionTitle4: "div";
   searchBar: typeof AntdInput;
-  label5: "div";
+  sectionLanguages: "div";
+  sectionTitle5: "div";
   language: typeof AntdRadioGroup;
   reset: typeof AntdButton;
   showFiltered: typeof AntdButton;
@@ -1820,7 +2793,7 @@ export const PlasmicCompanyReviews = Object.assign(
     mainNavigation: makeNodeComponent("mainNavigation"),
     content: makeNodeComponent("content"),
     header: makeNodeComponent("header"),
-    breadcrumb: makeNodeComponent("breadcrumb"),
+    pathBreadcrumb: makeNodeComponent("pathBreadcrumb"),
     basicInfo: makeNodeComponent("basicInfo"),
     companyLogo: makeNodeComponent("companyLogo"),
     companyName: makeNodeComponent("companyName"),
@@ -1841,17 +2814,33 @@ export const PlasmicCompanyReviews = Object.assign(
     trustpilotExperience: makeNodeComponent("trustpilotExperience"),
     footer: makeNodeComponent("footer"),
     drawer: makeNodeComponent("drawer"),
-    label: makeNodeComponent("label"),
-    rating: makeNodeComponent("rating"),
-    labelRecommended: makeNodeComponent("labelRecommended"),
-    recommended: makeNodeComponent("recommended"),
-    checkbox: makeNodeComponent("checkbox"),
-    checkbox2: makeNodeComponent("checkbox2"),
-    label3: makeNodeComponent("label3"),
+    sectionRating: makeNodeComponent("sectionRating"),
+    sectionTitle: makeNodeComponent("sectionTitle"),
+    options2: makeNodeComponent("options2"),
+    rating1: makeNodeComponent("rating1"),
+    rating2: makeNodeComponent("rating2"),
+    rating3: makeNodeComponent("rating3"),
+    rating4: makeNodeComponent("rating4"),
+    rating5: makeNodeComponent("rating5"),
+    sectionRecommended: makeNodeComponent("sectionRecommended"),
+    sectionTitle2: makeNodeComponent("sectionTitle2"),
+    options: makeNodeComponent("options"),
+    checkboxVerified: makeNodeComponent("checkboxVerified"),
+    verified: makeNodeComponent("verified"),
+    captionVerified2: makeNodeComponent("captionVerified2"),
+    captionVerified: makeNodeComponent("captionVerified"),
+    checkboxReplies: makeNodeComponent("checkboxReplies"),
+    replies: makeNodeComponent("replies"),
+    captionReplies2: makeNodeComponent("captionReplies2"),
+    captionReplies: makeNodeComponent("captionReplies"),
+    sectionDatePosted: makeNodeComponent("sectionDatePosted"),
+    sectionTitle3: makeNodeComponent("sectionTitle3"),
     datePosted: makeNodeComponent("datePosted"),
-    label4: makeNodeComponent("label4"),
+    sectionSearch: makeNodeComponent("sectionSearch"),
+    sectionTitle4: makeNodeComponent("sectionTitle4"),
     searchBar: makeNodeComponent("searchBar"),
-    label5: makeNodeComponent("label5"),
+    sectionLanguages: makeNodeComponent("sectionLanguages"),
+    sectionTitle5: makeNodeComponent("sectionTitle5"),
     language: makeNodeComponent("language"),
     reset: makeNodeComponent("reset"),
     showFiltered: makeNodeComponent("showFiltered"),

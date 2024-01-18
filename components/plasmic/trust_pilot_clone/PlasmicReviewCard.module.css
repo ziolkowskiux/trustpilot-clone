@@ -29,6 +29,27 @@
   > img {
   margin-top: var(--token-02IfQLozsPKb);
 }
+.reviewCardsmall {
+  width: 320px;
+  padding: var(--token-UEz8jpx4ZeEk);
+}
+.reviewCardsmall > :global(.__wab_flex-container) {
+  margin-left: calc(0px - 0px);
+  width: calc(100% + 0px);
+  margin-top: calc(0px - var(--token-Tf_KtjkxGdsv));
+  height: calc(100% + var(--token-Tf_KtjkxGdsv));
+}
+.reviewCardsmall > :global(.__wab_flex-container) > *,
+.reviewCardsmall > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.reviewCardsmall > :global(.__wab_flex-container) > picture > img,
+.reviewCardsmall
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 0px;
+  margin-top: var(--token-Tf_KtjkxGdsv);
+}
 .reviewCardHeader {
   display: flex;
   position: relative;
@@ -58,12 +79,24 @@
   > img {
   margin-left: var(--token-oYI7ebdZitcv);
 }
+.reviewCardHeadersmall {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  padding-bottom: 0px;
+  border-style: none;
+}
 .userAvatar {
   object-fit: cover;
   max-width: 100%;
 }
 .userAvatar > picture > img {
   object-fit: cover;
+}
+.userAvatarsmall {
+  max-width: 32px;
+  max-height: 32px;
+  height: 32px;
 }
 .freeBox {
   display: flex;
@@ -92,6 +125,10 @@
   > picture
   > img {
   margin-top: var(--token-cSJ2BJk-9JCq);
+}
+.freeBoxsmall > :global(.__wab_flex-container) {
+  align-items: flex-start;
+  justify-content: center;
 }
 .username {
   font-size: var(--token-7z5Kw5B89TZR);
@@ -132,6 +169,9 @@
   > picture
   > img {
   margin-left: var(--token-UEz8jpx4ZeEk);
+}
+.basicUserInformationsmall {
+  display: none;
 }
 .numberOfReviews {
   color: var(--token-LqpCVPPZF4_r);
@@ -197,6 +237,12 @@
   padding: 0px 0px var(--token-UEz8jpx4ZeEk);
   border-bottom: 1px solid var(--token-Pxe4wDL2kJpb);
 }
+.reviewCardBodysmall {
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  padding-bottom: 0px;
+  height: auto;
+}
 .reviewTitle {
   font-size: var(--token-BwOcdtoxJOlu);
   font-weight: 700;
@@ -207,6 +253,9 @@
   height: auto;
   max-width: 100%;
   min-width: 0;
+}
+.reviewTitlesmall {
+  display: none;
 }
 .reviewContent {
   position: relative;
@@ -248,6 +297,9 @@
   > img {
   margin-left: var(--token-cSJ2BJk-9JCq);
 }
+.rowDateOfExperiencesmall {
+  display: none;
+}
 .reviewDateOfExperience {
   width: auto;
   height: auto;
@@ -288,6 +340,9 @@
   > picture
   > img {
   margin-left: var(--token-UEz8jpx4ZeEk);
+}
+.reviewCardFootersmall {
+  display: none;
 }
 .tags {
   display: flex;

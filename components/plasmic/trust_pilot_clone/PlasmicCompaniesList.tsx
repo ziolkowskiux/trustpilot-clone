@@ -95,7 +95,7 @@ export type PlasmicCompaniesList__OverridesType = {
   data?: p.Flex<"div">;
   infoAndSorting?: p.Flex<"div">;
   sortFilter?: p.Flex<"div">;
-  select2?: p.Flex<typeof AntdSelect>;
+  sortBy?: p.Flex<typeof AntdSelect>;
   companyCard?: p.Flex<typeof CompanyCard>;
   footer?: p.Flex<typeof Footer>;
 };
@@ -165,10 +165,10 @@ function PlasmicCompaniesList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "select2.value",
+        path: "sortBy.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => "name"
       },
       {
         path: "radioGroupRating.value",
@@ -182,7 +182,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
         variableType: "boolean"
       },
       {
-        path: "categoriesBadge[].value",
+        path: "categoriesBadge[].labelValue",
         type: "private",
         variableType: "text"
       }
@@ -200,7 +200,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
     fetchCompanies: usePlasmicDataOp(() => {
       return {
         sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-        opId: "a4ee1d85-a172-456a-b6fe-62b6c4bca363",
+        opId: "4eaec896-2620-4561-9489-89ece22f9dc3",
         userArgs: {
           query: [
             $ctx.params.category_name,
@@ -209,13 +209,14 @@ function PlasmicCompaniesList__RenderFunc(props: {
             $state.selectCountries.value,
             $state.categoriesBadge
               .filter(item => item.isSelected == true)
-              .map(item => item.value),
+              .map(item => item.labelValue),
             $state.categoriesBadge.filter(item => item.isSelected === true)
               .length === 0,
-            $state.radioGroupRating.value
+            $state.radioGroupRating.value,
+            $state.sortBy.value
           ]
         },
-        cacheKey: `plasmic.$.a4ee1d85-a172-456a-b6fe-62b6c4bca363.$.`,
+        cacheKey: `plasmic.$.4eaec896-2620-4561-9489-89ece22f9dc3.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -674,16 +675,19 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       ).map((__plasmic_item_0, __plasmic_idx_0) => {
                         const currentItem = __plasmic_item_0;
                         const currentIndex = __plasmic_idx_0;
-                        return (
-                          <Label
-                            data-plasmic-name={"categoriesBadge"}
-                            data-plasmic-override={overrides.categoriesBadge}
-                            className={classNames(
+                        return (() => {
+                          const child$Props = {
+                            className: classNames(
                               "__wab_instance",
                               sty.categoriesBadge
-                            )}
-                            key={currentIndex}
-                            label={(() => {
+                            ),
+                            isSelected: p.generateStateValueProp($state, [
+                              "categoriesBadge",
+                              __plasmic_idx_0,
+                              "isSelected"
+                            ]),
+                            key: currentIndex,
+                            label: (() => {
                               try {
                                 return currentItem.name;
                               } catch (e) {
@@ -695,18 +699,36 @@ function PlasmicCompaniesList__RenderFunc(props: {
                                 }
                                 throw e;
                               }
-                            })()}
-                            onIsSelectedChange={p.generateStateOnChangeProp(
+                            })(),
+                            onIsSelectedChange: p.generateStateOnChangeProp(
                               $state,
                               ["categoriesBadge", __plasmic_idx_0, "isSelected"]
-                            )}
-                            onValueChange={p.generateStateOnChangeProp($state, [
-                              "categoriesBadge",
-                              __plasmic_idx_0,
-                              "value"
-                            ])}
-                          />
-                        );
+                            ),
+                            onLabelValueChange: p.generateStateOnChangeProp(
+                              $state,
+                              ["categoriesBadge", __plasmic_idx_0, "labelValue"]
+                            )
+                          };
+
+                          p.initializePlasmicStates(
+                            $state,
+                            [
+                              {
+                                name: "categoriesBadge[].isSelected",
+                                initFunc: ({ $props, $state, $queries }) =>
+                                  false
+                              }
+                            ],
+                            [__plasmic_idx_0]
+                          );
+                          return (
+                            <Label
+                              data-plasmic-name={"categoriesBadge"}
+                              data-plasmic-override={overrides.categoriesBadge}
+                              {...child$Props}
+                            />
+                          );
+                        })();
                       })}
                     </p.Stack>
                   </p.Stack>
@@ -769,9 +791,10 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       {"Sort by"}
                     </div>
                     <AntdSelect
-                      data-plasmic-name={"select2"}
-                      data-plasmic-override={overrides.select2}
-                      className={classNames("__wab_instance", sty.select2)}
+                      data-plasmic-name={"sortBy"}
+                      data-plasmic-override={overrides.sortBy}
+                      className={classNames("__wab_instance", sty.sortBy)}
+                      defaultOpen={false}
                       defaultStylesClassName={classNames(
                         projectcss.root_reset,
                         projectcss.plasmic_default_styles,
@@ -780,18 +803,28 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         plasmic_antd_5_hostless_css.plasmic_tokens,
                         plasmic_plasmic_rich_components_css.plasmic_tokens
                       )}
+                      defaultValue={"name"}
                       onChange={p.generateStateOnChangeProp($state, [
-                        "select2",
+                        "sortBy",
                         "value"
                       ])}
-                      options={[
-                        { value: "option1", label: "Option 1", type: "option" },
-                        { value: "option2", label: "Option 2", type: "option" }
-                      ]}
+                      options={(() => {
+                        const __composite = [
+                          { value: null, label: null, type: "option" },
+                          { value: null, label: null, type: "option" }
+                        ];
+                        __composite["0"]["value"] = "name";
+                        __composite["0"]["label"] = "Name";
+                        __composite["1"]["value"] = "rating";
+                        __composite["1"]["label"] = "Rating";
+                        return __composite;
+                      })()}
                       placeholder={"Select..."}
-                      popupScopeClassName={sty["select2__popup"]}
+                      popupScopeClassName={sty["sortBy__popup"]}
+                      size={"middle"}
+                      useChildren={false}
                       value={p.generateStateValueProp($state, [
-                        "select2",
+                        "sortBy",
                         "value"
                       ])}
                     />
@@ -963,7 +996,7 @@ const PlasmicDescendants = {
     "data",
     "infoAndSorting",
     "sortFilter",
-    "select2",
+    "sortBy",
     "companyCard",
     "footer"
   ],
@@ -987,7 +1020,7 @@ const PlasmicDescendants = {
     "data",
     "infoAndSorting",
     "sortFilter",
-    "select2",
+    "sortBy",
     "companyCard"
   ],
   header: ["header", "h1", "p", "tooltip"],
@@ -1008,7 +1041,7 @@ const PlasmicDescendants = {
     "data",
     "infoAndSorting",
     "sortFilter",
-    "select2",
+    "sortBy",
     "companyCard"
   ],
   search: [
@@ -1039,10 +1072,10 @@ const PlasmicDescendants = {
   checkboxVerified: ["checkboxVerified"],
   checkboxClaimed: ["checkboxClaimed"],
   categoriesBadge: ["categoriesBadge"],
-  data: ["data", "infoAndSorting", "sortFilter", "select2", "companyCard"],
-  infoAndSorting: ["infoAndSorting", "sortFilter", "select2"],
-  sortFilter: ["sortFilter", "select2"],
-  select2: ["select2"],
+  data: ["data", "infoAndSorting", "sortFilter", "sortBy", "companyCard"],
+  infoAndSorting: ["infoAndSorting", "sortFilter", "sortBy"],
+  sortFilter: ["sortFilter", "sortBy"],
+  sortBy: ["sortBy"],
   companyCard: ["companyCard"],
   footer: ["footer"]
 } as const;
@@ -1070,7 +1103,7 @@ type NodeDefaultElementType = {
   data: "div";
   infoAndSorting: "div";
   sortFilter: "div";
-  select2: typeof AntdSelect;
+  sortBy: typeof AntdSelect;
   companyCard: typeof CompanyCard;
   footer: typeof Footer;
 };
@@ -1196,7 +1229,7 @@ export const PlasmicCompaniesList = Object.assign(
     data: makeNodeComponent("data"),
     infoAndSorting: makeNodeComponent("infoAndSorting"),
     sortFilter: makeNodeComponent("sortFilter"),
-    select2: makeNodeComponent("select2"),
+    sortBy: makeNodeComponent("sortBy"),
     companyCard: makeNodeComponent("companyCard"),
     footer: makeNodeComponent("footer"),
 

@@ -351,7 +351,19 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                   throw e;
                 }
               })()
-            : true
+            : (() => {
+                try {
+                  return $props.companyEmail ? true : false;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })()
         ) ? (
           <p.Stack
             as={"div"}
@@ -409,59 +421,73 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
             </p.PlasmicLink>
           </p.Stack>
         ) : null}
-        <p.Stack
-          as={"div"}
-          data-plasmic-name={"phoneNumber"}
-          data-plasmic-override={overrides.phoneNumber}
-          hasGap={true}
-          className={classNames(projectcss.all, sty.phoneNumber)}
-        >
-          <PhoneIcon
-            className={classNames(projectcss.all, sty.svg__zjhou)}
-            role={"img"}
-          />
-
-          <p.PlasmicLink
-            className={classNames(
-              projectcss.all,
-              projectcss.a,
-              projectcss.__wab_text,
-              sty.link__xnOPr
-            )}
-            component={Link}
-            href={(() => {
-              try {
-                return "callto:".concat($props.companyPhone);
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return "https://www.plasmic.app/";
-                }
-                throw e;
-              }
-            })()}
-            platform={"nextjs"}
-            target={"_blank"}
+        {(() => {
+          try {
+            return $props.companyPhone ? true : false;
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
+          <p.Stack
+            as={"div"}
+            data-plasmic-name={"phoneNumber"}
+            data-plasmic-override={overrides.phoneNumber}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.phoneNumber)}
           >
-            <React.Fragment>
-              {(() => {
+            <PhoneIcon
+              className={classNames(projectcss.all, sty.svg__zjhou)}
+              role={"img"}
+            />
+
+            <p.PlasmicLink
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__xnOPr
+              )}
+              component={Link}
+              href={(() => {
                 try {
-                  return $props.companyPhone;
+                  return "callto:".concat($props.companyPhone);
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
                     e?.plasmicType === "PlasmicUndefinedDataError"
                   ) {
-                    return "Some link text";
+                    return "https://www.plasmic.app/";
                   }
                   throw e;
                 }
               })()}
-            </React.Fragment>
-          </p.PlasmicLink>
-        </p.Stack>
+              platform={"nextjs"}
+              target={"_blank"}
+            >
+              <React.Fragment>
+                {(() => {
+                  try {
+                    return $props.companyPhone;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return "Some link text";
+                    }
+                    throw e;
+                  }
+                })()}
+              </React.Fragment>
+            </p.PlasmicLink>
+          </p.Stack>
+        ) : null}
         {(() => {
           try {
             return $props.companyAddress ? true : false;

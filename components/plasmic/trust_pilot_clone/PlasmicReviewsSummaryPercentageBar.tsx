@@ -54,6 +54,7 @@ export const PlasmicReviewsSummaryPercentageBar__VariantProps =
   new Array<VariantPropType>();
 
 export type PlasmicReviewsSummaryPercentageBar__ArgsType = {
+  ratingBarChecked?: boolean;
   onRatingBarCheckedChange?: (val: boolean) => void;
   label?: string;
   value?: string;
@@ -63,6 +64,7 @@ export type PlasmicReviewsSummaryPercentageBar__ArgsType = {
 type ArgPropType = keyof PlasmicReviewsSummaryPercentageBar__ArgsType;
 export const PlasmicReviewsSummaryPercentageBar__ArgProps =
   new Array<ArgPropType>(
+    "ratingBarChecked",
     "onRatingBarCheckedChange",
     "label",
     "value",
@@ -80,6 +82,7 @@ export type PlasmicReviewsSummaryPercentageBar__OverridesType = {
 };
 
 export interface DefaultReviewsSummaryPercentageBarProps {
+  ratingBarChecked?: boolean;
   onRatingBarCheckedChange?: (val: boolean) => void;
   label?: string;
   value?: string;
@@ -135,10 +138,10 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
     () => [
       {
         path: "ratingBar.checked",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false,
 
+        valueProp: "ratingBarChecked",
         onChangeProp: "onRatingBarCheckedChange"
       }
     ],

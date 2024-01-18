@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@plasmicapp/cli": "^0.1.325",
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.6.4",
+    "@plasmicapp/cli": "^0.1.326",
     "@plasmicapp/loader-nextjs": "^1.0.308",
     "@plasmicapp/react-web": "^0.2.304",
     "@plasmicpkgs/antd5": "^0.0.201",
     "@plasmicpkgs/plasmic-query": "^0.0.206",
+    "@plasmicpkgs/plasmic-rich-components": "^1.0.175",
     "@plasmicpkgs/radix-ui": "^0.0.41",
     "@types/node": "20.5.6",
     "@types/react": "18.2.21",

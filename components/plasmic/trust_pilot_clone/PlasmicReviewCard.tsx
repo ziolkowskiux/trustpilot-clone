@@ -51,10 +51,16 @@ import FlagIcon from "./icons/PlasmicIcon__Flag"; // plasmic-import: etOc_NOHPm1
 
 createPlasmicElementProxy;
 
-export type PlasmicReviewCard__VariantMembers = {};
-export type PlasmicReviewCard__VariantsArgs = {};
+export type PlasmicReviewCard__VariantMembers = {
+  small: "small";
+};
+export type PlasmicReviewCard__VariantsArgs = {
+  small?: SingleBooleanChoiceArg<"small">;
+};
 type VariantPropType = keyof PlasmicReviewCard__VariantsArgs;
-export const PlasmicReviewCard__VariantProps = new Array<VariantPropType>();
+export const PlasmicReviewCard__VariantProps = new Array<VariantPropType>(
+  "small"
+);
 
 export type PlasmicReviewCard__ArgsType = {
   username?: string;
@@ -97,6 +103,7 @@ export interface DefaultReviewCardProps {
   reviewTitle?: string;
   reviewContent?: string;
   dateOfExperience?: string;
+  small?: SingleBooleanChoiceArg<"small">;
   className?: string;
 }
 
@@ -143,6 +150,24 @@ function PlasmicReviewCard__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "small",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.small
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = p.useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
     <p.Stack
       as={"div"}
@@ -159,7 +184,8 @@ function PlasmicReviewCard__RenderFunc(props: {
         projectcss.plasmic_tokens,
         plasmic_antd_5_hostless_css.plasmic_tokens,
         plasmic_plasmic_rich_components_css.plasmic_tokens,
-        sty.reviewCard
+        sty.reviewCard,
+        { [sty.reviewCardsmall]: hasVariant($state, "small", "small") }
       )}
     >
       <p.Stack
@@ -167,16 +193,24 @@ function PlasmicReviewCard__RenderFunc(props: {
         data-plasmic-name={"reviewCardHeader"}
         data-plasmic-override={overrides.reviewCardHeader}
         hasGap={true}
-        className={classNames(projectcss.all, sty.reviewCardHeader)}
+        className={classNames(projectcss.all, sty.reviewCardHeader, {
+          [sty.reviewCardHeadersmall]: hasVariant($state, "small", "small")
+        })}
       >
         <p.PlasmicImg
           data-plasmic-name={"userAvatar"}
           data-plasmic-override={overrides.userAvatar}
           alt={""}
-          className={classNames(sty.userAvatar)}
-          displayHeight={"auto"}
-          displayMaxHeight={"none"}
-          displayMaxWidth={"100%"}
+          className={classNames(sty.userAvatar, {
+            [sty.userAvatarsmall]: hasVariant($state, "small", "small")
+          })}
+          displayHeight={hasVariant($state, "small", "small") ? "32px" : "auto"}
+          displayMaxHeight={
+            hasVariant($state, "small", "small") ? "32px" : "none"
+          }
+          displayMaxWidth={
+            hasVariant($state, "small", "small") ? "32px" : "100%"
+          }
           displayMinHeight={"0"}
           displayMinWidth={"0"}
           displayWidth={"auto"}
@@ -188,7 +222,9 @@ function PlasmicReviewCard__RenderFunc(props: {
           data-plasmic-name={"freeBox"}
           data-plasmic-override={overrides.freeBox}
           hasGap={true}
-          className={classNames(projectcss.all, sty.freeBox)}
+          className={classNames(projectcss.all, sty.freeBox, {
+            [sty.freeBoxsmall]: hasVariant($state, "small", "small")
+          })}
         >
           <div
             data-plasmic-name={"username"}
@@ -220,7 +256,13 @@ function PlasmicReviewCard__RenderFunc(props: {
             data-plasmic-name={"basicUserInformation"}
             data-plasmic-override={overrides.basicUserInformation}
             hasGap={true}
-            className={classNames(projectcss.all, sty.basicUserInformation)}
+            className={classNames(projectcss.all, sty.basicUserInformation, {
+              [sty.basicUserInformationsmall]: hasVariant(
+                $state,
+                "small",
+                "small"
+              )
+            })}
           >
             <div
               data-plasmic-name={"numberOfReviews"}
@@ -228,7 +270,14 @@ function PlasmicReviewCard__RenderFunc(props: {
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.numberOfReviews
+                sty.numberOfReviews,
+                {
+                  [sty.numberOfReviewssmall]: hasVariant(
+                    $state,
+                    "small",
+                    "small"
+                  )
+                }
               )}
             >
               {"number of reviews"}
@@ -263,7 +312,9 @@ function PlasmicReviewCard__RenderFunc(props: {
       <div
         data-plasmic-name={"reviewCardBody"}
         data-plasmic-override={overrides.reviewCardBody}
-        className={classNames(projectcss.all, sty.reviewCardBody)}
+        className={classNames(projectcss.all, sty.reviewCardBody, {
+          [sty.reviewCardBodysmall]: hasVariant($state, "small", "small")
+        })}
       >
         <div
           data-plasmic-name={"reviewTitle"}
@@ -271,7 +322,8 @@ function PlasmicReviewCard__RenderFunc(props: {
           className={classNames(
             projectcss.all,
             projectcss.__wab_text,
-            sty.reviewTitle
+            sty.reviewTitle,
+            { [sty.reviewTitlesmall]: hasVariant($state, "small", "small") }
           )}
         >
           <React.Fragment>
@@ -296,7 +348,8 @@ function PlasmicReviewCard__RenderFunc(props: {
           className={classNames(
             projectcss.all,
             projectcss.__wab_text,
-            sty.reviewContent
+            sty.reviewContent,
+            { [sty.reviewContentsmall]: hasVariant($state, "small", "small") }
           )}
         >
           <React.Fragment>
@@ -320,7 +373,9 @@ function PlasmicReviewCard__RenderFunc(props: {
           data-plasmic-name={"rowDateOfExperience"}
           data-plasmic-override={overrides.rowDateOfExperience}
           hasGap={true}
-          className={classNames(projectcss.all, sty.rowDateOfExperience)}
+          className={classNames(projectcss.all, sty.rowDateOfExperience, {
+            [sty.rowDateOfExperiencesmall]: hasVariant($state, "small", "small")
+          })}
         >
           <div
             data-plasmic-name={"reviewDateOfExperience"}
@@ -339,7 +394,14 @@ function PlasmicReviewCard__RenderFunc(props: {
             className={classNames(
               projectcss.all,
               projectcss.__wab_text,
-              sty.dateOfExperience
+              sty.dateOfExperience,
+              {
+                [sty.dateOfExperiencesmall]: hasVariant(
+                  $state,
+                  "small",
+                  "small"
+                )
+              }
             )}
           >
             <React.Fragment>
@@ -365,7 +427,9 @@ function PlasmicReviewCard__RenderFunc(props: {
         data-plasmic-name={"reviewCardFooter"}
         data-plasmic-override={overrides.reviewCardFooter}
         hasGap={true}
-        className={classNames(projectcss.all, sty.reviewCardFooter)}
+        className={classNames(projectcss.all, sty.reviewCardFooter, {
+          [sty.reviewCardFootersmall]: hasVariant($state, "small", "small")
+        })}
       >
         <p.Stack
           as={"div"}

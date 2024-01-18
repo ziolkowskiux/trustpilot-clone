@@ -61,14 +61,16 @@ export const PlasmicLabel__VariantProps = new Array<VariantPropType>(
 
 export type PlasmicLabel__ArgsType = {
   label?: string;
+  isSelected?: boolean;
   onIsSelectedChange?: (val: string) => void;
-  onValueChange?: (val: string) => void;
+  onLabelValueChange?: (val: string) => void;
 };
 type ArgPropType = keyof PlasmicLabel__ArgsType;
 export const PlasmicLabel__ArgProps = new Array<ArgPropType>(
   "label",
+  "isSelected",
   "onIsSelectedChange",
-  "onValueChange"
+  "onLabelValueChange"
 );
 
 export type PlasmicLabel__OverridesType = {
@@ -80,8 +82,9 @@ export type PlasmicLabel__OverridesType = {
 
 export interface DefaultLabelProps {
   label?: string;
+  isSelected?: boolean;
   onIsSelectedChange?: (val: string) => void;
-  onValueChange?: (val: string) => void;
+  onLabelValueChange?: (val: string) => void;
   selected?: SingleBooleanChoiceArg<"selected">;
   className?: string;
 }
@@ -136,14 +139,14 @@ function PlasmicLabel__RenderFunc(props: {
       },
       {
         path: "isSelected",
-        type: "readonly",
+        type: "writable",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false,
 
+        valueProp: "isSelected",
         onChangeProp: "onIsSelectedChange"
       },
       {
-        path: "value",
+        path: "labelValue",
         type: "readonly",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -161,7 +164,7 @@ function PlasmicLabel__RenderFunc(props: {
             }
           })(),
 
-        onChangeProp: "onValueChange"
+        onChangeProp: "onLabelValueChange"
       }
     ],
     [$props, $ctx, $refs]

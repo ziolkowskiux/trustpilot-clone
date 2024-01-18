@@ -38,8 +38,7 @@ import {
 } from "@plasmicapp/react-web";
 import CompanyCardContactInfo from "../../CompanyCardContactInfo"; // plasmic-import: u5SO6SlWaMIn/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
-import { SliderWrapper } from "@plasmicpkgs/react-slick";
-import { sliderHelpers as SliderWrapper_Helpers } from "@plasmicpkgs/react-slick";
+import ReviewCard from "../../ReviewCard"; // plasmic-import: rJiDAmiPUpjj/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -71,6 +70,7 @@ export type PlasmicCompanyCard__ArgsType = {
   companyEmail?: string;
   companyPhone?: string;
   companyId?: string;
+  latestReviews?: any;
 };
 type ArgPropType = keyof PlasmicCompanyCard__ArgsType;
 export const PlasmicCompanyCard__ArgProps = new Array<ArgPropType>(
@@ -82,7 +82,8 @@ export const PlasmicCompanyCard__ArgProps = new Array<ArgPropType>(
   "companyWebsite",
   "companyEmail",
   "companyPhone",
-  "companyId"
+  "companyId",
+  "latestReviews"
 );
 
 export type PlasmicCompanyCard__OverridesType = {
@@ -98,7 +99,8 @@ export type PlasmicCompanyCard__OverridesType = {
   companyCardContactInfo?: p.Flex<typeof CompanyCardContactInfo>;
   button?: p.Flex<typeof AntdButton>;
   text?: p.Flex<"div">;
-  reviews?: p.Flex<typeof SliderWrapper>;
+  reviews?: p.Flex<"div">;
+  reviewCard?: p.Flex<typeof ReviewCard>;
 };
 
 export interface DefaultCompanyCardProps {
@@ -111,6 +113,7 @@ export interface DefaultCompanyCardProps {
   companyEmail?: string;
   companyPhone?: string;
   companyId?: string;
+  latestReviews?: any;
   reviewsVisible?: SingleBooleanChoiceArg<"reviewsVisible">;
   className?: string;
 }
@@ -139,8 +142,36 @@ function PlasmicCompanyCard__RenderFunc(props: {
           companyName: "Company name",
           trustScore: "0.00",
           reviewsCount: 0,
-          location: "Location",
-          companyWebsite: `/`
+          location: "2020 Happy Street, 99207 Spokane United States",
+          companyWebsite: "https://www.google.pl",
+          companyEmail: "testeruser@o2.pl",
+          latestReviews: [
+            {
+              name: "Mary Doe",
+              review: "I am super happy with the service",
+              date: "Yesterday"
+            },
+            {
+              name: "Mary Doe 2",
+              review: "2 I am super happy with the service",
+              date: "Yesterday"
+            },
+            {
+              name: "Mary Doe 3",
+              review: "3 I am super happy with the service",
+              date: "Yesterday"
+            },
+            {
+              name: "Mary Doe 4",
+              review: "4 I am super happy with the service",
+              date: "Yesterday"
+            },
+            {
+              name: "Mary Doe 5",
+              review: "5 I am super happy with the service",
+              date: "Yesterday"
+            }
+          ]
         },
         props.args
       ),
@@ -166,18 +197,6 @@ function PlasmicCompanyCard__RenderFunc(props: {
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.reviewsVisible
-      },
-      {
-        path: "reviews.currentSlide",
-        type: "private",
-        variableType: "number",
-        initFunc: ({ $props, $state, $queries, $ctx }) => 0,
-
-        refName: "reviews",
-        onMutate: p.generateOnMutateForSpec(
-          "currentSlide",
-          SliderWrapper_Helpers
-        )
       }
     ],
     [$props, $ctx, $refs]
@@ -425,12 +444,33 @@ function PlasmicCompanyCard__RenderFunc(props: {
           )
         })}
       >
-        <div className={classNames(projectcss.all, sty.freeBox__bfX)}>
+        <div
+          className={classNames(projectcss.all, sty.freeBox__bfX, {
+            [sty.freeBoxreviewsVisible__bfXeOoyo]: hasVariant(
+              $state,
+              "reviewsVisible",
+              "reviewsVisible"
+            )
+          })}
+        >
           <CompanyCardContactInfo
             data-plasmic-name={"companyCardContactInfo"}
             data-plasmic-override={overrides.companyCardContactInfo}
-            className={classNames("__wab_instance", sty.companyCardContactInfo)}
+            className={classNames(
+              "__wab_instance",
+              sty.companyCardContactInfo,
+              {
+                [sty.companyCardContactInforeviewsVisible]: hasVariant(
+                  $state,
+                  "reviewsVisible",
+                  "reviewsVisible"
+                )
+              }
+            )}
+            companyAddress={args.location}
+            companyEmail={args.companyEmail}
             companyPhone={args.companyPhone}
+            companyWebsite={args.companyWebsite}
           />
 
           <AntdButton
@@ -490,97 +530,79 @@ function PlasmicCompanyCard__RenderFunc(props: {
             </div>
           </AntdButton>
         </div>
-        {(() => {
-          const child$Props = {
-            beforeChange: p.generateStateOnChangePropForCodeComponents(
+        <p.Stack
+          as={"div"}
+          data-plasmic-name={"reviews"}
+          data-plasmic-override={overrides.reviews}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.reviews, {
+            [sty.reviewsreviewsVisible]: hasVariant(
               $state,
-              "currentSlide",
-              ["reviews", "currentSlide"],
-              SliderWrapper_Helpers
-            ),
-            className: classNames("__wab_instance", sty.reviews, {
-              [sty.reviewsreviewsVisible]: hasVariant(
-                $state,
-                "reviewsVisible",
-                "reviewsVisible"
-              )
-            }),
-            initialSlide: p.generateStateValueProp($state, [
-              "reviews",
-              "currentSlide"
-            ]),
-            ref: ref => {
-              $refs["reviews"] = ref;
-            },
-            sliderScopeClassName: sty["reviews__slider"]
-          };
-          p.initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "currentSlide",
-                plasmicStateName: "reviews.currentSlide"
+              "reviewsVisible",
+              "reviewsVisible"
+            )
+          })}
+        >
+          {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+            (() => {
+              try {
+                return $props.latestReviews;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return [];
+                }
+                throw e;
               }
-            ],
-            [],
-            SliderWrapper_Helpers ?? {},
-            child$Props
-          );
-
-          return (
-            <SliderWrapper
-              data-plasmic-name={"reviews"}
-              data-plasmic-override={overrides.reviews}
-              {...child$Props}
-            >
-              <div className={classNames(projectcss.all, sty.freeBox__nNOgs)}>
-                <p.PlasmicImg
-                  alt={""}
-                  className={classNames(sty.img__b87A5)}
-                  displayHeight={"auto"}
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={"auto"}
-                  src={
-                    "https://static1.plasmic.app/components/react-slick/slide1.png"
+            })()
+          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+            const currentItem = __plasmic_item_0;
+            const currentIndex = __plasmic_idx_0;
+            return (
+              <ReviewCard
+                data-plasmic-name={"reviewCard"}
+                data-plasmic-override={overrides.reviewCard}
+                className={classNames("__wab_instance", sty.reviewCard, {
+                  [sty.reviewCardreviewsVisible]: hasVariant(
+                    $state,
+                    "reviewsVisible",
+                    "reviewsVisible"
+                  )
+                })}
+                key={currentIndex}
+                reviewContent={(() => {
+                  try {
+                    return currentItem.review;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
                   }
-                />
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox__byWmA)}>
-                <p.PlasmicImg
-                  alt={""}
-                  className={classNames(sty.img__llJti)}
-                  displayHeight={"auto"}
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={"auto"}
-                  src={
-                    "https://static1.plasmic.app/components/react-slick/slide2.png"
+                })()}
+                small={true}
+                username={(() => {
+                  try {
+                    return currentItem.name;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
                   }
-                />
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox__tfW3G)}>
-                <p.PlasmicImg
-                  alt={""}
-                  className={classNames(sty.img__afEEk)}
-                  displayHeight={"auto"}
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={"auto"}
-                  src={
-                    "https://static1.plasmic.app/components/react-slick/slide3.png"
-                  }
-                />
-              </div>
-            </SliderWrapper>
-          );
-        })()}
+                })()}
+              />
+            );
+          })}
+        </p.Stack>
       </p.Stack>
     </div>
   ) as React.ReactElement | null;
@@ -600,7 +622,8 @@ const PlasmicDescendants = {
     "companyCardContactInfo",
     "button",
     "text",
-    "reviews"
+    "reviews",
+    "reviewCard"
   ],
   basicInformation: [
     "basicInformation",
@@ -617,11 +640,19 @@ const PlasmicDescendants = {
   reviewsCount: ["reviewsCount"],
   location: ["location"],
   label: ["label"],
-  footer: ["footer", "companyCardContactInfo", "button", "text", "reviews"],
+  footer: [
+    "footer",
+    "companyCardContactInfo",
+    "button",
+    "text",
+    "reviews",
+    "reviewCard"
+  ],
   companyCardContactInfo: ["companyCardContactInfo"],
   button: ["button", "text"],
   text: ["text"],
-  reviews: ["reviews"]
+  reviews: ["reviews", "reviewCard"],
+  reviewCard: ["reviewCard"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -639,7 +670,8 @@ type NodeDefaultElementType = {
   companyCardContactInfo: typeof CompanyCardContactInfo;
   button: typeof AntdButton;
   text: "div";
-  reviews: typeof SliderWrapper;
+  reviews: "div";
+  reviewCard: typeof ReviewCard;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -714,6 +746,7 @@ export const PlasmicCompanyCard = Object.assign(
     button: makeNodeComponent("button"),
     text: makeNodeComponent("text"),
     reviews: makeNodeComponent("reviews"),
+    reviewCard: makeNodeComponent("reviewCard"),
 
     // Metadata about props expected for PlasmicCompanyCard
     internalVariantProps: PlasmicCompanyCard__VariantProps,
