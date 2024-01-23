@@ -57,6 +57,9 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_trust_pilot_clone.module.css"; // plasmic-import: uzL7MLDrNkZiDQaUBve1wf/projectcss
 import sty from "./PlasmicCategories.module.css"; // plasmic-import: TbqF7dSOyn/css
 
+import MagnifyingGlassIcon from "./icons/PlasmicIcon__MagnifyingGlass"; // plasmic-import: k_4X76Kvfh/icon
+import XIcon from "./icons/PlasmicIcon__X"; // plasmic-import: GLcyIp_DFO/icon
+
 createPlasmicElementProxy;
 
 export type PlasmicCategories__VariantMembers = {};
@@ -74,7 +77,8 @@ export type PlasmicCategories__OverridesType = {
   body?: p.Flex<"div">;
   header?: p.Flex<"div">;
   h2?: p.Flex<"h2">;
-  input?: p.Flex<typeof AntdInput>;
+  companySearch?: p.Flex<typeof AntdInput>;
+  button?: p.Flex<"button">;
   categories?: p.Flex<"div">;
   h4?: p.Flex<"h4">;
   freeBox?: p.Flex<"div">;
@@ -121,7 +125,7 @@ function PlasmicCategories__RenderFunc(props: {
   const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "input.value",
+        path: "companySearch.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -225,21 +229,88 @@ function PlasmicCategories__RenderFunc(props: {
               </h2>
               {(() => {
                 const child$Props = {
-                  className: classNames("__wab_instance", sty.input),
+                  autoFocus: true,
+                  className: classNames("__wab_instance", sty.companySearch),
                   onChange: p.generateStateOnChangePropForCodeComponents(
                     $state,
                     "value",
-                    ["input", "value"],
+                    ["companySearch", "value"],
                     AntdInput_Helpers
                   ),
-                  value: p.generateStateValueProp($state, ["input", "value"])
+                  prefix: (
+                    <MagnifyingGlassIcon
+                      className={classNames(projectcss.all, sty.svg___7ZuoC)}
+                      role={"img"}
+                    />
+                  ),
+
+                  suffix: (
+                    <button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.button,
+                        sty.button
+                      )}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateCompanySearchValue"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["companySearch", "value"]
+                                },
+                                operation: 1
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                p.set(objRoot, variablePath, undefined);
+                                return undefined;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateCompanySearchValue"] != null &&
+                          typeof $steps["updateCompanySearchValue"] ===
+                            "object" &&
+                          typeof $steps["updateCompanySearchValue"].then ===
+                            "function"
+                        ) {
+                          $steps["updateCompanySearchValue"] = await $steps[
+                            "updateCompanySearchValue"
+                          ];
+                        }
+                      }}
+                    >
+                      <XIcon
+                        className={classNames(projectcss.all, sty.svg___0HEn1)}
+                        role={"img"}
+                      />
+                    </button>
+                  ),
+                  value: p.generateStateValueProp($state, [
+                    "companySearch",
+                    "value"
+                  ])
                 };
                 p.initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input.value"
+                      plasmicStateName: "companySearch.value"
                     }
                   ],
                   [],
@@ -249,8 +320,8 @@ function PlasmicCategories__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input"}
-                    data-plasmic-override={overrides.input}
+                    data-plasmic-name={"companySearch"}
+                    data-plasmic-override={overrides.companySearch}
                     {...child$Props}
                   />
                 );
@@ -384,7 +455,8 @@ const PlasmicDescendants = {
     "body",
     "header",
     "h2",
-    "input",
+    "companySearch",
+    "button",
     "categories",
     "h4",
     "freeBox",
@@ -396,15 +468,17 @@ const PlasmicDescendants = {
     "body",
     "header",
     "h2",
-    "input",
+    "companySearch",
+    "button",
     "categories",
     "h4",
     "freeBox",
     "categoryCardList"
   ],
-  header: ["header", "h2", "input"],
+  header: ["header", "h2", "companySearch", "button"],
   h2: ["h2"],
-  input: ["input"],
+  companySearch: ["companySearch", "button"],
+  button: ["button"],
   categories: ["categories", "h4", "freeBox", "categoryCardList"],
   h4: ["h4"],
   freeBox: ["freeBox", "categoryCardList"],
@@ -420,7 +494,8 @@ type NodeDefaultElementType = {
   body: "div";
   header: "div";
   h2: "h2";
-  input: typeof AntdInput;
+  companySearch: typeof AntdInput;
+  button: "button";
   categories: "div";
   h4: "h4";
   freeBox: "div";
@@ -534,7 +609,8 @@ export const PlasmicCategories = Object.assign(
     body: makeNodeComponent("body"),
     header: makeNodeComponent("header"),
     h2: makeNodeComponent("h2"),
-    input: makeNodeComponent("input"),
+    companySearch: makeNodeComponent("companySearch"),
+    button: makeNodeComponent("button"),
     categories: makeNodeComponent("categories"),
     h4: makeNodeComponent("h4"),
     freeBox: makeNodeComponent("freeBox"),

@@ -1,16 +1,6 @@
 {
   "props": [
     {
-      "name": "Primary Dark",
-      "type": "color",
-      "value": "#313336",
-      "category": "color",
-      "meta": {
-        "projectId": "uzL7MLDrNkZiDQaUBve1wf",
-        "id": "o1vZGRJWL"
-      }
-    },
-    {
       "name": "System: Background Global",
       "type": "color",
       "value": "#FDFDF4",
@@ -2138,6 +2128,16 @@
       "meta": {
         "projectId": "uzL7MLDrNkZiDQaUBve1wf",
         "id": "Whpoet9w77_d"
+      }
+    },
+    {
+      "name": "primary-dark",
+      "type": "color",
+      "value": "#313336",
+      "category": "color",
+      "meta": {
+        "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+        "id": "o1vZGRJWL"
       }
     }
   ],

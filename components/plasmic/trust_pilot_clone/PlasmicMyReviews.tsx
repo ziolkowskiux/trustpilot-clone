@@ -21,6 +21,11 @@ import * as p from "@plasmicapp/react-web";
 import * as ph from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
+import {
+  executePlasmicDataOp,
+  usePlasmicDataOp,
+  usePlasmicInvalidate
+} from "@plasmicapp/react-web/lib/data-sources";
 
 import {
   hasVariant,
@@ -41,6 +46,7 @@ import {
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -110,7 +116,29 @@ function PlasmicMyReviews__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
+  let [$queries, setDollarQueries] = React.useState<
+    Record<string, ReturnType<typeof usePlasmicDataOp>>
+  >({});
+
   const dataSourcesCtx = usePlasmicDataSourceContext();
+
+  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
+    getUserInfo: usePlasmicDataOp(() => {
+      return {
+        sourceId: "czoZTBwvV8zZJLNVxj78Sv",
+        opId: "e9e58509-2679-431e-ad0d-03c3af109e6b",
+        userArgs: {},
+        cacheKey: `plasmic.$.e9e58509-2679-431e-ad0d-03c3af109e6b.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+
+    $queries = new$Queries;
+  }
 
   return (
     <React.Fragment>
@@ -194,7 +222,25 @@ function PlasmicMyReviews__RenderFunc(props: {
                         sty.h4__kdAut
                       )}
                     >
-                      {"Username"}
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return (
+                              currentUser.properties.firstName +
+                              " " +
+                              currentUser.properties.lastName
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Username";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
                     </h4>
                     <p
                       className={classNames(
@@ -366,6 +412,7 @@ function PlasmicMyReviews__RenderFunc(props: {
                 </p.Stack>
                 <AntdButton
                   className={classNames("__wab_instance", sty.button__xHYlY)}
+                  href={`/categories`}
                   shape={"round"}
                   size={"large"}
                   type={"primary"}

@@ -319,7 +319,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         path: "drawer.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
         path: "datePosted.value",

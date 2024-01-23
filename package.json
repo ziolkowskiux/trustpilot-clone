@@ -18,6 +18,7 @@
     "@plasmicpkgs/plasmic-query": "^0.0.206",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.175",
     "@plasmicpkgs/radix-ui": "^0.0.41",
+    "@plasmicpkgs/react-awesome-reveal": "^3.8.189",
     "@types/node": "20.5.6",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

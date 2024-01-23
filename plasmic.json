@@ -175,7 +175,8 @@
           }
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "ohDidvG9XsCeFumugENU3J",
@@ -1047,6 +1048,62 @@
           "cssFilePath": "plasmic/trust_pilot_clone/PlasmicPathBreadcrumb.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "GEnUp2fCgvF9",
+          "name": "Select",
+          "type": "managed",
+          "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+          "renderModuleFilePath": "plasmic/trust_pilot_clone/PlasmicSelect.tsx",
+          "importSpec": {
+            "modulePath": "Select.tsx"
+          },
+          "cssFilePath": "plasmic/trust_pilot_clone/PlasmicSelect.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "select"
+        },
+        {
+          "id": "M65ZITmGxr2n",
+          "name": "Select__Option",
+          "type": "managed",
+          "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+          "renderModuleFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__Option.tsx",
+          "importSpec": {
+            "modulePath": "Select__Option.tsx"
+          },
+          "cssFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__Option.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "select-option"
+        },
+        {
+          "id": "fUKppJ6cRP5q",
+          "name": "Select__OptionGroup",
+          "type": "managed",
+          "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+          "renderModuleFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__OptionGroup.tsx",
+          "importSpec": {
+            "modulePath": "Select__OptionGroup.tsx"
+          },
+          "cssFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__OptionGroup.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "select-option-group"
+        },
+        {
+          "id": "JV_nuMKlLuD5",
+          "name": "Select__Overlay",
+          "type": "managed",
+          "projectId": "uzL7MLDrNkZiDQaUBve1wf",
+          "renderModuleFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__Overlay.tsx",
+          "importSpec": {
+            "modulePath": "Select__Overlay.tsx"
+          },
+          "cssFilePath": "plasmic/trust_pilot_clone/PlasmicSelect__Overlay.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "triggered-overlay"
         }
       ],
       "icons": [
@@ -1154,6 +1211,16 @@
           "id": "VAVaJQX6lOKe",
           "name": "StarSolidIcon",
           "moduleFilePath": "plasmic/trust_pilot_clone/icons/PlasmicIcon__StarSolid.tsx"
+        },
+        {
+          "id": "Zauj2sXN9mw0",
+          "name": "ChevronDownsvgIcon",
+          "moduleFilePath": "plasmic/trust_pilot_clone/icons/PlasmicIcon__ChevronDownsvg.tsx"
+        },
+        {
+          "id": "mcnn1qv6hl9d",
+          "name": "ChevronUpsvgIcon",
+          "moduleFilePath": "plasmic/trust_pilot_clone/icons/PlasmicIcon__ChevronUpsvg.tsx"
         }
       ],
       "images": [
@@ -1312,6 +1379,28 @@
       ],
       "customFunctions": [],
       "jsBundleThemes": []
+    },
+    {
+      "projectId": "58GpZjZCWTaJ8AUhpCwt2K",
+      "projectApiToken": "DIkcfhBwjMCJSjcxfBkMuy4NImyytq5EWylxVcpS9t9EpdhnPQuBgBGxmk00AB1itMFa1KXTxOKnrjN2PN9nlA",
+      "projectName": "react-awesome-reveal",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/react_awesome_reveal/plasmic_react_awesome_reveal.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [
+        {
+          "id": "R6s1FdhksG",
+          "name": "Reveal",
+          "displayName": "hostless-reveal",
+          "componentImportPath": "@plasmicpkgs/react-awesome-reveal"
+        }
+      ],
+      "customFunctions": []
     }
   ],
   "globalVariants": {

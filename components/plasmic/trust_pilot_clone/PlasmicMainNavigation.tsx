@@ -39,6 +39,8 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import Logo from "../../Logo"; // plasmic-import: xGLYzs7veW/component
+import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import NavTab from "../../NavTab"; // plasmic-import: DjlqHaVj5E/component
 import NavTabButton from "../../NavTabButton"; // plasmic-import: jyMP_1m1nW/component
 import NavProfileDropdown from "../../NavProfileDropdown"; // plasmic-import: Q2OGBST8lp/component
@@ -77,6 +79,9 @@ export type PlasmicMainNavigation__OverridesType = {
   navMobile?: p.Flex<"div">;
   buttonOpen?: p.Flex<"button">;
   buttonClose?: p.Flex<"button">;
+  search?: p.Flex<"div">;
+  input?: p.Flex<typeof AntdInput>;
+  buttonClose2?: p.Flex<"button">;
   desktop?: p.Flex<"div">;
   links?: p.Flex<"div">;
   navTabButton?: p.Flex<typeof NavTabButton>;
@@ -125,6 +130,20 @@ function PlasmicMainNavigation__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "input.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "searchOpened",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -157,10 +176,29 @@ function PlasmicMainNavigation__RenderFunc(props: {
         plasmic_plasmic_rich_components_css.plasmic_tokens,
         sty.nav
       )}
+      style={(() => {
+        try {
+          return {
+            backgroundColor: $state.searchOpened
+              ? "white"
+              : "var(--plasmic-token-primary-dark)"
+          };
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return { backgroundColor: "yellow" };
+          }
+          throw e;
+        }
+      })()}
     >
-      <div
+      <p.Stack
+        as={"div"}
         data-plasmic-name={"content"}
         data-plasmic-override={overrides.content}
+        hasGap={true}
         className={classNames(projectcss.all, sty.content)}
       >
         <div
@@ -193,6 +231,46 @@ function PlasmicMainNavigation__RenderFunc(props: {
                 projectcss.button,
                 sty.button__takK0
               )}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateSearchOpened"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["searchOpened"]
+                        },
+                        operation: 4,
+                        value: true
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = p.get(objRoot, variablePath);
+                        p.set(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateSearchOpened"] != null &&
+                  typeof $steps["updateSearchOpened"] === "object" &&
+                  typeof $steps["updateSearchOpened"].then === "function"
+                ) {
+                  $steps["updateSearchOpened"] = await $steps[
+                    "updateSearchOpened"
+                  ];
+                }
+              }}
             >
               <MagnifyingGlassIcon
                 className={classNames(projectcss.all, sty.svg__lExP6)}
@@ -200,7 +278,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
               />
             </button>
             {(
-              hasVariant(globalVariants, "screen", "mobileOnly")
+              hasVariant(globalVariants, "screen", "mobile")
                 ? (() => {
                     try {
                       return !$state.isOpen;
@@ -272,7 +350,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
               </button>
             ) : null}
             {(
-              hasVariant(globalVariants, "screen", "mobileOnly")
+              hasVariant(globalVariants, "screen", "mobile")
                 ? (() => {
                     try {
                       return $state.isOpen;
@@ -346,7 +424,131 @@ function PlasmicMainNavigation__RenderFunc(props: {
           </div>
         </div>
         {(
-          hasVariant(globalVariants, "screen", "mobileOnly")
+          hasVariant(globalVariants, "screen", "mobile")
+            ? (() => {
+                try {
+                  return $state.searchOpened;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })()
+            : true
+        ) ? (
+          <p.Stack
+            as={"div"}
+            data-plasmic-name={"search"}
+            data-plasmic-override={overrides.search}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.search)}
+          >
+            <MagnifyingGlassIcon
+              className={classNames(projectcss.all, sty.svg__n1D1Y)}
+              role={"img"}
+            />
+
+            {(() => {
+              const child$Props = {
+                bordered: hasVariant(globalVariants, "screen", "mobile")
+                  ? false
+                  : undefined,
+                className: classNames("__wab_instance", sty.input),
+                onChange: p.generateStateOnChangePropForCodeComponents(
+                  $state,
+                  "value",
+                  ["input", "value"],
+                  AntdInput_Helpers
+                ),
+                placeholder: "Search for a company or category",
+                size: "large",
+                value: p.generateStateValueProp($state, ["input", "value"])
+              };
+              p.initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "value",
+                    plasmicStateName: "input.value"
+                  }
+                ],
+                [],
+                AntdInput_Helpers ?? {},
+                child$Props
+              );
+
+              return (
+                <AntdInput
+                  data-plasmic-name={"input"}
+                  data-plasmic-override={overrides.input}
+                  {...child$Props}
+                />
+              );
+            })()}
+            <button
+              data-plasmic-name={"buttonClose2"}
+              data-plasmic-override={overrides.buttonClose2}
+              className={classNames(
+                projectcss.all,
+                projectcss.button,
+                sty.buttonClose2
+              )}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateSearchOpened"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["searchOpened"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = p.get(objRoot, variablePath);
+                        p.set(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateSearchOpened"] != null &&
+                  typeof $steps["updateSearchOpened"] === "object" &&
+                  typeof $steps["updateSearchOpened"].then === "function"
+                ) {
+                  $steps["updateSearchOpened"] = await $steps[
+                    "updateSearchOpened"
+                  ];
+                }
+              }}
+              ref={ref => {
+                $refs["buttonClose2"] = ref;
+              }}
+            >
+              <XIcon
+                className={classNames(projectcss.all, sty.svg__y6Uqu)}
+                role={"img"}
+              />
+            </button>
+          </p.Stack>
+        ) : null}
+        {(
+          hasVariant(globalVariants, "screen", "mobile")
             ? (() => {
                 try {
                   return $state.isOpen;
@@ -537,7 +739,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
             </AntdButton>
           </p.Stack>
         ) : null}
-      </div>
+      </p.Stack>
     </nav>
   ) as React.ReactElement | null;
 }
@@ -552,6 +754,9 @@ const PlasmicDescendants = {
     "navMobile",
     "buttonOpen",
     "buttonClose",
+    "search",
+    "input",
+    "buttonClose2",
     "desktop",
     "links",
     "navTabButton",
@@ -565,6 +770,9 @@ const PlasmicDescendants = {
     "navMobile",
     "buttonOpen",
     "buttonClose",
+    "search",
+    "input",
+    "buttonClose2",
     "desktop",
     "links",
     "navTabButton",
@@ -576,6 +784,9 @@ const PlasmicDescendants = {
   navMobile: ["navMobile", "buttonOpen", "buttonClose"],
   buttonOpen: ["buttonOpen"],
   buttonClose: ["buttonClose"],
+  search: ["search", "input", "buttonClose2"],
+  input: ["input"],
+  buttonClose2: ["buttonClose2"],
   desktop: ["desktop", "links", "navTabButton", "navProfileDropdown"],
   links: ["links", "navTabButton", "navProfileDropdown"],
   navTabButton: ["navTabButton"],
@@ -593,6 +804,9 @@ type NodeDefaultElementType = {
   navMobile: "div";
   buttonOpen: "button";
   buttonClose: "button";
+  search: "div";
+  input: typeof AntdInput;
+  buttonClose2: "button";
   desktop: "div";
   links: "div";
   navTabButton: typeof NavTabButton;
@@ -666,6 +880,9 @@ export const PlasmicMainNavigation = Object.assign(
     navMobile: makeNodeComponent("navMobile"),
     buttonOpen: makeNodeComponent("buttonOpen"),
     buttonClose: makeNodeComponent("buttonClose"),
+    search: makeNodeComponent("search"),
+    input: makeNodeComponent("input"),
+    buttonClose2: makeNodeComponent("buttonClose2"),
     desktop: makeNodeComponent("desktop"),
     links: makeNodeComponent("links"),
     navTabButton: makeNodeComponent("navTabButton"),

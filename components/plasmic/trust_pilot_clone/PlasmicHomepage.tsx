@@ -62,6 +62,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_trust_pilot_clone.module.css"; // plasmic-import: uzL7MLDrNkZiDQaUBve1wf/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: cgPUeCn72oWlE/css
 
+import MagnifyingGlassIcon from "./icons/PlasmicIcon__MagnifyingGlass"; // plasmic-import: k_4X76Kvfh/icon
+
 createPlasmicElementProxy;
 
 export type PlasmicHomepage__VariantMembers = {};
@@ -78,7 +80,9 @@ export type PlasmicHomepage__OverridesType = {
   mainNavigation?: p.Flex<typeof MainNavigation>;
   body?: p.Flex<"div">;
   heroSection?: p.Flex<"section">;
+  heroSearch?: p.Flex<"div">;
   input?: p.Flex<typeof AntdInput>;
+  svg?: p.Flex<"svg">;
   categories?: p.Flex<"section">;
   header?: p.Flex<"div">;
   sliderCarousel?: p.Flex<typeof SliderWrapper>;
@@ -282,38 +286,78 @@ function PlasmicHomepage__RenderFunc(props: {
                     "Read Reviews. Write reviews.\nFind companies you can trust."
                   }
                 </h2>
-                {(() => {
-                  const child$Props = {
-                    className: classNames("__wab_instance", sty.input),
-                    onChange: p.generateStateOnChangePropForCodeComponents(
-                      $state,
-                      "value",
-                      ["input", "value"],
-                      AntdInput_Helpers
-                    ),
-                    value: p.generateStateValueProp($state, ["input", "value"])
-                  };
-                  p.initializeCodeComponentStates(
-                    $state,
-                    [
-                      {
-                        name: "value",
-                        plasmicStateName: "input.value"
-                      }
-                    ],
-                    [],
-                    AntdInput_Helpers ?? {},
-                    child$Props
-                  );
+                <p.Stack
+                  as={"div"}
+                  data-plasmic-name={"heroSearch"}
+                  data-plasmic-override={overrides.heroSearch}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.heroSearch)}
+                >
+                  {(() => {
+                    const child$Props = {
+                      addonAfter: null,
+                      bordered: false,
+                      className: classNames("__wab_instance", sty.input),
+                      onChange: p.generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "value",
+                        ["input", "value"],
+                        AntdInput_Helpers
+                      ),
+                      placeholder: "Company or category",
+                      prefix: (
+                        <MagnifyingGlassIcon
+                          data-plasmic-name={"svg"}
+                          data-plasmic-override={overrides.svg}
+                          className={classNames(projectcss.all, sty.svg)}
+                          role={"img"}
+                        />
+                      ),
 
-                  return (
-                    <AntdInput
-                      data-plasmic-name={"input"}
-                      data-plasmic-override={overrides.input}
-                      {...child$Props}
-                    />
-                  );
-                })()}
+                      size: "large",
+                      value: p.generateStateValueProp($state, [
+                        "input",
+                        "value"
+                      ])
+                    };
+                    p.initializeCodeComponentStates(
+                      $state,
+                      [
+                        {
+                          name: "value",
+                          plasmicStateName: "input.value"
+                        }
+                      ],
+                      [],
+                      AntdInput_Helpers ?? {},
+                      child$Props
+                    );
+
+                    return (
+                      <AntdInput
+                        data-plasmic-name={"input"}
+                        data-plasmic-override={overrides.input}
+                        {...child$Props}
+                      />
+                    );
+                  })()}
+                  <AntdButton
+                    className={classNames("__wab_instance", sty.button___1VFxS)}
+                    shape={"round"}
+                    size={"large"}
+                    type={"primary"}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__lxHq4
+                      )}
+                    >
+                      {"Search"}
+                    </div>
+                  </AntdButton>
+                </p.Stack>
               </p.Stack>
             </section>
             <section
@@ -338,6 +382,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 </h4>
                 <AntdButton
                   className={classNames("__wab_instance", sty.button__li1Vn)}
+                  href={`/categories`}
                 >
                   <div
                     className={classNames(
@@ -353,7 +398,12 @@ function PlasmicHomepage__RenderFunc(props: {
               {(() => {
                 const child$Props = {
                   accessibility: true,
-                  adaptiveHeight: true,
+                  adaptiveHeight: hasVariant(globalVariants, "screen", "mobile")
+                    ? true
+                    : true,
+                  arrows: hasVariant(globalVariants, "screen", "mobile")
+                    ? false
+                    : undefined,
                   beforeChange: p.generateStateOnChangePropForCodeComponents(
                     $state,
                     "currentSlide",
@@ -374,11 +424,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   },
                   rows: 3,
                   sliderScopeClassName: sty["sliderCarousel__slider"],
-                  slidesPerRow: hasVariant(
-                    globalVariants,
-                    "screen",
-                    "mobileOnly"
-                  )
+                  slidesPerRow: hasVariant(globalVariants, "screen", "mobile")
                     ? 2
                     : 4,
                   variableWidth: false
@@ -1028,7 +1074,9 @@ const PlasmicDescendants = {
     "mainNavigation",
     "body",
     "heroSection",
+    "heroSearch",
     "input",
+    "svg",
     "categories",
     "header",
     "sliderCarousel",
@@ -1049,7 +1097,9 @@ const PlasmicDescendants = {
   body: [
     "body",
     "heroSection",
+    "heroSearch",
     "input",
+    "svg",
     "categories",
     "header",
     "sliderCarousel",
@@ -1065,8 +1115,10 @@ const PlasmicDescendants = {
     "stories",
     "sliderCarousel2"
   ],
-  heroSection: ["heroSection", "input"],
-  input: ["input"],
+  heroSection: ["heroSection", "heroSearch", "input", "svg"],
+  heroSearch: ["heroSearch", "input", "svg"],
+  input: ["input", "svg"],
+  svg: ["svg"],
   categories: ["categories", "header", "sliderCarousel", "categoryCard4"],
   header: ["header"],
   sliderCarousel: ["sliderCarousel", "categoryCard4"],
@@ -1091,7 +1143,9 @@ type NodeDefaultElementType = {
   mainNavigation: typeof MainNavigation;
   body: "div";
   heroSection: "section";
+  heroSearch: "div";
   input: typeof AntdInput;
+  svg: "svg";
   categories: "section";
   header: "div";
   sliderCarousel: typeof SliderWrapper;
@@ -1214,7 +1268,9 @@ export const PlasmicHomepage = Object.assign(
     mainNavigation: makeNodeComponent("mainNavigation"),
     body: makeNodeComponent("body"),
     heroSection: makeNodeComponent("heroSection"),
+    heroSearch: makeNodeComponent("heroSearch"),
     input: makeNodeComponent("input"),
+    svg: makeNodeComponent("svg"),
     categories: makeNodeComponent("categories"),
     header: makeNodeComponent("header"),
     sliderCarousel: makeNodeComponent("sliderCarousel"),
