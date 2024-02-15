@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import ReviewsSummaryPercentageBar from "../../ReviewsSummaryPercentageBar"; // plasmic-import: _vOq5FSptHrw/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
@@ -98,23 +121,23 @@ export const PlasmicReviewsSummary__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicReviewsSummary__OverridesType = {
-  reviewsSummary?: p.Flex<"div">;
-  header?: p.Flex<"div">;
-  calculatedScore?: p.Flex<"div">;
-  title?: p.Flex<"div">;
-  svg?: p.Flex<"svg">;
-  headerScore?: p.Flex<"div">;
-  reviewsCount?: p.Flex<"div">;
-  reviewsBreakdown?: p.Flex<"div">;
-  _5StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  _4StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  _3StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  _2StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  _1StarReviews?: p.Flex<typeof ReviewsSummaryPercentageBar>;
-  footer?: p.Flex<"div">;
-  buttonFilter?: p.Flex<typeof AntdButton>;
-  buttonsRight?: p.Flex<"div">;
-  buttonSort?: p.Flex<typeof AntdButton>;
+  reviewsSummary?: Flex__<"div">;
+  header?: Flex__<"div">;
+  calculatedScore?: Flex__<"div">;
+  title?: Flex__<"div">;
+  svg?: Flex__<"svg">;
+  headerScore?: Flex__<"div">;
+  reviewsCount?: Flex__<"div">;
+  reviewsBreakdown?: Flex__<"div">;
+  _5StarReviews?: Flex__<typeof ReviewsSummaryPercentageBar>;
+  _4StarReviews?: Flex__<typeof ReviewsSummaryPercentageBar>;
+  _3StarReviews?: Flex__<typeof ReviewsSummaryPercentageBar>;
+  _2StarReviews?: Flex__<typeof ReviewsSummaryPercentageBar>;
+  _1StarReviews?: Flex__<typeof ReviewsSummaryPercentageBar>;
+  footer?: Flex__<"div">;
+  buttonFilter?: Flex__<typeof AntdButton>;
+  buttonsRight?: Flex__<"div">;
+  buttonSort?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultReviewsSummaryProps {
@@ -179,13 +202,13 @@ function PlasmicReviewsSummary__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "_5StarReviews.ratingBarChecked",
@@ -236,7 +259,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -244,7 +267,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
   });
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"reviewsSummary"}
       data-plasmic-override={overrides.reviewsSummary}
@@ -267,7 +290,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
         data-plasmic-override={overrides.header}
         className={classNames(projectcss.all, sty.header)}
       >
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"calculatedScore"}
           data-plasmic-override={overrides.calculatedScore}
@@ -317,7 +340,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
               })()}
             </React.Fragment>
           </div>
-        </p.Stack>
+        </Stack__>
         <div
           data-plasmic-name={"reviewsCount"}
           data-plasmic-override={overrides.reviewsCount}
@@ -344,7 +367,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           </React.Fragment>
         </div>
       </div>
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"reviewsBreakdown"}
         data-plasmic-override={overrides.reviewsBreakdown}
@@ -357,11 +380,11 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           className={classNames("__wab_instance", sty._5StarReviews)}
           fillColor={"#27ae60"}
           label={"5-star"}
-          onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+          onRatingBarCheckedChange={generateStateOnChangeProp($state, [
             "_5StarReviews",
             "ratingBarChecked"
           ])}
-          ratingBarChecked={p.generateStateValueProp($state, [
+          ratingBarChecked={generateStateValueProp($state, [
             "_5StarReviews",
             "ratingBarChecked"
           ])}
@@ -402,11 +425,11 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           data-plasmic-override={overrides._4StarReviews}
           className={classNames("__wab_instance", sty._4StarReviews)}
           label={"4-star"}
-          onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+          onRatingBarCheckedChange={generateStateOnChangeProp($state, [
             "_4StarReviews",
             "ratingBarChecked"
           ])}
-          ratingBarChecked={p.generateStateValueProp($state, [
+          ratingBarChecked={generateStateValueProp($state, [
             "_4StarReviews",
             "ratingBarChecked"
           ])}
@@ -447,11 +470,11 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           data-plasmic-override={overrides._3StarReviews}
           className={classNames("__wab_instance", sty._3StarReviews)}
           label={"3-star"}
-          onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+          onRatingBarCheckedChange={generateStateOnChangeProp($state, [
             "_3StarReviews",
             "ratingBarChecked"
           ])}
-          ratingBarChecked={p.generateStateValueProp($state, [
+          ratingBarChecked={generateStateValueProp($state, [
             "_3StarReviews",
             "ratingBarChecked"
           ])}
@@ -492,11 +515,11 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           data-plasmic-override={overrides._2StarReviews}
           className={classNames("__wab_instance", sty._2StarReviews)}
           label={"2-star"}
-          onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+          onRatingBarCheckedChange={generateStateOnChangeProp($state, [
             "_2StarReviews",
             "ratingBarChecked"
           ])}
-          ratingBarChecked={p.generateStateValueProp($state, [
+          ratingBarChecked={generateStateValueProp($state, [
             "_2StarReviews",
             "ratingBarChecked"
           ])}
@@ -537,11 +560,11 @@ function PlasmicReviewsSummary__RenderFunc(props: {
           data-plasmic-override={overrides._1StarReviews}
           className={classNames("__wab_instance", sty._1StarReviews)}
           label={"1-star"}
-          onRatingBarCheckedChange={p.generateStateOnChangeProp($state, [
+          onRatingBarCheckedChange={generateStateOnChangeProp($state, [
             "_1StarReviews",
             "ratingBarChecked"
           ])}
-          ratingBarChecked={p.generateStateValueProp($state, [
+          ratingBarChecked={generateStateValueProp($state, [
             "_1StarReviews",
             "ratingBarChecked"
           ])}
@@ -576,7 +599,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             }
           })()}
         />
-      </p.Stack>
+      </Stack__>
       <div
         data-plasmic-name={"footer"}
         data-plasmic-override={overrides.footer}
@@ -601,7 +624,7 @@ function PlasmicReviewsSummary__RenderFunc(props: {
             {"Filter"}
           </div>
         </AntdButton>
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"buttonsRight"}
           data-plasmic-override={overrides.buttonsRight}
@@ -633,9 +656,9 @@ function PlasmicReviewsSummary__RenderFunc(props: {
               {"Most relevant"}
             </div>
           </AntdButton>
-        </p.Stack>
+        </Stack__>
       </div>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

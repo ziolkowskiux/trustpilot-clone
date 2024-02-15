@@ -7,18 +7,23 @@
 import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
+import { ParallaxProviderWrapper } from "@plasmicpkgs/react-scroll-parallax";
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
+  parallaxProviderWrapperProps?: Partial<
+    Omit<React.ComponentProps<typeof ParallaxProviderWrapper>, "children">
+  >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, antdConfigProviderProps } = props;
+  const { children, antdConfigProviderProps, parallaxProviderWrapperProps } =
+    props;
 
   return (
     <AntdConfigProvider
@@ -113,7 +118,17 @@ export default function GlobalContextsProvider(
           : false
       }
     >
-      {children}
+      <ParallaxProviderWrapper
+        {...parallaxProviderWrapperProps}
+        scrollAxis={
+          parallaxProviderWrapperProps &&
+          "scrollAxis" in parallaxProviderWrapperProps
+            ? parallaxProviderWrapperProps.scrollAxis!
+            : undefined
+        }
+      >
+        {children}
+      </ParallaxProviderWrapper>
     </AntdConfigProvider>
   );
 }

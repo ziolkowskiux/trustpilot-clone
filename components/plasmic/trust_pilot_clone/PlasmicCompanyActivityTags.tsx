@@ -17,25 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -53,7 +75,7 @@ export const PlasmicCompanyActivityTags__VariantProps =
   new Array<VariantPropType>();
 
 export type PlasmicCompanyActivityTags__ArgsType = {
-  activityIcon?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  activityIcon?: React.ComponentProps<typeof PlasmicImg__>["src"];
   activityLabel?: string;
 };
 type ArgPropType = keyof PlasmicCompanyActivityTags__ArgsType;
@@ -63,13 +85,13 @@ export const PlasmicCompanyActivityTags__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicCompanyActivityTags__OverridesType = {
-  companyActivityRow?: p.Flex<"div">;
-  img?: p.Flex<typeof p.PlasmicImg>;
-  label?: p.Flex<"div">;
+  companyActivityRow?: Flex__<"div">;
+  img?: Flex__<typeof PlasmicImg__>;
+  label?: Flex__<"div">;
 };
 
 export interface DefaultCompanyActivityTagsProps {
-  activityIcon?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  activityIcon?: React.ComponentProps<typeof PlasmicImg__>["src"];
   activityLabel?: string;
   className?: string;
 }
@@ -108,14 +130,14 @@ function PlasmicCompanyActivityTags__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"companyActivityRow"}
       data-plasmic-override={overrides.companyActivityRow}
@@ -133,7 +155,7 @@ function PlasmicCompanyActivityTags__RenderFunc(props: {
         sty.companyActivityRow
       )}
     >
-      <p.PlasmicImg
+      <PlasmicImg__
         data-plasmic-name={"img"}
         data-plasmic-override={overrides.img}
         alt={""}
@@ -169,7 +191,7 @@ function PlasmicCompanyActivityTags__RenderFunc(props: {
           })()}
         </React.Fragment>
       </div>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
@@ -183,7 +205,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   companyActivityRow: "div";
-  img: typeof p.PlasmicImg;
+  img: typeof PlasmicImg__;
   label: "div";
 };
 

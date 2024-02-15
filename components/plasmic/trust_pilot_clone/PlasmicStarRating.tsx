@@ -17,25 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -80,12 +102,12 @@ export const PlasmicStarRating__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicStarRating__OverridesType = {
-  starRating?: p.Flex<"div">;
-  rating1?: p.Flex<"button">;
-  rating2?: p.Flex<"button">;
-  rating3?: p.Flex<"button">;
-  rating4?: p.Flex<"button">;
-  rating5?: p.Flex<"button">;
+  starRating?: Flex__<"div">;
+  rating1?: Flex__<"button">;
+  rating2?: Flex__<"button">;
+  rating3?: Flex__<"button">;
+  rating4?: Flex__<"button">;
+  rating5?: Flex__<"button">;
 };
 
 export interface DefaultStarRatingProps {
@@ -124,13 +146,13 @@ function PlasmicStarRating__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "hoverStates",
@@ -155,7 +177,7 @@ function PlasmicStarRating__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -163,7 +185,7 @@ function PlasmicStarRating__RenderFunc(props: {
   });
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"starRating"}
       data-plasmic-override={overrides.starRating}
@@ -213,7 +235,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   value = [value];
                 }
 
-                p.set($state, vgroup, undefined);
+                $stateSet($state, vgroup, undefined);
                 return undefined;
               })?.apply(null, [actionArgs]);
             })()
@@ -299,7 +321,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -330,7 +352,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   }
                   const { objRoot, variablePath } = variable;
 
-                  p.set(objRoot, variablePath, value);
+                  $stateSet(objRoot, variablePath, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -358,7 +380,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -452,7 +474,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -483,7 +505,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   }
                   const { objRoot, variablePath } = variable;
 
-                  p.set(objRoot, variablePath, value);
+                  $stateSet(objRoot, variablePath, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -511,7 +533,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -597,7 +619,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -628,7 +650,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   }
                   const { objRoot, variablePath } = variable;
 
-                  p.set(objRoot, variablePath, value);
+                  $stateSet(objRoot, variablePath, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -656,7 +678,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -730,7 +752,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -761,7 +783,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   }
                   const { objRoot, variablePath } = variable;
 
-                  p.set(objRoot, variablePath, value);
+                  $stateSet(objRoot, variablePath, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -789,7 +811,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -842,7 +864,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  p.set($state, vgroup, value);
+                  $stateSet($state, vgroup, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -873,7 +895,7 @@ function PlasmicStarRating__RenderFunc(props: {
                   }
                   const { objRoot, variablePath } = variable;
 
-                  p.set(objRoot, variablePath, value);
+                  $stateSet(objRoot, variablePath, value);
                   return value;
                 })?.apply(null, [actionArgs]);
               })()
@@ -901,7 +923,7 @@ function PlasmicStarRating__RenderFunc(props: {
                     value = [value];
                   }
 
-                  let activeVariants = p.get($state, vgroup) ?? [];
+                  let activeVariants = $stateGet($state, vgroup) ?? [];
                   if (typeof activeVariants === "string") {
                     activeVariants = [activeVariants];
                   }
@@ -910,7 +932,7 @@ function PlasmicStarRating__RenderFunc(props: {
                       activeVariants.push(variant);
                     }
                   }
-                  p.set($state, vgroup, activeVariants);
+                  $stateSet($state, vgroup, activeVariants);
                   return activeVariants;
                 })?.apply(null, [actionArgs]);
               })()
@@ -933,7 +955,7 @@ function PlasmicStarRating__RenderFunc(props: {
           role={"img"}
         />
       </button>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

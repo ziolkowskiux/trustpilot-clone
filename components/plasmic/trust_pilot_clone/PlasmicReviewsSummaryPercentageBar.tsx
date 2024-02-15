@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -73,12 +96,12 @@ export const PlasmicReviewsSummaryPercentageBar__ArgProps =
   );
 
 export type PlasmicReviewsSummaryPercentageBar__OverridesType = {
-  withRating?: p.Flex<"label">;
-  ratingBar?: p.Flex<typeof AntdCheckbox>;
-  text?: p.Flex<"div">;
-  bar?: p.Flex<"div">;
-  percentageBar?: p.Flex<"div">;
-  percentageValue?: p.Flex<"div">;
+  withRating?: Flex__<"label">;
+  ratingBar?: Flex__<typeof AntdCheckbox>;
+  text?: Flex__<"div">;
+  bar?: Flex__<"div">;
+  percentageBar?: Flex__<"div">;
+  percentageValue?: Flex__<"div">;
 };
 
 export interface DefaultReviewsSummaryPercentageBarProps {
@@ -128,13 +151,13 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "ratingBar.checked",
@@ -147,7 +170,7 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -163,7 +186,7 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
   };
 
   return (
-    <p.Stack
+    <Stack__
       as={"label"}
       data-plasmic-name={"withRating"}
       data-plasmic-override={overrides.withRating}
@@ -185,10 +208,10 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
       <AntdCheckbox
         data-plasmic-name={"ratingBar"}
         data-plasmic-override={overrides.ratingBar}
-        checked={p.generateStateValueProp($state, ["ratingBar", "checked"])}
+        checked={generateStateValueProp($state, ["ratingBar", "checked"])}
         className={classNames("__wab_instance", sty.ratingBar)}
         defaultChecked={false}
-        onChange={p.generateStateOnChangeProp($state, ["ratingBar", "checked"])}
+        onChange={generateStateOnChangeProp($state, ["ratingBar", "checked"])}
       >
         <div
           data-plasmic-name={"text"}
@@ -284,7 +307,7 @@ function PlasmicReviewsSummaryPercentageBar__RenderFunc(props: {
           })()}
         </React.Fragment>
       </div>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
@@ -67,20 +90,20 @@ type ArgPropType = keyof PlasmicMyReviews__ArgsType;
 export const PlasmicMyReviews__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicMyReviews__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  body?: p.Flex<"div">;
-  header?: p.Flex<"div">;
-  content?: p.Flex<"div">;
-  profile?: p.Flex<"div">;
-  profileImage?: p.Flex<typeof p.PlasmicImg>;
-  reviews?: p.Flex<"div">;
-  reads?: p.Flex<"div">;
-  useful?: p.Flex<"div">;
-  columns?: p.Flex<"div">;
-  reviewsList?: p.Flex<"div">;
-  extras?: p.Flex<"div">;
-  footer?: p.Flex<typeof Footer>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  body?: Flex__<"div">;
+  header?: Flex__<"div">;
+  content?: Flex__<"div">;
+  profile?: Flex__<"div">;
+  profileImage?: Flex__<typeof PlasmicImg__>;
+  reviews?: Flex__<"div">;
+  reads?: Flex__<"div">;
+  useful?: Flex__<"div">;
+  columns?: Flex__<"div">;
+  reviewsList?: Flex__<"div">;
+  extras?: Flex__<"div">;
+  footer?: Flex__<typeof Footer>;
 };
 
 export interface DefaultMyReviewsProps {}
@@ -110,11 +133,11 @@ function PlasmicMyReviews__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
@@ -188,14 +211,14 @@ function PlasmicMyReviews__RenderFunc(props: {
                 data-plasmic-override={overrides.content}
                 className={classNames(projectcss.all, sty.content)}
               >
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"profile"}
                   data-plasmic-override={overrides.profile}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.profile)}
                 >
-                  <p.PlasmicImg
+                  <PlasmicImg__
                     data-plasmic-name={"profileImage"}
                     data-plasmic-override={overrides.profileImage}
                     alt={""}
@@ -209,7 +232,7 @@ function PlasmicMyReviews__RenderFunc(props: {
                     loading={"lazy"}
                   />
 
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.freeBox__eDpcn)}
@@ -252,14 +275,14 @@ function PlasmicMyReviews__RenderFunc(props: {
                     >
                       {"User location"}
                     </p>
-                  </p.Stack>
-                </p.Stack>
-                <p.Stack
+                  </Stack__>
+                </Stack__>
+                <Stack__
                   as={"div"}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.freeBox__vmu3)}
                 >
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"reviews"}
                     data-plasmic-override={overrides.reviews}
@@ -294,8 +317,8 @@ function PlasmicMyReviews__RenderFunc(props: {
                         {"Reviews"}
                       </div>
                     </AntdButton>
-                  </p.Stack>
-                  <p.Stack
+                  </Stack__>
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"reads"}
                     data-plasmic-override={overrides.reads}
@@ -330,8 +353,8 @@ function PlasmicMyReviews__RenderFunc(props: {
                         {"Reads"}
                       </div>
                     </AntdButton>
-                  </p.Stack>
-                  <p.Stack
+                  </Stack__>
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"useful"}
                     data-plasmic-override={overrides.useful}
@@ -366,8 +389,8 @@ function PlasmicMyReviews__RenderFunc(props: {
                         {"Useful"}
                       </div>
                     </AntdButton>
-                  </p.Stack>
-                </p.Stack>
+                  </Stack__>
+                </Stack__>
               </div>
             </div>
             <div
@@ -375,14 +398,14 @@ function PlasmicMyReviews__RenderFunc(props: {
               data-plasmic-override={overrides.columns}
               className={classNames(projectcss.all, sty.columns)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"reviewsList"}
                 data-plasmic-override={overrides.reviewsList}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.reviewsList)}
               >
-                <p.Stack
+                <Stack__
                   as={"div"}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.freeBox__n5MBr)}
@@ -409,7 +432,7 @@ function PlasmicMyReviews__RenderFunc(props: {
                       "Share your experience! Your feedback will empower others to shop with confidence and help companies improve."
                     }
                   </p>
-                </p.Stack>
+                </Stack__>
                 <AntdButton
                   className={classNames("__wab_instance", sty.button__xHYlY)}
                   href={`/categories`}
@@ -427,7 +450,7 @@ function PlasmicMyReviews__RenderFunc(props: {
                     {"Find a company"}
                   </div>
                 </AntdButton>
-              </p.Stack>
+              </Stack__>
               <div
                 data-plasmic-name={"extras"}
                 data-plasmic-override={overrides.extras}
@@ -507,7 +530,7 @@ type NodeDefaultElementType = {
   header: "div";
   content: "div";
   profile: "div";
-  profileImage: typeof p.PlasmicImg;
+  profileImage: typeof PlasmicImg__;
   reviews: "div";
   reads: "div";
   useful: "div";
@@ -576,14 +599,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={"4d9b94b7-5067-41d5-bb18-b0b97eba2313"}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -599,7 +622,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -608,7 +631,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;

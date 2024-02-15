@@ -17,25 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -53,7 +75,7 @@ export const PlasmicCategoryCardList__VariantProps =
   new Array<VariantPropType>();
 
 export type PlasmicCategoryCardList__ArgsType = {
-  categoryIcon?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  categoryIcon?: React.ComponentProps<typeof PlasmicImg__>["src"];
   categoryName?: string;
   subcategories?: any;
   categoryLink?: string;
@@ -67,16 +89,16 @@ export const PlasmicCategoryCardList__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicCategoryCardList__OverridesType = {
-  categoryCard?: p.Flex<"div">;
-  categoryHeader?: p.Flex<"a"> & Partial<LinkProps>;
-  categoryIcon?: p.Flex<typeof p.PlasmicImg>;
-  categoryName?: p.Flex<"h6">;
-  subcategoriesList?: p.Flex<"div">;
-  link?: p.Flex<"div">;
+  categoryCard?: Flex__<"div">;
+  categoryHeader?: Flex__<"a"> & Partial<LinkProps>;
+  categoryIcon?: Flex__<typeof PlasmicImg__>;
+  categoryName?: Flex__<"h6">;
+  subcategoriesList?: Flex__<"div">;
+  link?: Flex__<"div">;
 };
 
 export interface DefaultCategoryCardListProps {
-  categoryIcon?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  categoryIcon?: React.ComponentProps<typeof PlasmicImg__>["src"];
   categoryName?: string;
   subcategories?: any;
   categoryLink?: string;
@@ -122,11 +144,11 @@ function PlasmicCategoryCardList__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   return (
     <div
@@ -145,8 +167,8 @@ function PlasmicCategoryCardList__RenderFunc(props: {
         sty.categoryCard
       )}
     >
-      <p.Stack
-        as={p.PlasmicLink}
+      <Stack__
+        as={PlasmicLink__}
         data-plasmic-name={"categoryHeader"}
         data-plasmic-override={overrides.categoryHeader}
         hasGap={true}
@@ -155,7 +177,7 @@ function PlasmicCategoryCardList__RenderFunc(props: {
         href={args.categoryLink}
         platform={"nextjs"}
       >
-        <p.PlasmicImg
+        <PlasmicImg__
           data-plasmic-name={"categoryIcon"}
           data-plasmic-override={overrides.categoryIcon}
           alt={""}
@@ -196,7 +218,7 @@ function PlasmicCategoryCardList__RenderFunc(props: {
             })()}
           </React.Fragment>
         </h6>
-      </p.Stack>
+      </Stack__>
       <div
         data-plasmic-name={"subcategoriesList"}
         data-plasmic-override={overrides.subcategoriesList}
@@ -220,7 +242,7 @@ function PlasmicCategoryCardList__RenderFunc(props: {
           const currentItem = __plasmic_item_0;
           const currentIndex = __plasmic_idx_0;
           return (
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"link"}
               data-plasmic-override={overrides.link}
@@ -228,7 +250,7 @@ function PlasmicCategoryCardList__RenderFunc(props: {
               className={classNames(projectcss.all, sty.link)}
               key={currentIndex}
             >
-              <p.PlasmicLink
+              <PlasmicLink__
                 className={classNames(
                   projectcss.all,
                   projectcss.a,
@@ -254,8 +276,8 @@ function PlasmicCategoryCardList__RenderFunc(props: {
                     }
                   })()}
                 </React.Fragment>
-              </p.PlasmicLink>
-            </p.Stack>
+              </PlasmicLink__>
+            </Stack__>
           );
         })}
       </div>
@@ -284,7 +306,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   categoryCard: "div";
   categoryHeader: "a";
-  categoryIcon: typeof p.PlasmicImg;
+  categoryIcon: typeof PlasmicImg__;
   categoryName: "h6";
   subcategoriesList: "div";
   link: "div";

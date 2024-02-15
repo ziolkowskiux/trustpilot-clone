@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import StarRating from "../../StarRating"; // plasmic-import: a7ppcDbGWwYt/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -61,13 +84,13 @@ export const PlasmicWriteAReview__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicWriteAReview__OverridesType = {
-  writeAReview?: p.Flex<"div">;
-  freeBox?: p.Flex<"div">;
-  usersAvatar?: p.Flex<typeof p.PlasmicImg>;
-  userNameAndLink?: p.Flex<"div">;
-  text?: p.Flex<"div">;
-  link?: p.Flex<"a"> & Partial<LinkProps>;
-  starRating?: p.Flex<typeof StarRating>;
+  writeAReview?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  usersAvatar?: Flex__<typeof PlasmicImg__>;
+  userNameAndLink?: Flex__<"div">;
+  text?: Flex__<"div">;
+  link?: Flex__<"a"> & Partial<LinkProps>;
+  starRating?: Flex__<typeof StarRating>;
 };
 
 export interface DefaultWriteAReviewProps {
@@ -100,13 +123,13 @@ function PlasmicWriteAReview__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "starRating.trustScore",
@@ -117,7 +140,7 @@ function PlasmicWriteAReview__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -125,7 +148,7 @@ function PlasmicWriteAReview__RenderFunc(props: {
   });
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"writeAReview"}
       data-plasmic-override={overrides.writeAReview}
@@ -143,14 +166,14 @@ function PlasmicWriteAReview__RenderFunc(props: {
         sty.writeAReview
       )}
     >
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"freeBox"}
         data-plasmic-override={overrides.freeBox}
         hasGap={true}
         className={classNames(projectcss.all, sty.freeBox)}
       >
-        <p.PlasmicImg
+        <PlasmicImg__
           data-plasmic-name={"usersAvatar"}
           data-plasmic-override={overrides.usersAvatar}
           alt={""}
@@ -198,7 +221,7 @@ function PlasmicWriteAReview__RenderFunc(props: {
               })()}
             </React.Fragment>
           </div>
-          <p.PlasmicLink
+          <PlasmicLink__
             data-plasmic-name={"link"}
             data-plasmic-override={overrides.link}
             className={classNames(
@@ -212,19 +235,19 @@ function PlasmicWriteAReview__RenderFunc(props: {
             platform={"nextjs"}
           >
             {"Write a review"}
-          </p.PlasmicLink>
+          </PlasmicLink__>
         </div>
-      </p.Stack>
+      </Stack__>
       <StarRating
         data-plasmic-name={"starRating"}
         data-plasmic-override={overrides.starRating}
         className={classNames("__wab_instance", sty.starRating)}
-        onTrustScoreChange={p.generateStateOnChangeProp($state, [
+        onTrustScoreChange={generateStateOnChangeProp($state, [
           "starRating",
           "trustScore"
         ])}
       />
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
@@ -251,7 +274,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   writeAReview: "div";
   freeBox: "div";
-  usersAvatar: typeof p.PlasmicImg;
+  usersAvatar: typeof PlasmicImg__;
   userNameAndLink: "div";
   text: "div";
   link: "a";

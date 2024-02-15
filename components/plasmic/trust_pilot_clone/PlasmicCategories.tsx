@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -72,18 +95,18 @@ type ArgPropType = keyof PlasmicCategories__ArgsType;
 export const PlasmicCategories__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicCategories__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  body?: p.Flex<"div">;
-  header?: p.Flex<"div">;
-  h2?: p.Flex<"h2">;
-  companySearch?: p.Flex<typeof AntdInput>;
-  button?: p.Flex<"button">;
-  categories?: p.Flex<"div">;
-  h4?: p.Flex<"h4">;
-  freeBox?: p.Flex<"div">;
-  categoryCardList?: p.Flex<typeof CategoryCardList>;
-  footer?: p.Flex<typeof Footer>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  body?: Flex__<"div">;
+  header?: Flex__<"div">;
+  h2?: Flex__<"h2">;
+  companySearch?: Flex__<typeof AntdInput>;
+  button?: Flex__<"button">;
+  categories?: Flex__<"div">;
+  h4?: Flex__<"h4">;
+  freeBox?: Flex__<"div">;
+  categoryCardList?: Flex__<typeof CategoryCardList>;
+  footer?: Flex__<typeof Footer>;
 };
 
 export interface DefaultCategoriesProps {}
@@ -113,16 +136,16 @@ function PlasmicCategories__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "companySearch.value",
@@ -130,12 +153,12 @@ function PlasmicCategories__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       }
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
@@ -208,7 +231,7 @@ function PlasmicCategories__RenderFunc(props: {
             data-plasmic-override={overrides.body}
             className={classNames(projectcss.all, sty.body)}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"header"}
               data-plasmic-override={overrides.header}
@@ -231,7 +254,7 @@ function PlasmicCategories__RenderFunc(props: {
                 const child$Props = {
                   autoFocus: true,
                   className: classNames("__wab_instance", sty.companySearch),
-                  onChange: p.generateStateOnChangePropForCodeComponents(
+                  onChange: generateStateOnChangePropForCodeComponents(
                     $state,
                     "value",
                     ["companySearch", "value"],
@@ -276,7 +299,7 @@ function PlasmicCategories__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                p.set(objRoot, variablePath, undefined);
+                                $stateSet(objRoot, variablePath, undefined);
                                 return undefined;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -300,12 +323,12 @@ function PlasmicCategories__RenderFunc(props: {
                       />
                     </button>
                   ),
-                  value: p.generateStateValueProp($state, [
+                  value: generateStateValueProp($state, [
                     "companySearch",
                     "value"
                   ])
                 };
-                p.initializeCodeComponentStates(
+                initializeCodeComponentStates(
                   $state,
                   [
                     {
@@ -326,8 +349,8 @@ function PlasmicCategories__RenderFunc(props: {
                   />
                 );
               })()}
-            </p.Stack>
-            <p.Stack
+            </Stack__>
+            <Stack__
               as={"div"}
               data-plasmic-name={"categories"}
               data-plasmic-override={overrides.categories}
@@ -435,7 +458,7 @@ function PlasmicCategories__RenderFunc(props: {
                   );
                 })}
               </div>
-            </p.Stack>
+            </Stack__>
           </div>
           <Footer
             data-plasmic-name={"footer"}
@@ -562,14 +585,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -585,7 +608,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -594,7 +617,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;

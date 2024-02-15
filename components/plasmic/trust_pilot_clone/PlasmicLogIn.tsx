@@ -17,27 +17,50 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -63,13 +86,13 @@ type ArgPropType = keyof PlasmicLogIn__ArgsType;
 export const PlasmicLogIn__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicLogIn__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  h5?: p.Flex<"h5">;
-  emailLoginSection?: p.Flex<"div">;
-  input?: p.Flex<typeof AntdInput>;
-  p?: p.Flex<"p">;
-  footer?: p.Flex<typeof Footer>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  h5?: Flex__<"h5">;
+  emailLoginSection?: Flex__<"div">;
+  input?: Flex__<typeof AntdInput>;
+  p?: Flex__<"p">;
+  footer?: Flex__<typeof Footer>;
 };
 
 export interface DefaultLogInProps {}
@@ -99,13 +122,13 @@ function PlasmicLogIn__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "input.value",
@@ -113,7 +136,7 @@ function PlasmicLogIn__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "showEmailSection",
@@ -124,7 +147,7 @@ function PlasmicLogIn__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -164,12 +187,12 @@ function PlasmicLogIn__RenderFunc(props: {
             className={classNames("__wab_instance", sty.mainNavigation)}
           />
 
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__jk1Z4)}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               hasGap={true}
               className={classNames(projectcss.all, sty.freeBox___02ZUy)}
@@ -184,7 +207,7 @@ function PlasmicLogIn__RenderFunc(props: {
               >
                 {"Read reviews, Write reviews. Find companies."}
               </h2>
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__r9LFu)}
@@ -226,7 +249,7 @@ function PlasmicLogIn__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            p.set(objRoot, variablePath, value);
+                            $stateSet(objRoot, variablePath, value);
                             return value;
                           })?.apply(null, [actionArgs]);
                         })()
@@ -311,7 +334,7 @@ function PlasmicLogIn__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            p.set(objRoot, variablePath, value);
+                            $stateSet(objRoot, variablePath, value);
                             return value;
                           })?.apply(null, [actionArgs]);
                         })()
@@ -354,7 +377,7 @@ function PlasmicLogIn__RenderFunc(props: {
                     throw e;
                   }
                 })() ? (
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"emailLoginSection"}
                     data-plasmic-override={overrides.emailLoginSection}
@@ -380,22 +403,21 @@ function PlasmicLogIn__RenderFunc(props: {
                         const child$Props = {
                           autoFocus: false,
                           className: classNames("__wab_instance", sty.input),
-                          onChange:
-                            p.generateStateOnChangePropForCodeComponents(
-                              $state,
-                              "value",
-                              ["input", "value"],
-                              AntdInput_Helpers
-                            ),
+                          onChange: generateStateOnChangePropForCodeComponents(
+                            $state,
+                            "value",
+                            ["input", "value"],
+                            AntdInput_Helpers
+                          ),
                           placeholder: "your@email.com",
                           size: "large",
                           type: "email",
-                          value: p.generateStateValueProp($state, [
+                          value: generateStateValueProp($state, [
                             "input",
                             "value"
                           ])
                         };
-                        p.initializeCodeComponentStates(
+                        initializeCodeComponentStates(
                           $state,
                           [
                             {
@@ -436,11 +458,11 @@ function PlasmicLogIn__RenderFunc(props: {
                         {"Continue with email"}
                       </div>
                     </AntdButton>
-                  </p.Stack>
+                  </Stack__>
                 ) : null}
-              </p.Stack>
-            </p.Stack>
-            <p.Stack
+              </Stack__>
+            </Stack__>
+            <Stack__
               as={"div"}
               hasGap={true}
               className={classNames(projectcss.all, sty.freeBox__wO8Qa)}
@@ -467,7 +489,7 @@ function PlasmicLogIn__RenderFunc(props: {
               >
                 {"Set up your business account on Trustpilot for free."}
               </p>
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__fid1Y)}
@@ -505,9 +527,9 @@ function PlasmicLogIn__RenderFunc(props: {
                     {"Sign up"}
                   </div>
                 </AntdButton>
-              </p.Stack>
-            </p.Stack>
-          </p.Stack>
+              </Stack__>
+            </Stack__>
+          </Stack__>
           <Footer
             data-plasmic-name={"footer"}
             data-plasmic-override={overrides.footer}
@@ -608,14 +630,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -631,7 +653,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -640,7 +662,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;

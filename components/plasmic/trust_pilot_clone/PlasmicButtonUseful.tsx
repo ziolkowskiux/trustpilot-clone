@@ -17,25 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -65,9 +87,9 @@ type ArgPropType = keyof PlasmicButtonUseful__ArgsType;
 export const PlasmicButtonUseful__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicButtonUseful__OverridesType = {
-  tagLike?: p.Flex<"button">;
-  svg?: p.Flex<"svg">;
-  labelUseful?: p.Flex<"div">;
+  tagLike?: Flex__<"button">;
+  svg?: Flex__<"svg">;
+  labelUseful?: Flex__<"div">;
 };
 
 export interface DefaultButtonUsefulProps {
@@ -100,13 +122,13 @@ function PlasmicButtonUseful__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "pressed",
@@ -117,7 +139,7 @@ function PlasmicButtonUseful__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -125,7 +147,7 @@ function PlasmicButtonUseful__RenderFunc(props: {
   });
 
   return (
-    <p.Stack
+    <Stack__
       as={"button"}
       data-plasmic-name={"tagLike"}
       data-plasmic-override={overrides.tagLike}
@@ -158,8 +180,8 @@ function PlasmicButtonUseful__RenderFunc(props: {
                   value = [value];
                 }
 
-                const oldValue = p.get($state, vgroup);
-                p.set($state, vgroup, !oldValue);
+                const oldValue = $stateGet($state, vgroup);
+                $stateSet($state, vgroup, !oldValue);
                 return !oldValue;
               })?.apply(null, [actionArgs]);
             })()
@@ -176,7 +198,7 @@ function PlasmicButtonUseful__RenderFunc(props: {
         $refs["tagLike"] = ref;
       }}
     >
-      <p.PlasmicIcon
+      <PlasmicIcon__
         data-plasmic-name={"svg"}
         data-plasmic-override={overrides.svg}
         PlasmicIconType={
@@ -199,7 +221,7 @@ function PlasmicButtonUseful__RenderFunc(props: {
       >
         {"Useful"}
       </div>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

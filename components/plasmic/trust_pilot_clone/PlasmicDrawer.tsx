@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { Dialog } from "@plasmicpkgs/radix-ui";
 import Button2 from "../../Button2"; // plasmic-import: UXSIw5rr6ki/component
 import { SheetContent } from "@plasmicpkgs/radix-ui";
@@ -82,11 +105,11 @@ export const PlasmicDrawer__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicDrawer__OverridesType = {
-  dialog?: p.Flex<typeof Dialog>;
-  drawerContent?: p.Flex<typeof SheetContent>;
-  freeBox?: p.Flex<"div">;
-  dialogTitle?: p.Flex<typeof DialogTitle>;
-  dialogClose?: p.Flex<typeof DialogClose>;
+  dialog?: Flex__<typeof Dialog>;
+  drawerContent?: Flex__<typeof SheetContent>;
+  freeBox?: Flex__<"div">;
+  dialogTitle?: Flex__<typeof DialogTitle>;
+  dialogClose?: Flex__<typeof DialogClose>;
 };
 
 export interface DefaultDrawerProps {
@@ -124,13 +147,13 @@ function PlasmicDrawer__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "dialog.open",
@@ -150,7 +173,7 @@ function PlasmicDrawer__RenderFunc(props: {
 
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -175,8 +198,8 @@ function PlasmicDrawer__RenderFunc(props: {
         { [sty.dialognoTrigger]: hasVariant($state, "noTrigger", "noTrigger") }
       )}
       noContain={true}
-      onOpenChange={p.generateStateOnChangeProp($state, ["dialog", "open"])}
-      open={p.generateStateValueProp($state, ["dialog", "open"])}
+      onOpenChange={generateStateOnChangeProp($state, ["dialog", "open"])}
+      open={generateStateValueProp($state, ["dialog", "open"])}
       overlayClassName={classNames({ [sty["pcls_OMAtoDPBSJf9"]]: true })}
       themeResetClass={classNames(
         projectcss.root_reset,
@@ -188,7 +211,7 @@ function PlasmicDrawer__RenderFunc(props: {
       )}
       triggerSlot={
         (hasVariant($state, "noTrigger", "noTrigger") ? false : true)
-          ? p.renderPlasmicSlot({
+          ? renderPlasmicSlot({
               defaultContents: (
                 <Button2>
                   <div
@@ -221,7 +244,7 @@ function PlasmicDrawer__RenderFunc(props: {
           plasmic_plasmic_rich_components_css.plasmic_tokens
         )}
       >
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"freeBox"}
           data-plasmic-override={overrides.freeBox}
@@ -233,14 +256,14 @@ function PlasmicDrawer__RenderFunc(props: {
             data-plasmic-override={overrides.dialogTitle}
             className={classNames("__wab_instance", sty.dialogTitle)}
           >
-            {p.renderPlasmicSlot({
+            {renderPlasmicSlot({
               defaultContents: "Drawer title",
               value: args.children
             })}
           </DialogTitle>
-          {p.renderPlasmicSlot({
+          {renderPlasmicSlot({
             defaultContents: (
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__j51Yk)}
@@ -254,12 +277,12 @@ function PlasmicDrawer__RenderFunc(props: {
                 >
                   {"You can insert drawer body content here in this slot."}
                 </div>
-              </p.Stack>
+              </Stack__>
             ),
 
             value: args.slot
           })}
-        </p.Stack>
+        </Stack__>
         <DialogClose
           data-plasmic-name={"dialogClose"}
           data-plasmic-override={overrides.dialogClose}

@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
 import { LoadingBoundary } from "@plasmicpkgs/plasmic-basic-components";
 
@@ -62,9 +85,9 @@ type ArgPropType = keyof PlasmicPageLayout__ArgsType;
 export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>("children");
 
 export type PlasmicPageLayout__OverridesType = {
-  root?: p.Flex<typeof RichLayout>;
-  loadingBoundary?: p.Flex<typeof LoadingBoundary>;
-  svg?: p.Flex<"svg">;
+  root?: Flex__<typeof RichLayout>;
+  loadingBoundary?: Flex__<typeof LoadingBoundary>;
+  svg?: Flex__<"svg">;
 };
 
 export interface DefaultPageLayoutProps {
@@ -97,11 +120,11 @@ function PlasmicPageLayout__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   return (
     <RichLayout
@@ -134,7 +157,7 @@ function PlasmicPageLayout__RenderFunc(props: {
         data-plasmic-override={overrides.loadingBoundary}
         className={classNames("__wab_instance", sty.loadingBoundary)}
         loadingState={
-          <ph.DataCtxReader>
+          <DataCtxReader__>
             {$ctx => (
               <div className={classNames(projectcss.all, sty.freeBox___0UWi1)}>
                 <IconIcon
@@ -145,13 +168,13 @@ function PlasmicPageLayout__RenderFunc(props: {
                 />
               </div>
             )}
-          </ph.DataCtxReader>
+          </DataCtxReader__>
         }
       >
-        <ph.DataCtxReader>
+        <DataCtxReader__>
           {$ctx => (
             <div className={classNames(projectcss.all, sty.freeBox__wEkwE)}>
-              {p.renderPlasmicSlot({
+              {renderPlasmicSlot({
                 defaultContents: (
                   <section
                     className={classNames(projectcss.all, sty.section__iArbR)}
@@ -183,7 +206,7 @@ function PlasmicPageLayout__RenderFunc(props: {
               })}
             </div>
           )}
-        </ph.DataCtxReader>
+        </DataCtxReader__>
       </LoadingBoundary>
     </RichLayout>
   ) as React.ReactElement | null;

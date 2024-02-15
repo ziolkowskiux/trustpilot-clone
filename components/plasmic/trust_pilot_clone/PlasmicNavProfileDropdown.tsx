@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import NavDropdownItem from "../../NavDropdownItem"; // plasmic-import: yhxgNC5CiG/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -58,10 +81,10 @@ type ArgPropType = keyof PlasmicNavProfileDropdown__ArgsType;
 export const PlasmicNavProfileDropdown__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicNavProfileDropdown__OverridesType = {
-  root?: p.Flex<"div">;
-  freeBox?: p.Flex<"div">;
-  profilePicture?: p.Flex<typeof p.PlasmicImg>;
-  navDropdown?: p.Flex<"div">;
+  root?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  profilePicture?: Flex__<typeof PlasmicImg__>;
+  navDropdown?: Flex__<"div">;
 };
 
 export interface DefaultNavProfileDropdownProps {
@@ -93,11 +116,11 @@ function PlasmicNavProfileDropdown__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   const [isRootHover, triggerRootHoverProps] = useTrigger("useHover", {});
   const triggers = {
@@ -105,7 +128,7 @@ function PlasmicNavProfileDropdown__RenderFunc(props: {
   };
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
@@ -124,14 +147,14 @@ function PlasmicNavProfileDropdown__RenderFunc(props: {
       )}
       data-plasmic-trigger-props={[triggerRootHoverProps]}
     >
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"freeBox"}
         data-plasmic-override={overrides.freeBox}
         hasGap={true}
         className={classNames(projectcss.all, sty.freeBox)}
       >
-        <p.PlasmicImg
+        <PlasmicImg__
           data-plasmic-name={"profilePicture"}
           data-plasmic-override={overrides.profilePicture}
           alt={""}
@@ -154,7 +177,7 @@ function PlasmicNavProfileDropdown__RenderFunc(props: {
         >
           {"Username"}
         </div>
-      </p.Stack>
+      </Stack__>
       <div
         data-plasmic-name={"navDropdown"}
         data-plasmic-override={overrides.navDropdown}
@@ -247,7 +270,7 @@ function PlasmicNavProfileDropdown__RenderFunc(props: {
           </div>
         </NavDropdownItem>
       </div>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
@@ -263,7 +286,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   freeBox: "div";
-  profilePicture: typeof p.PlasmicImg;
+  profilePicture: typeof PlasmicImg__;
   navDropdown: "div";
 };
 

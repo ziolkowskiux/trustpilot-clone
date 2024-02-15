@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -50,6 +73,7 @@ import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { SliderWrapper } from "@plasmicpkgs/react-slick";
 import { sliderHelpers as SliderWrapper_Helpers } from "@plasmicpkgs/react-slick";
 import CategoryCard from "../../CategoryCard"; // plasmic-import: 8jl3uPMC9m/component
+import Testimonial from "../../Testimonial"; // plasmic-import: ui7nbJaTgbTi/component
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -76,28 +100,28 @@ type ArgPropType = keyof PlasmicHomepage__ArgsType;
 export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicHomepage__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  body?: p.Flex<"div">;
-  heroSection?: p.Flex<"section">;
-  heroSearch?: p.Flex<"div">;
-  input?: p.Flex<typeof AntdInput>;
-  svg?: p.Flex<"svg">;
-  categories?: p.Flex<"section">;
-  header?: p.Flex<"div">;
-  sliderCarousel?: p.Flex<typeof SliderWrapper>;
-  categoryCard4?: p.Flex<typeof CategoryCard>;
-  recentReviews?: p.Flex<"section">;
-  shopSmarter?: p.Flex<"section">;
-  card?: p.Flex<"div">;
-  images?: p.Flex<"div">;
-  transparencyReport?: p.Flex<"div">;
-  beHeard?: p.Flex<"div">;
-  transparencyReport2?: p.Flex<"div">;
-  yourStories?: p.Flex<"div">;
-  stories?: p.Flex<"div">;
-  sliderCarousel2?: p.Flex<typeof SliderWrapper>;
-  footer?: p.Flex<typeof Footer>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  body?: Flex__<"div">;
+  heroSection?: Flex__<"section">;
+  heroSearch?: Flex__<"div">;
+  input?: Flex__<typeof AntdInput>;
+  svg?: Flex__<"svg">;
+  categories?: Flex__<"section">;
+  header?: Flex__<"div">;
+  sliderCarousel?: Flex__<typeof SliderWrapper>;
+  categoryCard4?: Flex__<typeof CategoryCard>;
+  recentReviews?: Flex__<"section">;
+  shopSmarter?: Flex__<"section">;
+  card?: Flex__<"div">;
+  images?: Flex__<"div">;
+  transparencyReport?: Flex__<"div">;
+  beHeard?: Flex__<"div">;
+  transparencyReport2?: Flex__<"div">;
+  yourStories?: Flex__<"div">;
+  stories?: Flex__<"div">;
+  sliderCarousel2?: Flex__<typeof SliderWrapper>;
+  footer?: Flex__<typeof Footer>;
 };
 
 export interface DefaultHomepageProps {}
@@ -127,16 +151,16 @@ function PlasmicHomepage__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "input.value",
@@ -144,7 +168,7 @@ function PlasmicHomepage__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "categories2",
@@ -177,10 +201,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => 0,
 
         refName: "sliderCarousel",
-        onMutate: p.generateOnMutateForSpec(
-          "currentSlide",
-          SliderWrapper_Helpers
-        )
+        onMutate: generateOnMutateForSpec("currentSlide", SliderWrapper_Helpers)
       },
       {
         path: "sliderCarousel2.currentSlide",
@@ -189,20 +210,19 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => 0,
 
         refName: "sliderCarousel2",
-        onMutate: p.generateOnMutateForSpec(
-          "currentSlide",
-          SliderWrapper_Helpers
-        )
+        onMutate: generateOnMutateForSpec("currentSlide", SliderWrapper_Helpers)
       }
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
     $refs
   });
+  const dataSourcesCtx = usePlasmicDataSourceContext();
+  const plasmicInvalidate = usePlasmicInvalidate();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
     query: usePlasmicDataOp(() => {
@@ -269,7 +289,7 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.heroSection}
               className={classNames(projectcss.all, sty.heroSection)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox___88KPt)}
@@ -286,7 +306,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     "Read Reviews. Write reviews.\nFind companies you can trust."
                   }
                 </h2>
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"heroSearch"}
                   data-plasmic-override={overrides.heroSearch}
@@ -298,12 +318,55 @@ function PlasmicHomepage__RenderFunc(props: {
                       addonAfter: null,
                       bordered: false,
                       className: classNames("__wab_instance", sty.input),
-                      onChange: p.generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "value",
-                        ["input", "value"],
-                        AntdInput_Helpers
-                      ),
+                      onChange: async (...eventArgs: any) => {
+                        generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "value",
+                          ["input", "value"],
+                          AntdInput_Helpers
+                        ).apply(null, eventArgs);
+                        (async event => {
+                          const $steps = {};
+
+                          $steps["useIntegration"] =
+                            $state.input.value.length > 3
+                              ? (() => {
+                                  const actionArgs = {};
+                                  return (async ({
+                                    dataOp,
+                                    continueOnError
+                                  }) => {
+                                    try {
+                                      const response =
+                                        await executePlasmicDataOp(dataOp, {
+                                          userAuthToken:
+                                            dataSourcesCtx?.userAuthToken,
+                                          user: dataSourcesCtx?.user
+                                        });
+                                      await plasmicInvalidate(
+                                        dataOp.invalidatedKeys
+                                      );
+                                      return response;
+                                    } catch (e) {
+                                      if (!continueOnError) {
+                                        throw e;
+                                      }
+                                      return e;
+                                    }
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["useIntegration"] != null &&
+                            typeof $steps["useIntegration"] === "object" &&
+                            typeof $steps["useIntegration"].then === "function"
+                          ) {
+                            $steps["useIntegration"] = await $steps[
+                              "useIntegration"
+                            ];
+                          }
+                        }).apply(null, eventArgs);
+                      },
                       placeholder: "Company or category",
                       prefix: (
                         <MagnifyingGlassIcon
@@ -315,12 +378,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       ),
 
                       size: "large",
-                      value: p.generateStateValueProp($state, [
-                        "input",
-                        "value"
-                      ])
+                      value: generateStateValueProp($state, ["input", "value"])
                     };
-                    p.initializeCodeComponentStates(
+                    initializeCodeComponentStates(
                       $state,
                       [
                         {
@@ -357,8 +417,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       {"Search"}
                     </div>
                   </AntdButton>
-                </p.Stack>
-              </p.Stack>
+                </Stack__>
+              </Stack__>
             </section>
             <section
               data-plasmic-name={"categories"}
@@ -404,7 +464,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   arrows: hasVariant(globalVariants, "screen", "mobile")
                     ? false
                     : undefined,
-                  beforeChange: p.generateStateOnChangePropForCodeComponents(
+                  beforeChange: generateStateOnChangePropForCodeComponents(
                     $state,
                     "currentSlide",
                     ["sliderCarousel", "currentSlide"],
@@ -414,7 +474,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   className: classNames("__wab_instance", sty.sliderCarousel),
                   dots: false,
                   infinite: false,
-                  initialSlide: p.generateStateValueProp($state, [
+                  initialSlide: generateStateValueProp($state, [
                     "sliderCarousel",
                     "currentSlide"
                   ]),
@@ -429,7 +489,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     : 4,
                   variableWidth: false
                 };
-                p.initializeCodeComponentStates(
+                initializeCodeComponentStates(
                   $state,
                   [
                     {
@@ -476,7 +536,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         >
                           {(() => {
                             const child$Props = {
-                              categoryName: p.generateStateValueProp($state, [
+                              categoryName: generateStateValueProp($state, [
                                 "categoryCard4",
                                 __plasmic_idx_0,
                                 "categoryName"
@@ -485,12 +545,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                 "__wab_instance",
                                 sty.categoryCard4
                               ),
-                              icon: p.generateStateValueProp($state, [
+                              icon: generateStateValueProp($state, [
                                 "categoryCard4",
                                 __plasmic_idx_0,
                                 "icon"
                               ]),
-                              onCategoryNameChange: p.generateStateOnChangeProp(
+                              onCategoryNameChange: generateStateOnChangeProp(
                                 $state,
                                 [
                                   "categoryCard4",
@@ -498,13 +558,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                   "categoryName"
                                 ]
                               ),
-                              onIconChange: p.generateStateOnChangeProp(
-                                $state,
-                                ["categoryCard4", __plasmic_idx_0, "icon"]
-                              )
+                              onIconChange: generateStateOnChangeProp($state, [
+                                "categoryCard4",
+                                __plasmic_idx_0,
+                                "icon"
+                              ])
                             };
 
-                            p.initializePlasmicStates(
+                            initializePlasmicStates(
                               $state,
                               [
                                 {
@@ -589,7 +650,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 data-plasmic-override={overrides.card}
                 className={classNames(projectcss.all, sty.card)}
               >
-                <p.Stack
+                <Stack__
                   as={"div"}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.freeBox__aokCs)}
@@ -616,14 +677,14 @@ function PlasmicHomepage__RenderFunc(props: {
                       "Keep Trustpilot in your pocket. Find companies, read reviews, or write them - all while on the go."
                     }
                   </p>
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"images"}
                     data-plasmic-override={overrides.images}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.images)}
                   >
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__miEy0)}
                       displayHeight={"auto"}
@@ -641,7 +702,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }}
                     />
 
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__rrOa)}
                       displayHeight={"auto"}
@@ -659,7 +720,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }}
                     />
 
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__zXFwK)}
                       displayHeight={"auto"}
@@ -676,19 +737,19 @@ function PlasmicHomepage__RenderFunc(props: {
                         aspectRatio: undefined
                       }}
                     />
-                  </p.Stack>
-                </p.Stack>
-                <p.Stack
+                  </Stack__>
+                </Stack__>
+                <Stack__
                   as={"div"}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.freeBox__ovjqy)}
                 >
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.freeBox___4UR41)}
                   >
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__ypw1L)}
                       displayHeight={"48px"}
@@ -706,7 +767,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }}
                     />
 
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__arWmb)}
                       displayHeight={"48px"}
@@ -724,7 +785,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }}
                     />
 
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__sSZb4)}
                       displayHeight={"48px"}
@@ -742,7 +803,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }}
                     />
 
-                    <p.PlasmicImg
+                    <PlasmicImg__
                       alt={""}
                       className={classNames(sty.img__bpg5M)}
                       displayHeight={"48px"}
@@ -759,7 +820,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         aspectRatio: undefined
                       }}
                     />
-                  </p.Stack>
+                  </Stack__>
                   <div
                     className={classNames(projectcss.all, sty.freeBox___0Yeim)}
                   >
@@ -785,7 +846,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   </div>
-                  <p.PlasmicImg
+                  <PlasmicImg__
                     alt={""}
                     className={classNames(sty.img__lFyZ)}
                     displayHeight={"auto"}
@@ -802,7 +863,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       aspectRatio: undefined
                     }}
                   />
-                </p.Stack>
+                </Stack__>
               </div>
             </section>
             <div
@@ -810,12 +871,12 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.transparencyReport}
               className={classNames(projectcss.all, sty.transparencyReport)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox___4A2Qn)}
               >
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"beHeard"}
                   data-plasmic-override={overrides.beHeard}
@@ -861,8 +922,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       {"What we do"}
                     </h5>
                   </AntdButton>
-                </p.Stack>
-                <p.Stack
+                </Stack__>
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"transparencyReport2"}
                   data-plasmic-override={overrides.transparencyReport2}
@@ -910,17 +971,17 @@ function PlasmicHomepage__RenderFunc(props: {
                       {"Take a loook"}
                     </h5>
                   </AntdButton>
-                </p.Stack>
-              </p.Stack>
+                </Stack__>
+              </Stack__>
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"yourStories"}
               data-plasmic-override={overrides.yourStories}
               hasGap={true}
               className={classNames(projectcss.all, sty.yourStories)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__bNlWx)}
@@ -945,7 +1006,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 >
                   {"Each review has a personal story"}
                 </h2>
-              </p.Stack>
+              </Stack__>
               <div
                 data-plasmic-name={"stories"}
                 data-plasmic-override={overrides.stories}
@@ -953,26 +1014,34 @@ function PlasmicHomepage__RenderFunc(props: {
               >
                 {(() => {
                   const child$Props = {
-                    beforeChange: p.generateStateOnChangePropForCodeComponents(
+                    autoplay: true,
+                    beforeChange: generateStateOnChangePropForCodeComponents(
                       $state,
                       "currentSlide",
                       ["sliderCarousel2", "currentSlide"],
                       SliderWrapper_Helpers
                     ),
+                    centerMode: true,
+                    centerPadding: "0",
                     className: classNames(
                       "__wab_instance",
                       sty.sliderCarousel2
                     ),
-                    initialSlide: p.generateStateValueProp($state, [
+                    dots: false,
+                    infinite: true,
+                    initialSlide: generateStateValueProp($state, [
                       "sliderCarousel2",
                       "currentSlide"
                     ]),
+                    pauseOnDotsHover: false,
+                    pauseOnFocus: false,
                     ref: ref => {
                       $refs["sliderCarousel2"] = ref;
                     },
-                    sliderScopeClassName: sty["sliderCarousel2__slider"]
+                    sliderScopeClassName: sty["sliderCarousel2__slider"],
+                    slidesToShow: 1
                   };
-                  p.initializeCodeComponentStates(
+                  initializeCodeComponentStates(
                     $state,
                     [
                       {
@@ -991,71 +1060,31 @@ function PlasmicHomepage__RenderFunc(props: {
                       data-plasmic-override={overrides.sliderCarousel2}
                       {...child$Props}
                     >
-                      <div
+                      <Testimonial
                         className={classNames(
-                          projectcss.all,
-                          sty.freeBox__sC4Jz
+                          "__wab_instance",
+                          sty.testimonial___1RZzC
                         )}
-                      >
-                        <p.PlasmicImg
-                          alt={""}
-                          className={classNames(sty.img__i5Av1)}
-                          displayHeight={"auto"}
-                          displayMaxHeight={"none"}
-                          displayMaxWidth={"100%"}
-                          displayMinHeight={"0"}
-                          displayMinWidth={"0"}
-                          displayWidth={"auto"}
-                          src={
-                            "https://static1.plasmic.app/components/react-slick/slide1.png"
-                          }
-                        />
-                      </div>
-                      <div
+                      />
+
+                      <Testimonial
                         className={classNames(
-                          projectcss.all,
-                          sty.freeBox__doHJ
+                          "__wab_instance",
+                          sty.testimonial__cvtQm
                         )}
-                      >
-                        <p.PlasmicImg
-                          alt={""}
-                          className={classNames(sty.img__cyUBj)}
-                          displayHeight={"auto"}
-                          displayMaxHeight={"none"}
-                          displayMaxWidth={"100%"}
-                          displayMinHeight={"0"}
-                          displayMinWidth={"0"}
-                          displayWidth={"auto"}
-                          src={
-                            "https://static1.plasmic.app/components/react-slick/slide2.png"
-                          }
-                        />
-                      </div>
-                      <div
+                      />
+
+                      <Testimonial
                         className={classNames(
-                          projectcss.all,
-                          sty.freeBox__z0Xqz
+                          "__wab_instance",
+                          sty.testimonial__ignRk
                         )}
-                      >
-                        <p.PlasmicImg
-                          alt={""}
-                          className={classNames(sty.img__pwhLz)}
-                          displayHeight={"auto"}
-                          displayMaxHeight={"none"}
-                          displayMaxWidth={"100%"}
-                          displayMinHeight={"0"}
-                          displayMinWidth={"0"}
-                          displayWidth={"auto"}
-                          src={
-                            "https://static1.plasmic.app/components/react-slick/slide3.png"
-                          }
-                        />
-                      </div>
+                      />
                     </SliderWrapper>
                   );
                 })()}
               </div>
-            </p.Stack>
+            </Stack__>
           </div>
           <Footer
             data-plasmic-name={"footer"}
@@ -1222,14 +1251,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -1245,7 +1274,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -1254,7 +1283,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;

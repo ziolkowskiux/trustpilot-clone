@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import Tooltip from "../../Tooltip"; // plasmic-import: qJCD7o382h/component
 import { AntdRadioGroup } from "@plasmicpkgs/antd5/skinny/registerRadio";
@@ -53,6 +76,8 @@ import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/reg
 import { AntdCheckbox } from "@plasmicpkgs/antd5/skinny/registerCheckbox";
 import Label from "../../Label"; // plasmic-import: W1OlkHb9N4/component
 import CompanyCard from "../../CompanyCard"; // plasmic-import: pRzZD4AnBwq/component
+import { AntdPagination } from "@plasmicpkgs/antd5/skinny/registerPagination";
+import { paginationHelpers as AntdPagination_Helpers } from "@plasmicpkgs/antd5/skinny/registerPagination";
 import Footer from "../../Footer"; // plasmic-import: F_FUewQemGz/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -75,29 +100,30 @@ type ArgPropType = keyof PlasmicCompaniesList__ArgsType;
 export const PlasmicCompaniesList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicCompaniesList__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  body?: p.Flex<"div">;
-  header?: p.Flex<"div">;
-  h1?: p.Flex<"h1">;
-  p?: p.Flex<"p">;
-  tooltip?: p.Flex<typeof Tooltip>;
-  list?: p.Flex<"div">;
-  search?: p.Flex<"div">;
-  filters?: p.Flex<"div">;
-  rating?: p.Flex<"div">;
-  radioGroupRating?: p.Flex<typeof AntdRadioGroup>;
-  selectCountries?: p.Flex<typeof AntdSelect>;
-  inputCityOrZipCode?: p.Flex<typeof AntdInput>;
-  checkboxVerified?: p.Flex<typeof AntdCheckbox>;
-  checkboxClaimed?: p.Flex<typeof AntdCheckbox>;
-  categoriesBadge?: p.Flex<typeof Label>;
-  data?: p.Flex<"div">;
-  infoAndSorting?: p.Flex<"div">;
-  sortFilter?: p.Flex<"div">;
-  sortBy?: p.Flex<typeof AntdSelect>;
-  companyCard?: p.Flex<typeof CompanyCard>;
-  footer?: p.Flex<typeof Footer>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  body?: Flex__<"div">;
+  header?: Flex__<"div">;
+  h1?: Flex__<"h1">;
+  p?: Flex__<"p">;
+  tooltip?: Flex__<typeof Tooltip>;
+  list?: Flex__<"div">;
+  search?: Flex__<"div">;
+  filters?: Flex__<"div">;
+  rating?: Flex__<"div">;
+  radioGroupRating?: Flex__<typeof AntdRadioGroup>;
+  selectCountries?: Flex__<typeof AntdSelect>;
+  inputCityOrZipCode?: Flex__<typeof AntdInput>;
+  checkboxVerified?: Flex__<typeof AntdCheckbox>;
+  checkboxClaimed?: Flex__<typeof AntdCheckbox>;
+  categoriesBadge?: Flex__<typeof Label>;
+  data?: Flex__<"div">;
+  infoAndSorting?: Flex__<"div">;
+  sortFilter?: Flex__<"div">;
+  sortBy?: Flex__<typeof AntdSelect>;
+  companyCard?: Flex__<typeof CompanyCard>;
+  pagination?: Flex__<typeof AntdPagination>;
+  footer?: Flex__<typeof Footer>;
 };
 
 export interface DefaultCompaniesListProps {}
@@ -127,16 +153,16 @@ function PlasmicCompaniesList__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "selectCountries.value",
@@ -150,7 +176,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "checkboxVerified.checked",
@@ -185,11 +211,43 @@ function PlasmicCompaniesList__RenderFunc(props: {
         path: "categoriesBadge[].labelValue",
         type: "private",
         variableType: "text"
+      },
+      {
+        path: "pagination.currentPage",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 1,
+
+        onMutate: generateOnMutateForSpec("currentPage", AntdPagination_Helpers)
+      },
+      {
+        path: "pagination.pageSize",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 10,
+
+        onMutate: generateOnMutateForSpec("pageSize", AntdPagination_Helpers)
+      },
+      {
+        path: "pagination.startIndex",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("startIndex", AntdPagination_Helpers)
+      },
+      {
+        path: "pagination.endIndex",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("endIndex", AntdPagination_Helpers)
       }
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
@@ -200,7 +258,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
     fetchCompanies: usePlasmicDataOp(() => {
       return {
         sourceId: "czoZTBwvV8zZJLNVxj78Sv",
-        opId: "4eaec896-2620-4561-9489-89ece22f9dc3",
+        opId: "2f9eee20-cbb8-41cb-b824-d588d12b716c",
         userArgs: {
           query: [
             $ctx.params.category_name,
@@ -213,10 +271,12 @@ function PlasmicCompaniesList__RenderFunc(props: {
             $state.categoriesBadge.filter(item => item.isSelected === true)
               .length === 0,
             $state.radioGroupRating.value,
-            $state.sortBy.value
+            $state.sortBy.value,
+            $state.pagination.pageSize,
+            ($state.pagination.currentPage - 1) * $state.pagination.pageSize
           ]
         },
-        cacheKey: `plasmic.$.4eaec896-2620-4561-9489-89ece22f9dc3.$.`,
+        cacheKey: `plasmic.$.2f9eee20-cbb8-41cb-b824-d588d12b716c.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -239,6 +299,16 @@ function PlasmicCompaniesList__RenderFunc(props: {
           filters: [$ctx.params.category_name]
         },
         cacheKey: `plasmic.$.b05fc006-2810-4091-b4b3-fe1322fb8a7f.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    }),
+    fetchLatestReviews: usePlasmicDataOp(() => {
+      return {
+        sourceId: "czoZTBwvV8zZJLNVxj78Sv",
+        opId: "f965d7d5-0915-4f2f-81ac-2fbbffe57dd9",
+        userArgs: {},
+        cacheKey: `plasmic.$.f965d7d5-0915-4f2f-81ac-2fbbffe57dd9.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -288,7 +358,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
             data-plasmic-override={overrides.body}
             className={classNames(projectcss.all, sty.body)}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"header"}
               data-plasmic-override={overrides.header}
@@ -321,7 +391,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                   })()}
                 </React.Fragment>
               </h1>
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox___3GpBi)}
@@ -343,8 +413,8 @@ function PlasmicCompaniesList__RenderFunc(props: {
                   data-plasmic-override={overrides.tooltip}
                   className={classNames("__wab_instance", sty.tooltip)}
                 />
-              </p.Stack>
-            </p.Stack>
+              </Stack__>
+            </Stack__>
             <div
               data-plasmic-name={"list"}
               data-plasmic-override={overrides.list}
@@ -355,14 +425,14 @@ function PlasmicCompaniesList__RenderFunc(props: {
                 data-plasmic-override={overrides.search}
                 className={classNames(projectcss.all, sty.search)}
               >
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"filters"}
                   data-plasmic-override={overrides.filters}
                   hasGap={true}
                   className={classNames(projectcss.all, sty.filters)}
                 >
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"rating"}
                     data-plasmic-override={overrides.rating}
@@ -387,7 +457,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         sty.radioGroupRating
                       )}
                       defaultValue={"0"}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "radioGroupRating",
                         "value"
                       ])}
@@ -409,7 +479,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         __composite["3"]["value"] = "4.5";
                         return __composite;
                       })()}
-                      value={p.generateStateValueProp($state, [
+                      value={generateStateValueProp($state, [
                         "radioGroupRating",
                         "value"
                       ])}
@@ -449,8 +519,8 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         </div>
                       </AntdRadio>
                     </AntdRadioGroup>
-                  </p.Stack>
-                  <p.Stack
+                  </Stack__>
+                  <Stack__
                     as={"div"}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.freeBox__uGspr)}
@@ -481,7 +551,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         plasmic_plasmic_rich_components_css.plasmic_tokens
                       )}
                       defaultValue={"United States"}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "selectCountries",
                         "value"
                       ])}
@@ -519,7 +589,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       })()}
                       placeholder={"Select..."}
                       popupScopeClassName={sty["selectCountries__popup"]}
-                      value={p.generateStateValueProp($state, [
+                      value={generateStateValueProp($state, [
                         "selectCountries",
                         "value"
                       ])}
@@ -531,19 +601,19 @@ function PlasmicCompaniesList__RenderFunc(props: {
                           "__wab_instance",
                           sty.inputCityOrZipCode
                         ),
-                        onChange: p.generateStateOnChangePropForCodeComponents(
+                        onChange: generateStateOnChangePropForCodeComponents(
                           $state,
                           "value",
                           ["inputCityOrZipCode", "value"],
                           AntdInput_Helpers
                         ),
                         placeholder: "City or ZIP code",
-                        value: p.generateStateValueProp($state, [
+                        value: generateStateValueProp($state, [
                           "inputCityOrZipCode",
                           "value"
                         ])
                       };
-                      p.initializeCodeComponentStates(
+                      initializeCodeComponentStates(
                         $state,
                         [
                           {
@@ -564,8 +634,8 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         />
                       );
                     })()}
-                  </p.Stack>
-                  <p.Stack
+                  </Stack__>
+                  <Stack__
                     as={"div"}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.freeBox__tWw4A)}
@@ -584,7 +654,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       data-plasmic-name={"checkboxVerified"}
                       data-plasmic-override={overrides.checkboxVerified}
                       autoFocus={false}
-                      checked={p.generateStateValueProp($state, [
+                      checked={generateStateValueProp($state, [
                         "checkboxVerified",
                         "checked"
                       ])}
@@ -593,7 +663,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         sty.checkboxVerified
                       )}
                       indeterminate={false}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "checkboxVerified",
                         "checked"
                       ])}
@@ -612,7 +682,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       data-plasmic-name={"checkboxClaimed"}
                       data-plasmic-override={overrides.checkboxClaimed}
                       autoFocus={false}
-                      checked={p.generateStateValueProp($state, [
+                      checked={generateStateValueProp($state, [
                         "checkboxClaimed",
                         "checked"
                       ])}
@@ -621,7 +691,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         sty.checkboxClaimed
                       )}
                       indeterminate={false}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "checkboxClaimed",
                         "checked"
                       ])}
@@ -636,8 +706,8 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         {"Claimed"}
                       </div>
                     </AntdCheckbox>
-                  </p.Stack>
-                  <p.Stack
+                  </Stack__>
+                  <Stack__
                     as={"div"}
                     hasGap={true}
                     className={classNames(projectcss.all, sty.freeBox__w65ID)}
@@ -652,7 +722,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                     >
                       {"Subcategories"}
                     </h6>
-                    <p.Stack
+                    <Stack__
                       as={"div"}
                       hasGap={true}
                       className={classNames(projectcss.all, sty.freeBox__qR8ZI)}
@@ -681,7 +751,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                               "__wab_instance",
                               sty.categoriesBadge
                             ),
-                            isSelected: p.generateStateValueProp($state, [
+                            isSelected: generateStateValueProp($state, [
                               "categoriesBadge",
                               __plasmic_idx_0,
                               "isSelected"
@@ -700,17 +770,17 @@ function PlasmicCompaniesList__RenderFunc(props: {
                                 throw e;
                               }
                             })(),
-                            onIsSelectedChange: p.generateStateOnChangeProp(
+                            onIsSelectedChange: generateStateOnChangeProp(
                               $state,
                               ["categoriesBadge", __plasmic_idx_0, "isSelected"]
                             ),
-                            onLabelValueChange: p.generateStateOnChangeProp(
+                            onLabelValueChange: generateStateOnChangeProp(
                               $state,
                               ["categoriesBadge", __plasmic_idx_0, "labelValue"]
                             )
                           };
 
-                          p.initializePlasmicStates(
+                          initializePlasmicStates(
                             $state,
                             [
                               {
@@ -730,11 +800,11 @@ function PlasmicCompaniesList__RenderFunc(props: {
                           );
                         })();
                       })}
-                    </p.Stack>
-                  </p.Stack>
-                </p.Stack>
+                    </Stack__>
+                  </Stack__>
+                </Stack__>
               </div>
-              <p.Stack
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"data"}
                 data-plasmic-override={overrides.data}
@@ -774,7 +844,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       })()}
                     </React.Fragment>
                   </div>
-                  <p.Stack
+                  <Stack__
                     as={"div"}
                     data-plasmic-name={"sortFilter"}
                     data-plasmic-override={overrides.sortFilter}
@@ -804,7 +874,7 @@ function PlasmicCompaniesList__RenderFunc(props: {
                         plasmic_plasmic_rich_components_css.plasmic_tokens
                       )}
                       defaultValue={"name"}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "sortBy",
                         "value"
                       ])}
@@ -823,12 +893,12 @@ function PlasmicCompaniesList__RenderFunc(props: {
                       popupScopeClassName={sty["sortBy__popup"]}
                       size={"middle"}
                       useChildren={false}
-                      value={p.generateStateValueProp($state, [
+                      value={generateStateValueProp($state, [
                         "sortBy",
                         "value"
                       ])}
                     />
-                  </p.Stack>
+                  </Stack__>
                 </div>
                 {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
@@ -960,7 +1030,94 @@ function PlasmicCompaniesList__RenderFunc(props: {
                     />
                   );
                 })}
-              </p.Stack>
+                {(() => {
+                  const child$Props = {
+                    className: classNames("__wab_instance", sty.pagination),
+                    current: generateStateValueProp($state, [
+                      "pagination",
+                      "currentPage"
+                    ]),
+                    defaultCurrent: 1,
+                    defaultPageSize: 10,
+                    hideOnSinglePage: true,
+                    onChange: async (...eventArgs: any) => {
+                      generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "currentPage",
+                        ["pagination", "currentPage"],
+                        AntdPagination_Helpers
+                      ).apply(null, eventArgs);
+                      generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "startIndex",
+                        ["pagination", "startIndex"],
+                        AntdPagination_Helpers
+                      ).apply(null, eventArgs);
+                      generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "endIndex",
+                        ["pagination", "endIndex"],
+                        AntdPagination_Helpers
+                      ).apply(null, eventArgs);
+                    },
+                    onShowSizeChange:
+                      generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "pageSize",
+                        ["pagination", "pageSize"],
+                        AntdPagination_Helpers
+                      ),
+                    pageSize: generateStateValueProp($state, [
+                      "pagination",
+                      "pageSize"
+                    ]),
+                    pageSizeOptions: [
+                      { pageSize: 10 },
+                      { pageSize: 20 },
+                      { pageSize: 50 },
+                      { pageSize: 100 }
+                    ],
+                    showLessItems: false,
+                    showQuickJumper: false,
+                    showSizeChanger: false,
+                    simple: false,
+                    size: "default",
+                    total: undefined
+                  };
+                  initializeCodeComponentStates(
+                    $state,
+                    [
+                      {
+                        name: "currentPage",
+                        plasmicStateName: "pagination.currentPage"
+                      },
+                      {
+                        name: "pageSize",
+                        plasmicStateName: "pagination.pageSize"
+                      },
+                      {
+                        name: "startIndex",
+                        plasmicStateName: "pagination.startIndex"
+                      },
+                      {
+                        name: "endIndex",
+                        plasmicStateName: "pagination.endIndex"
+                      }
+                    ],
+                    [],
+                    AntdPagination_Helpers ?? {},
+                    child$Props
+                  );
+
+                  return (
+                    <AntdPagination
+                      data-plasmic-name={"pagination"}
+                      data-plasmic-override={overrides.pagination}
+                      {...child$Props}
+                    />
+                  );
+                })()}
+              </Stack__>
             </div>
           </div>
           <Footer
@@ -998,6 +1155,7 @@ const PlasmicDescendants = {
     "sortFilter",
     "sortBy",
     "companyCard",
+    "pagination",
     "footer"
   ],
   mainNavigation: ["mainNavigation"],
@@ -1021,7 +1179,8 @@ const PlasmicDescendants = {
     "infoAndSorting",
     "sortFilter",
     "sortBy",
-    "companyCard"
+    "companyCard",
+    "pagination"
   ],
   header: ["header", "h1", "p", "tooltip"],
   h1: ["h1"],
@@ -1042,7 +1201,8 @@ const PlasmicDescendants = {
     "infoAndSorting",
     "sortFilter",
     "sortBy",
-    "companyCard"
+    "companyCard",
+    "pagination"
   ],
   search: [
     "search",
@@ -1072,11 +1232,19 @@ const PlasmicDescendants = {
   checkboxVerified: ["checkboxVerified"],
   checkboxClaimed: ["checkboxClaimed"],
   categoriesBadge: ["categoriesBadge"],
-  data: ["data", "infoAndSorting", "sortFilter", "sortBy", "companyCard"],
+  data: [
+    "data",
+    "infoAndSorting",
+    "sortFilter",
+    "sortBy",
+    "companyCard",
+    "pagination"
+  ],
   infoAndSorting: ["infoAndSorting", "sortFilter", "sortBy"],
   sortFilter: ["sortFilter", "sortBy"],
   sortBy: ["sortBy"],
   companyCard: ["companyCard"],
+  pagination: ["pagination"],
   footer: ["footer"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -1105,6 +1273,7 @@ type NodeDefaultElementType = {
   sortFilter: "div";
   sortBy: typeof AntdSelect;
   companyCard: typeof CompanyCard;
+  pagination: typeof AntdPagination;
   footer: typeof Footer;
 };
 
@@ -1167,14 +1336,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -1190,7 +1359,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -1199,7 +1368,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;
@@ -1231,6 +1400,7 @@ export const PlasmicCompaniesList = Object.assign(
     sortFilter: makeNodeComponent("sortFilter"),
     sortBy: makeNodeComponent("sortBy"),
     companyCard: makeNodeComponent("companyCard"),
+    pagination: makeNodeComponent("pagination"),
     footer: makeNodeComponent("footer"),
 
     // Metadata about props expected for PlasmicCompaniesList

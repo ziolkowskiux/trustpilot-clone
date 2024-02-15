@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { AntdBreadcrumb } from "@plasmicpkgs/antd5/skinny/registerBreadcrumb";
 import { AntdBreadcrumbItem } from "@plasmicpkgs/antd5/skinny/registerBreadcrumb";
 
@@ -58,8 +81,8 @@ type ArgPropType = keyof PlasmicPathBreadcrumb__ArgsType;
 export const PlasmicPathBreadcrumb__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPathBreadcrumb__OverridesType = {
-  root?: p.Flex<typeof AntdBreadcrumb>;
-  breadcrumbItem?: p.Flex<typeof AntdBreadcrumbItem>;
+  root?: Flex__<typeof AntdBreadcrumb>;
+  breadcrumbItem?: Flex__<typeof AntdBreadcrumbItem>;
 };
 
 export interface DefaultPathBreadcrumbProps {
@@ -91,11 +114,11 @@ function PlasmicPathBreadcrumb__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   return (
     <AntdBreadcrumb

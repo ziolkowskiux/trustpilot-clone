@@ -17,26 +17,49 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
-import * as pp from "@plasmicapp/react-web";
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
+import * as pp from "@plasmicapp/react-web";
 import Select__Overlay from "../../Select__Overlay"; // plasmic-import: JV_nuMKlLuD5/component
 import Select__Option from "../../Select__Option"; // plasmic-import: M65ZITmGxr2n/component
 import Select__OptionGroup from "../../Select__OptionGroup"; // plasmic-import: fUKppJ6cRP5q/component
@@ -119,19 +142,18 @@ export const PlasmicSelect__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicSelect__OverridesType = {
-  root?: p.Flex<"div">;
-  trigger?: p.Flex<"button">;
-  contentContainer?: p.Flex<"div">;
-  dropdownIcon?: p.Flex<"svg">;
-  overlay?: p.Flex<typeof Select__Overlay>;
-  optionsContainer?: p.Flex<"div">;
+  root?: Flex__<"div">;
+  trigger?: Flex__<"button">;
+  contentContainer?: Flex__<"div">;
+  dropdownIcon?: Flex__<"svg">;
+  overlay?: Flex__<typeof Select__Overlay>;
+  optionsContainer?: Flex__<"div">;
 };
 
 export interface DefaultSelectProps extends pp.BaseSelectProps {
   "aria-label"?: string;
   "aria-labelledby"?: string;
   options?: any;
-  onChange?: (value: string) => void;
   color?: SingleChoiceArg<
     | "softBlue"
     | "softCyan"
@@ -176,13 +198,13 @@ function PlasmicSelect__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "showPlaceholder",
@@ -219,7 +241,7 @@ function PlasmicSelect__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -375,7 +397,7 @@ function PlasmicSelect__RenderFunc(props: {
                 ? false
                 : true
             )
-              ? p.renderPlasmicSlot({
+              ? renderPlasmicSlot({
                   defaultContents: "Selected",
                   value: args.selectedContent,
                   className: classNames(sty.slotTargetSelectedContent, {
@@ -454,7 +476,7 @@ function PlasmicSelect__RenderFunc(props: {
                     }
                   })()
             )
-              ? p.renderPlasmicSlot({
+              ? renderPlasmicSlot({
                   defaultContents: "Select\u2026",
                   value: args.placeholder,
                   className: classNames(sty.slotTargetPlaceholder, {
@@ -517,7 +539,7 @@ function PlasmicSelect__RenderFunc(props: {
                 })
               : null}
           </div>
-          <p.PlasmicIcon
+          <PlasmicIcon__
             data-plasmic-name={"dropdownIcon"}
             data-plasmic-override={overrides.dropdownIcon}
             PlasmicIconType={
@@ -603,7 +625,7 @@ function PlasmicSelect__RenderFunc(props: {
                 )
               })}
             >
-              {p.renderPlasmicSlot({
+              {renderPlasmicSlot({
                 defaultContents: null,
                 value: args.children
               })}

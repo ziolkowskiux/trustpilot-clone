@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { AntdTooltip } from "@plasmicpkgs/antd5/skinny/registerTooltip";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -73,19 +96,19 @@ export const PlasmicCompanyCardContactInfo__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicCompanyCardContactInfo__OverridesType = {
-  basicInfo?: p.Flex<"button">;
-  website?: p.Flex<"svg">;
-  mail?: p.Flex<"svg">;
-  phone?: p.Flex<"svg">;
-  tooltip?: p.Flex<typeof AntdTooltip>;
-  header?: p.Flex<"div">;
-  text?: p.Flex<"div">;
-  websiteAddress?: p.Flex<"div">;
-  emailAddress?: p.Flex<"div">;
-  emailAddressValue?: p.Flex<"a"> & Partial<LinkProps>;
-  phoneNumber?: p.Flex<"div">;
-  physicalAddress?: p.Flex<"div">;
-  physicalAddressValue?: p.Flex<"div">;
+  basicInfo?: Flex__<"button">;
+  website?: Flex__<"svg">;
+  mail?: Flex__<"svg">;
+  phone?: Flex__<"svg">;
+  tooltip?: Flex__<typeof AntdTooltip>;
+  header?: Flex__<"div">;
+  text?: Flex__<"div">;
+  websiteAddress?: Flex__<"div">;
+  emailAddress?: Flex__<"div">;
+  emailAddressValue?: Flex__<"a"> & Partial<LinkProps>;
+  phoneNumber?: Flex__<"div">;
+  physicalAddress?: Flex__<"div">;
+  physicalAddressValue?: Flex__<"div">;
 };
 
 export interface DefaultCompanyCardContactInfoProps {
@@ -132,11 +155,11 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   const [isBasicInfoFocusWithin, triggerBasicInfoFocusWithinProps] = useTrigger(
     "useFocusedWithin",
@@ -147,7 +170,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
   };
 
   return (
-    <p.Stack
+    <Stack__
       as={"button"}
       data-plasmic-name={"basicInfo"}
       data-plasmic-override={overrides.basicInfo}
@@ -282,7 +305,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                 }
               })()
         ) ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"websiteAddress"}
             data-plasmic-override={overrides.websiteAddress}
@@ -294,7 +317,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
               role={"img"}
             />
 
-            <p.PlasmicLink
+            <PlasmicLink__
               className={classNames(
                 projectcss.all,
                 projectcss.a,
@@ -333,8 +356,8 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                   }
                 })()}
               </React.Fragment>
-            </p.PlasmicLink>
-          </p.Stack>
+            </PlasmicLink__>
+          </Stack__>
         ) : null}
         {(
           triggers.focusWithin_basicInfo
@@ -365,7 +388,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                 }
               })()
         ) ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"emailAddress"}
             data-plasmic-override={overrides.emailAddress}
@@ -377,7 +400,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
               role={"img"}
             />
 
-            <p.PlasmicLink
+            <PlasmicLink__
               data-plasmic-name={"emailAddressValue"}
               data-plasmic-override={overrides.emailAddressValue}
               className={classNames(
@@ -418,8 +441,8 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                   }
                 })()}
               </React.Fragment>
-            </p.PlasmicLink>
-          </p.Stack>
+            </PlasmicLink__>
+          </Stack__>
         ) : null}
         {(() => {
           try {
@@ -434,7 +457,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
             throw e;
           }
         })() ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"phoneNumber"}
             data-plasmic-override={overrides.phoneNumber}
@@ -446,7 +469,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
               role={"img"}
             />
 
-            <p.PlasmicLink
+            <PlasmicLink__
               className={classNames(
                 projectcss.all,
                 projectcss.a,
@@ -485,8 +508,8 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                   }
                 })()}
               </React.Fragment>
-            </p.PlasmicLink>
-          </p.Stack>
+            </PlasmicLink__>
+          </Stack__>
         ) : null}
         {(() => {
           try {
@@ -501,7 +524,7 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
             throw e;
           }
         })() ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"physicalAddress"}
             data-plasmic-override={overrides.physicalAddress}
@@ -538,10 +561,10 @@ function PlasmicCompanyCardContactInfo__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </div>
-          </p.Stack>
+          </Stack__>
         ) : null}
       </AntdTooltip>
-    </p.Stack>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

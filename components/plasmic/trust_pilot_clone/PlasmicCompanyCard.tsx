@@ -17,25 +17,55 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
+import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
+import {
+  executePlasmicDataOp,
+  usePlasmicDataOp,
+  usePlasmicInvalidate
+} from "@plasmicapp/react-web/lib/data-sources";
+
 import CompanyCardContactInfo from "../../CompanyCardContactInfo"; // plasmic-import: u5SO6SlWaMIn/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import ReviewCard from "../../ReviewCard"; // plasmic-import: rJiDAmiPUpjj/component
@@ -61,7 +91,7 @@ export const PlasmicCompanyCard__VariantProps = new Array<VariantPropType>(
 );
 
 export type PlasmicCompanyCard__ArgsType = {
-  companyLogo?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  companyLogo?: React.ComponentProps<typeof PlasmicImg__>["src"];
   companyName?: string;
   trustScore?: string;
   reviewsCount?: number;
@@ -87,24 +117,24 @@ export const PlasmicCompanyCard__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicCompanyCard__OverridesType = {
-  companyCard?: p.Flex<"div">;
-  basicInformation?: p.Flex<"a"> & Partial<LinkProps>;
-  companyLogo?: p.Flex<typeof p.PlasmicImg>;
-  companyName?: p.Flex<"h5">;
-  trustScore?: p.Flex<"p">;
-  reviewsCount?: p.Flex<"p">;
-  location?: p.Flex<"p">;
-  label?: p.Flex<"label">;
-  footer?: p.Flex<"div">;
-  companyCardContactInfo?: p.Flex<typeof CompanyCardContactInfo>;
-  button?: p.Flex<typeof AntdButton>;
-  text?: p.Flex<"div">;
-  reviews?: p.Flex<"div">;
-  reviewCard?: p.Flex<typeof ReviewCard>;
+  companyCard?: Flex__<"div">;
+  basicInformation?: Flex__<"a"> & Partial<LinkProps>;
+  companyLogo?: Flex__<typeof PlasmicImg__>;
+  companyName?: Flex__<"h5">;
+  trustScore?: Flex__<"p">;
+  reviewsCount?: Flex__<"p">;
+  location?: Flex__<"p">;
+  label?: Flex__<"label">;
+  footer?: Flex__<"div">;
+  companyCardContactInfo?: Flex__<typeof CompanyCardContactInfo>;
+  button?: Flex__<typeof AntdButton>;
+  text?: Flex__<"div">;
+  reviews?: Flex__<"div">;
+  reviewCard?: Flex__<typeof ReviewCard>;
 };
 
 export interface DefaultCompanyCardProps {
-  companyLogo?: React.ComponentProps<typeof p.PlasmicImg>["src"];
+  companyLogo?: React.ComponentProps<typeof PlasmicImg__>["src"];
   companyName?: string;
   trustScore?: string;
   reviewsCount?: number;
@@ -145,6 +175,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
           location: "2020 Happy Street, 99207 Spokane United States",
           companyWebsite: "https://www.google.pl",
           companyEmail: "testeruser@o2.pl",
+          companyId: "3713b938-f7b8-4907-8af8-6eae6e498d2f",
           latestReviews: [
             {
               name: "Mary Doe",
@@ -184,13 +215,13 @@ function PlasmicCompanyCard__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "reviewsVisible",
@@ -201,12 +232,14 @@ function PlasmicCompanyCard__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
     $refs
   });
+  const dataSourcesCtx = usePlasmicDataSourceContext();
+  const plasmicInvalidate = usePlasmicInvalidate();
 
   return (
     <div
@@ -225,8 +258,8 @@ function PlasmicCompanyCard__RenderFunc(props: {
         sty.companyCard
       )}
     >
-      <p.Stack
-        as={p.PlasmicLink}
+      <Stack__
+        as={PlasmicLink__}
         data-plasmic-name={"basicInformation"}
         data-plasmic-override={overrides.basicInformation}
         hasGap={true}
@@ -280,7 +313,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
         }}
         platform={"nextjs"}
       >
-        <p.PlasmicImg
+        <PlasmicImg__
           data-plasmic-name={"companyLogo"}
           data-plasmic-override={overrides.companyLogo}
           alt={""}
@@ -295,7 +328,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
           src={args.companyLogo}
         />
 
-        <p.Stack
+        <Stack__
           as={"div"}
           hasGap={true}
           className={classNames(projectcss.all, sty.freeBox__zzX70, {
@@ -332,7 +365,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
               })()}
             </React.Fragment>
           </h5>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__c2Gs)}
@@ -389,7 +422,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </p>
-          </p.Stack>
+          </Stack__>
           <p
             data-plasmic-name={"location"}
             data-plasmic-override={overrides.location}
@@ -416,7 +449,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
               })()}
             </React.Fragment>
           </p>
-        </p.Stack>
+        </Stack__>
         <div className={classNames(projectcss.all, sty.freeBox__dRgSp)}>
           <label
             data-plasmic-name={"label"}
@@ -430,8 +463,8 @@ function PlasmicCompanyCard__RenderFunc(props: {
             {"tag name"}
           </label>
         </div>
-      </p.Stack>
-      <p.Stack
+      </Stack__>
+      <Stack__
         as={"div"}
         data-plasmic-name={"footer"}
         data-plasmic-override={overrides.footer}
@@ -498,8 +531,8 @@ function PlasmicCompanyCard__RenderFunc(props: {
                         value = [value];
                       }
 
-                      const oldValue = p.get($state, vgroup);
-                      p.set($state, vgroup, !oldValue);
+                      const oldValue = $stateGet($state, vgroup);
+                      $stateSet($state, vgroup, !oldValue);
                       return !oldValue;
                     })?.apply(null, [actionArgs]);
                   })()
@@ -512,6 +545,46 @@ function PlasmicCompanyCard__RenderFunc(props: {
                 $steps["updateReviewsVisible"] = await $steps[
                   "updateReviewsVisible"
                 ];
+              }
+
+              $steps["getLatestReviews"] =
+                $state.reviewsVisible == false
+                  ? (() => {
+                      const actionArgs = {
+                        dataOp: {
+                          sourceId: "czoZTBwvV8zZJLNVxj78Sv",
+                          opId: "d6807c17-a863-467e-8fa6-fafcbc99f46e",
+                          userArgs: {
+                            query: [$props.companyId]
+                          },
+                          cacheKey: null,
+                          invalidatedKeys: null,
+                          roleId: null
+                        }
+                      };
+                      return (async ({ dataOp, continueOnError }) => {
+                        try {
+                          const response = await executePlasmicDataOp(dataOp, {
+                            userAuthToken: dataSourcesCtx?.userAuthToken,
+                            user: dataSourcesCtx?.user
+                          });
+                          await plasmicInvalidate(dataOp.invalidatedKeys);
+                          return response;
+                        } catch (e) {
+                          if (!continueOnError) {
+                            throw e;
+                          }
+                          return e;
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+              if (
+                $steps["getLatestReviews"] != null &&
+                typeof $steps["getLatestReviews"] === "object" &&
+                typeof $steps["getLatestReviews"].then === "function"
+              ) {
+                $steps["getLatestReviews"] = await $steps["getLatestReviews"];
               }
             }}
             size={"small"}
@@ -530,7 +603,7 @@ function PlasmicCompanyCard__RenderFunc(props: {
             </div>
           </AntdButton>
         </div>
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"reviews"}
           data-plasmic-override={overrides.reviews}
@@ -585,6 +658,19 @@ function PlasmicCompanyCard__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                reviewTitle={(() => {
+                  try {
+                    return undefined;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 small={true}
                 username={(() => {
                   try {
@@ -602,8 +688,8 @@ function PlasmicCompanyCard__RenderFunc(props: {
               />
             );
           })}
-        </p.Stack>
-      </p.Stack>
+        </Stack__>
+      </Stack__>
     </div>
   ) as React.ReactElement | null;
 }
@@ -660,7 +746,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   companyCard: "div";
   basicInformation: "a";
-  companyLogo: typeof p.PlasmicImg;
+  companyLogo: typeof PlasmicImg__;
   companyName: "h5";
   trustScore: "p";
   reviewsCount: "p";

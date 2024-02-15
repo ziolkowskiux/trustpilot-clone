@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import Button2 from "../../Button2"; // plasmic-import: UXSIw5rr6ki/component
 
 import { useScreenVariants as useScreenVariantsstcidH67POnn4E } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: StcidH67pONN4e/globalVariant
@@ -65,8 +88,8 @@ type ArgPropType = keyof PlasmicFooter__ArgsType;
 export const PlasmicFooter__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicFooter__OverridesType = {
-  footer?: p.Flex<"div">;
-  columns?: p.Flex<"div">;
+  footer?: Flex__<"div">;
+  columns?: Flex__<"div">;
 };
 
 export interface DefaultFooterProps {
@@ -98,11 +121,11 @@ function PlasmicFooter__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsstcidH67POnn4E()
@@ -125,7 +148,7 @@ function PlasmicFooter__RenderFunc(props: {
         sty.footer
       )}
     >
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"columns"}
         data-plasmic-override={overrides.columns}
@@ -133,12 +156,12 @@ function PlasmicFooter__RenderFunc(props: {
         className={classNames(projectcss.all, sty.columns)}
       >
         <div className={classNames(projectcss.all, sty.column__wT00X)}>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__yOjN)}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               hasGap={true}
               className={classNames(projectcss.all, sty.freeBox___6ZcBk)}
@@ -152,7 +175,7 @@ function PlasmicFooter__RenderFunc(props: {
               >
                 {"Connect with us"}
               </div>
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__c0ITh)}
@@ -171,12 +194,12 @@ function PlasmicFooter__RenderFunc(props: {
                   className={classNames(projectcss.all, sty.svg___55C0Z)}
                   role={"img"}
                 />
-              </p.Stack>
-            </p.Stack>
-          </p.Stack>
+              </Stack__>
+            </Stack__>
+          </Stack__>
         </div>
         <div className={classNames(projectcss.all, sty.column__e4UkH)}>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__vvOYy)}
@@ -302,10 +325,10 @@ function PlasmicFooter__RenderFunc(props: {
                 {"Insights"}
               </div>
             </Button2>
-          </p.Stack>
+          </Stack__>
         </div>
         <div className={classNames(projectcss.all, sty.column__v1Awn)}>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox___11NWt)}
@@ -403,10 +426,10 @@ function PlasmicFooter__RenderFunc(props: {
                 {"Status"}
               </div>
             </Button2>
-          </p.Stack>
+          </Stack__>
         </div>
         <div className={classNames(projectcss.all, sty.column__ve6R4)}>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox___01Ppw)}
@@ -532,9 +555,9 @@ function PlasmicFooter__RenderFunc(props: {
                 {"Media"}
               </div>
             </Button2>
-          </p.Stack>
+          </Stack__>
         </div>
-      </p.Stack>
+      </Stack__>
     </div>
   ) as React.ReactElement | null;
 }

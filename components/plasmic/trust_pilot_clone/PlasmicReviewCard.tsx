@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import ButtonUseful from "../../ButtonUseful"; // plasmic-import: ihmuDpsJi3Cb/component
 import ButtonShare from "../../ButtonShare"; // plasmic-import: 7X73wCpmj9Ov/component
 
@@ -77,25 +100,25 @@ export const PlasmicReviewCard__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicReviewCard__OverridesType = {
-  reviewCard?: p.Flex<"div">;
-  reviewCardHeader?: p.Flex<"div">;
-  userAvatar?: p.Flex<typeof p.PlasmicImg>;
-  freeBox?: p.Flex<"div">;
-  username?: p.Flex<"div">;
-  basicUserInformation?: p.Flex<"div">;
-  numberOfReviews?: p.Flex<"div">;
-  userLocation?: p.Flex<"div">;
-  location?: p.Flex<"div">;
-  reviewCardBody?: p.Flex<"div">;
-  reviewTitle?: p.Flex<"div">;
-  reviewContent?: p.Flex<"div">;
-  rowDateOfExperience?: p.Flex<"div">;
-  reviewDateOfExperience?: p.Flex<"div">;
-  dateOfExperience?: p.Flex<"div">;
-  reviewCardFooter?: p.Flex<"div">;
-  tags?: p.Flex<"div">;
-  markerUseful?: p.Flex<typeof ButtonUseful>;
-  buttonShare?: p.Flex<typeof ButtonShare>;
+  reviewCard?: Flex__<"div">;
+  reviewCardHeader?: Flex__<"div">;
+  userAvatar?: Flex__<typeof PlasmicImg__>;
+  freeBox?: Flex__<"div">;
+  username?: Flex__<"div">;
+  basicUserInformation?: Flex__<"div">;
+  numberOfReviews?: Flex__<"div">;
+  userLocation?: Flex__<"div">;
+  location?: Flex__<"div">;
+  reviewCardBody?: Flex__<"div">;
+  reviewTitle?: Flex__<"div">;
+  reviewContent?: Flex__<"div">;
+  rowDateOfExperience?: Flex__<"div">;
+  reviewDateOfExperience?: Flex__<"div">;
+  dateOfExperience?: Flex__<"div">;
+  reviewCardFooter?: Flex__<"div">;
+  tags?: Flex__<"div">;
+  markerUseful?: Flex__<typeof ButtonUseful>;
+  buttonShare?: Flex__<typeof ButtonShare>;
 };
 
 export interface DefaultReviewCardProps {
@@ -144,13 +167,13 @@ function PlasmicReviewCard__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "small",
@@ -161,7 +184,7 @@ function PlasmicReviewCard__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -169,7 +192,7 @@ function PlasmicReviewCard__RenderFunc(props: {
   });
 
   return (
-    <p.Stack
+    <Stack__
       as={"div"}
       data-plasmic-name={"reviewCard"}
       data-plasmic-override={overrides.reviewCard}
@@ -188,7 +211,7 @@ function PlasmicReviewCard__RenderFunc(props: {
         { [sty.reviewCardsmall]: hasVariant($state, "small", "small") }
       )}
     >
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"reviewCardHeader"}
         data-plasmic-override={overrides.reviewCardHeader}
@@ -197,7 +220,7 @@ function PlasmicReviewCard__RenderFunc(props: {
           [sty.reviewCardHeadersmall]: hasVariant($state, "small", "small")
         })}
       >
-        <p.PlasmicImg
+        <PlasmicImg__
           data-plasmic-name={"userAvatar"}
           data-plasmic-override={overrides.userAvatar}
           alt={""}
@@ -217,7 +240,7 @@ function PlasmicReviewCard__RenderFunc(props: {
           loading={"lazy"}
         />
 
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"freeBox"}
           data-plasmic-override={overrides.freeBox}
@@ -251,7 +274,7 @@ function PlasmicReviewCard__RenderFunc(props: {
               })()}
             </React.Fragment>
           </div>
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"basicUserInformation"}
             data-plasmic-override={overrides.basicUserInformation}
@@ -282,7 +305,7 @@ function PlasmicReviewCard__RenderFunc(props: {
             >
               {"number of reviews"}
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"userLocation"}
               data-plasmic-override={overrides.userLocation}
@@ -305,10 +328,10 @@ function PlasmicReviewCard__RenderFunc(props: {
               >
                 {"user location"}
               </div>
-            </p.Stack>
-          </p.Stack>
-        </p.Stack>
-      </p.Stack>
+            </Stack__>
+          </Stack__>
+        </Stack__>
+      </Stack__>
       <div
         data-plasmic-name={"reviewCardBody"}
         data-plasmic-override={overrides.reviewCardBody}
@@ -368,7 +391,7 @@ function PlasmicReviewCard__RenderFunc(props: {
             })()}
           </React.Fragment>
         </div>
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"rowDateOfExperience"}
           data-plasmic-override={overrides.rowDateOfExperience}
@@ -420,9 +443,9 @@ function PlasmicReviewCard__RenderFunc(props: {
               })()}
             </React.Fragment>
           </div>
-        </p.Stack>
+        </Stack__>
       </div>
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"reviewCardFooter"}
         data-plasmic-override={overrides.reviewCardFooter}
@@ -431,7 +454,7 @@ function PlasmicReviewCard__RenderFunc(props: {
           [sty.reviewCardFootersmall]: hasVariant($state, "small", "small")
         })}
       >
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"tags"}
           data-plasmic-override={overrides.tags}
@@ -449,13 +472,13 @@ function PlasmicReviewCard__RenderFunc(props: {
             data-plasmic-override={overrides.buttonShare}
             className={classNames("__wab_instance", sty.buttonShare)}
           />
-        </p.Stack>
+        </Stack__>
         <FlagIcon
           className={classNames(projectcss.all, sty.svg__upTjy)}
           role={"img"}
         />
-      </p.Stack>
-    </p.Stack>
+      </Stack__>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
@@ -538,7 +561,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   reviewCard: "div";
   reviewCardHeader: "div";
-  userAvatar: typeof p.PlasmicImg;
+  userAvatar: typeof PlasmicImg__;
   freeBox: "div";
   username: "div";
   basicUserInformation: "div";

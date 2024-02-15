@@ -218,6 +218,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  filter: none;
+  transform: none;
   min-width: 0;
 }
 .search > :global(.__wab_flex-container) {

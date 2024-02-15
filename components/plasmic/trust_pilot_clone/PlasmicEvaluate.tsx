@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import StarRating from "../../StarRating"; // plasmic-import: a7ppcDbGWwYt/component
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -69,33 +92,33 @@ type ArgPropType = keyof PlasmicEvaluate__ArgsType;
 export const PlasmicEvaluate__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicEvaluate__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  header?: p.Flex<"div">;
-  companyInfo?: p.Flex<"div">;
-  companyLogo?: p.Flex<typeof p.PlasmicImg>;
-  freeBox?: p.Flex<"div">;
-  companyName?: p.Flex<"div">;
-  companyWebsite?: p.Flex<"div">;
-  userReview?: p.Flex<"form">;
-  rateYourExperience?: p.Flex<"div">;
-  label?: p.Flex<"label">;
-  starRating?: p.Flex<typeof StarRating>;
-  review?: p.Flex<"div">;
-  label2?: p.Flex<"label">;
-  linkGuidelines?: p.Flex<"a"> & Partial<LinkProps>;
-  reviewContent?: p.Flex<"textarea">;
-  linkHowToWrite?: p.Flex<"a"> & Partial<LinkProps>;
-  reviewTitle?: p.Flex<"div">;
-  reviewTitle2?: p.Flex<typeof AntdInput>;
-  dateOfExperience?: p.Flex<"div">;
-  date?: p.Flex<typeof AntdInput>;
-  attachments?: p.Flex<"div">;
-  header2?: p.Flex<"label">;
-  description?: p.Flex<"div">;
-  submitAttachment?: p.Flex<typeof AntdButton>;
-  submitReview?: p.Flex<"div">;
-  button?: p.Flex<typeof AntdButton>;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  header?: Flex__<"div">;
+  companyInfo?: Flex__<"div">;
+  companyLogo?: Flex__<typeof PlasmicImg__>;
+  freeBox?: Flex__<"div">;
+  companyName?: Flex__<"div">;
+  companyWebsite?: Flex__<"div">;
+  userReview?: Flex__<"form">;
+  rateYourExperience?: Flex__<"div">;
+  label?: Flex__<"label">;
+  starRating?: Flex__<typeof StarRating>;
+  review?: Flex__<"div">;
+  label2?: Flex__<"label">;
+  linkGuidelines?: Flex__<"a"> & Partial<LinkProps>;
+  reviewContent?: Flex__<"textarea">;
+  linkHowToWrite?: Flex__<"a"> & Partial<LinkProps>;
+  reviewTitle?: Flex__<"div">;
+  reviewTitle2?: Flex__<typeof AntdInput>;
+  dateOfExperience?: Flex__<"div">;
+  date?: Flex__<typeof AntdInput>;
+  attachments?: Flex__<"div">;
+  header2?: Flex__<"label">;
+  description?: Flex__<"div">;
+  submitAttachment?: Flex__<typeof AntdButton>;
+  submitReview?: Flex__<"div">;
+  button?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultEvaluateProps {}
@@ -125,16 +148,16 @@ function PlasmicEvaluate__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "reviewTitle2.value",
@@ -142,7 +165,7 @@ function PlasmicEvaluate__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "reviewContent.value",
@@ -156,7 +179,7 @@ function PlasmicEvaluate__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "starRating.trustScore",
@@ -167,7 +190,7 @@ function PlasmicEvaluate__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
@@ -234,14 +257,14 @@ function PlasmicEvaluate__RenderFunc(props: {
             data-plasmic-override={overrides.header}
             className={classNames(projectcss.all, sty.header)}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"companyInfo"}
               data-plasmic-override={overrides.companyInfo}
               hasGap={true}
               className={classNames(projectcss.all, sty.companyInfo)}
             >
-              <p.PlasmicImg
+              <PlasmicImg__
                 data-plasmic-name={"companyLogo"}
                 data-plasmic-override={overrides.companyLogo}
                 alt={""}
@@ -311,9 +334,9 @@ function PlasmicEvaluate__RenderFunc(props: {
                   </React.Fragment>
                 </div>
               </div>
-            </p.Stack>
+            </Stack__>
           </div>
-          <p.Stack
+          <Stack__
             as={"form"}
             data-plasmic-name={"userReview"}
             data-plasmic-override={overrides.userReview}
@@ -340,13 +363,13 @@ function PlasmicEvaluate__RenderFunc(props: {
                 data-plasmic-name={"starRating"}
                 data-plasmic-override={overrides.starRating}
                 className={classNames("__wab_instance", sty.starRating)}
-                onTrustScoreChange={p.generateStateOnChangeProp($state, [
+                onTrustScoreChange={generateStateOnChangeProp($state, [
                   "starRating",
                   "trustScore"
                 ])}
               />
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"review"}
               data-plasmic-override={overrides.review}
@@ -364,7 +387,7 @@ function PlasmicEvaluate__RenderFunc(props: {
               >
                 {"Tell us more about your experience"}
               </label>
-              <p.PlasmicLink
+              <PlasmicLink__
                 data-plasmic-name={"linkGuidelines"}
                 data-plasmic-override={overrides.linkGuidelines}
                 className={classNames(
@@ -378,7 +401,7 @@ function PlasmicEvaluate__RenderFunc(props: {
                 platform={"nextjs"}
               >
                 {"Read our Guidelines for Reviewers"}
-              </p.PlasmicLink>
+              </PlasmicLink__>
               <textarea
                 data-plasmic-name={"reviewContent"}
                 data-plasmic-override={overrides.reviewContent}
@@ -388,10 +411,9 @@ function PlasmicEvaluate__RenderFunc(props: {
                   sty.reviewContent
                 )}
                 onChange={e => {
-                  p.generateStateOnChangeProp($state, [
-                    "reviewContent",
-                    "value"
-                  ])(e.target.value);
+                  generateStateOnChangeProp($state, ["reviewContent", "value"])(
+                    e.target.value
+                  );
                 }}
                 placeholder={
                   "What went wrong this time? How can this company improve? Remember to be honest, helpful and constructive!"
@@ -400,14 +422,12 @@ function PlasmicEvaluate__RenderFunc(props: {
                   $refs["reviewContent"] = ref;
                 }}
                 value={
-                  p.generateStateValueProp($state, [
-                    "reviewContent",
-                    "value"
-                  ]) ?? ""
+                  generateStateValueProp($state, ["reviewContent", "value"]) ??
+                  ""
                 }
               />
 
-              <p.PlasmicLink
+              <PlasmicLink__
                 data-plasmic-name={"linkHowToWrite"}
                 data-plasmic-override={overrides.linkHowToWrite}
                 className={classNames(
@@ -421,8 +441,8 @@ function PlasmicEvaluate__RenderFunc(props: {
                 platform={"nextjs"}
               >
                 {"How to write a useful review"}
-              </p.PlasmicLink>
-            </p.Stack>
+              </PlasmicLink__>
+            </Stack__>
             <div
               data-plasmic-name={"reviewTitle"}
               data-plasmic-override={overrides.reviewTitle}
@@ -441,19 +461,19 @@ function PlasmicEvaluate__RenderFunc(props: {
                 const child$Props = {
                   className: classNames("__wab_instance", sty.reviewTitle2),
                   maxLength: 100,
-                  onChange: p.generateStateOnChangePropForCodeComponents(
+                  onChange: generateStateOnChangePropForCodeComponents(
                     $state,
                     "value",
                     ["reviewTitle2", "value"],
                     AntdInput_Helpers
                   ),
                   placeholder: "What's important for people to know?",
-                  value: p.generateStateValueProp($state, [
+                  value: generateStateValueProp($state, [
                     "reviewTitle2",
                     "value"
                   ])
                 };
-                p.initializeCodeComponentStates(
+                initializeCodeComponentStates(
                   $state,
                   [
                     {
@@ -492,7 +512,7 @@ function PlasmicEvaluate__RenderFunc(props: {
               {(() => {
                 const child$Props = {
                   className: classNames("__wab_instance", sty.date),
-                  onChange: p.generateStateOnChangePropForCodeComponents(
+                  onChange: generateStateOnChangePropForCodeComponents(
                     $state,
                     "value",
                     ["date", "value"],
@@ -500,9 +520,9 @@ function PlasmicEvaluate__RenderFunc(props: {
                   ),
                   placeholder: ``,
                   type: "date",
-                  value: p.generateStateValueProp($state, ["date", "value"])
+                  value: generateStateValueProp($state, ["date", "value"])
                 };
-                p.initializeCodeComponentStates(
+                initializeCodeComponentStates(
                   $state,
                   [
                     {
@@ -524,7 +544,7 @@ function PlasmicEvaluate__RenderFunc(props: {
                 );
               })()}
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"attachments"}
               data-plasmic-override={overrides.attachments}
@@ -572,8 +592,8 @@ function PlasmicEvaluate__RenderFunc(props: {
                   {"Attach photo or screenshot"}
                 </div>
               </AntdButton>
-            </p.Stack>
-            <p.Stack
+            </Stack__>
+            <Stack__
               as={"div"}
               data-plasmic-name={"submitReview"}
               data-plasmic-override={overrides.submitReview}
@@ -662,8 +682,8 @@ function PlasmicEvaluate__RenderFunc(props: {
                   {"Submit review"}
                 </div>
               </AntdButton>
-            </p.Stack>
-          </p.Stack>
+            </Stack__>
+          </Stack__>
         </div>
       </div>
     </React.Fragment>
@@ -774,7 +794,7 @@ type NodeDefaultElementType = {
   mainNavigation: typeof MainNavigation;
   header: "div";
   companyInfo: "div";
-  companyLogo: typeof p.PlasmicImg;
+  companyLogo: typeof PlasmicImg__;
   freeBox: "div";
   companyName: "div";
   companyWebsite: "div";
@@ -858,14 +878,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -881,7 +901,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -890,7 +910,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;

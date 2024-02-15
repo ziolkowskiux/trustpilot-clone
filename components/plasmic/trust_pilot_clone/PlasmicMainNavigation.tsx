@@ -17,27 +17,50 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import Logo from "../../Logo"; // plasmic-import: xGLYzs7veW/component
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -71,21 +94,21 @@ type ArgPropType = keyof PlasmicMainNavigation__ArgsType;
 export const PlasmicMainNavigation__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicMainNavigation__OverridesType = {
-  nav?: p.Flex<"nav">;
-  content?: p.Flex<"div">;
-  mobile?: p.Flex<"div">;
-  link?: p.Flex<"a"> & Partial<LinkProps>;
-  logo?: p.Flex<typeof Logo>;
-  navMobile?: p.Flex<"div">;
-  buttonOpen?: p.Flex<"button">;
-  buttonClose?: p.Flex<"button">;
-  search?: p.Flex<"div">;
-  input?: p.Flex<typeof AntdInput>;
-  buttonClose2?: p.Flex<"button">;
-  desktop?: p.Flex<"div">;
-  links?: p.Flex<"div">;
-  navTabButton?: p.Flex<typeof NavTabButton>;
-  navProfileDropdown?: p.Flex<typeof NavProfileDropdown>;
+  nav?: Flex__<"nav">;
+  content?: Flex__<"div">;
+  mobile?: Flex__<"div">;
+  link?: Flex__<"a"> & Partial<LinkProps>;
+  logo?: Flex__<typeof Logo>;
+  navMobile?: Flex__<"div">;
+  buttonOpen?: Flex__<"button">;
+  buttonClose?: Flex__<"button">;
+  search?: Flex__<"div">;
+  input?: Flex__<typeof AntdInput>;
+  buttonClose2?: Flex__<"button">;
+  desktop?: Flex__<"div">;
+  links?: Flex__<"div">;
+  navTabButton?: Flex__<typeof NavTabButton>;
+  navProfileDropdown?: Flex__<typeof NavProfileDropdown>;
 };
 
 export interface DefaultMainNavigationProps {
@@ -117,13 +140,13 @@ function PlasmicMainNavigation__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "isOpen",
@@ -137,7 +160,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "searchOpened",
@@ -148,7 +171,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -194,7 +217,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
         }
       })()}
     >
-      <p.Stack
+      <Stack__
         as={"div"}
         data-plasmic-name={"content"}
         data-plasmic-override={overrides.content}
@@ -206,7 +229,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
           data-plasmic-override={overrides.mobile}
           className={classNames(projectcss.all, sty.mobile)}
         >
-          <p.PlasmicLink
+          <PlasmicLink__
             data-plasmic-name={"link"}
             data-plasmic-override={overrides.link}
             className={classNames(projectcss.all, projectcss.a, sty.link)}
@@ -219,7 +242,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
               data-plasmic-override={overrides.logo}
               className={classNames("__wab_instance", sty.logo)}
             />
-          </p.PlasmicLink>
+          </PlasmicLink__>
           <div
             data-plasmic-name={"navMobile"}
             data-plasmic-override={overrides.navMobile}
@@ -255,8 +278,8 @@ function PlasmicMainNavigation__RenderFunc(props: {
                         }
                         const { objRoot, variablePath } = variable;
 
-                        const oldValue = p.get(objRoot, variablePath);
-                        p.set(objRoot, variablePath, !oldValue);
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
                         return !oldValue;
                       })?.apply(null, [actionArgs]);
                     })()
@@ -325,8 +348,8 @@ function PlasmicMainNavigation__RenderFunc(props: {
                           }
                           const { objRoot, variablePath } = variable;
 
-                          const oldValue = p.get(objRoot, variablePath);
-                          p.set(objRoot, variablePath, !oldValue);
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
                           return !oldValue;
                         })?.apply(null, [actionArgs]);
                       })()
@@ -397,8 +420,8 @@ function PlasmicMainNavigation__RenderFunc(props: {
                           }
                           const { objRoot, variablePath } = variable;
 
-                          const oldValue = p.get(objRoot, variablePath);
-                          p.set(objRoot, variablePath, !oldValue);
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
                           return !oldValue;
                         })?.apply(null, [actionArgs]);
                       })()
@@ -440,7 +463,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
               })()
             : true
         ) ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"search"}
             data-plasmic-override={overrides.search}
@@ -458,7 +481,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
                   ? false
                   : undefined,
                 className: classNames("__wab_instance", sty.input),
-                onChange: p.generateStateOnChangePropForCodeComponents(
+                onChange: generateStateOnChangePropForCodeComponents(
                   $state,
                   "value",
                   ["input", "value"],
@@ -466,9 +489,9 @@ function PlasmicMainNavigation__RenderFunc(props: {
                 ),
                 placeholder: "Search for a company or category",
                 size: "large",
-                value: p.generateStateValueProp($state, ["input", "value"])
+                value: generateStateValueProp($state, ["input", "value"])
               };
-              p.initializeCodeComponentStates(
+              initializeCodeComponentStates(
                 $state,
                 [
                   {
@@ -520,8 +543,8 @@ function PlasmicMainNavigation__RenderFunc(props: {
                         }
                         const { objRoot, variablePath } = variable;
 
-                        const oldValue = p.get(objRoot, variablePath);
-                        p.set(objRoot, variablePath, !oldValue);
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
                         return !oldValue;
                       })?.apply(null, [actionArgs]);
                     })()
@@ -545,7 +568,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
                 role={"img"}
               />
             </button>
-          </p.Stack>
+          </Stack__>
         ) : null}
         {(
           hasVariant(globalVariants, "screen", "mobile")
@@ -564,7 +587,7 @@ function PlasmicMainNavigation__RenderFunc(props: {
               })()
             : true
         ) ? (
-          <p.Stack
+          <Stack__
             as={"div"}
             data-plasmic-name={"desktop"}
             data-plasmic-override={overrides.desktop}
@@ -737,9 +760,9 @@ function PlasmicMainNavigation__RenderFunc(props: {
                 {"For business"}
               </div>
             </AntdButton>
-          </p.Stack>
+          </Stack__>
         ) : null}
-      </p.Stack>
+      </Stack__>
     </nav>
   ) as React.ReactElement | null;
 }

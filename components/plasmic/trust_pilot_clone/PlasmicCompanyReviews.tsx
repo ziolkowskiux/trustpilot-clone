@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,22 +66,6 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import MainNavigation from "../../MainNavigation"; // plasmic-import: yAd4Bu3qCA/component
 import PathBreadcrumb from "../../PathBreadcrumb"; // plasmic-import: 829KtCjh8CIv/component
 import WebsiteAddressCard from "../../WebsiteAddressCard"; // plasmic-import: hWfONOgVJn4L/component
@@ -85,63 +108,63 @@ type ArgPropType = keyof PlasmicCompanyReviews__ArgsType;
 export const PlasmicCompanyReviews__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicCompanyReviews__OverridesType = {
-  root?: p.Flex<"div">;
-  mainNavigation?: p.Flex<typeof MainNavigation>;
-  content?: p.Flex<"div">;
-  header?: p.Flex<"div">;
-  pathBreadcrumb?: p.Flex<typeof PathBreadcrumb>;
-  basicInfo?: p.Flex<"div">;
-  companyLogo?: p.Flex<typeof p.PlasmicImg>;
-  companyName?: p.Flex<"div">;
-  reviews?: p.Flex<"div">;
-  reviews2?: p.Flex<"div">;
-  averageRating?: p.Flex<"div">;
-  trustScore?: p.Flex<"div">;
-  websiteAddressCard?: p.Flex<typeof WebsiteAddressCard>;
-  writeAReview?: p.Flex<typeof WriteAReview>;
-  reviewsSummary?: p.Flex<typeof ReviewsSummary>;
-  reviewsList?: p.Flex<"div">;
-  reviewCard?: p.Flex<typeof ReviewCard>;
-  pagination?: p.Flex<typeof AntdPagination>;
-  companyActivity?: p.Flex<typeof Card>;
-  link?: p.Flex<"a"> & Partial<LinkProps>;
-  companyActivityTags?: p.Flex<typeof CompanyActivityTags>;
-  companyInfo?: p.Flex<typeof Card>;
-  trustpilotExperience?: p.Flex<typeof Card>;
-  footer?: p.Flex<typeof Footer>;
-  drawer?: p.Flex<typeof AntdDrawer>;
-  sectionRating?: p.Flex<"div">;
-  sectionTitle?: p.Flex<"div">;
-  options2?: p.Flex<"div">;
-  rating1?: p.Flex<typeof Label>;
-  rating2?: p.Flex<typeof Label>;
-  rating3?: p.Flex<typeof Label>;
-  rating4?: p.Flex<typeof Label>;
-  rating5?: p.Flex<typeof Label>;
-  sectionRecommended?: p.Flex<"div">;
-  sectionTitle2?: p.Flex<"div">;
-  options?: p.Flex<"div">;
-  checkboxVerified?: p.Flex<"div">;
-  verified?: p.Flex<typeof AntdCheckbox>;
-  captionVerified2?: p.Flex<"div">;
-  captionVerified?: p.Flex<"div">;
-  checkboxReplies?: p.Flex<"div">;
-  replies?: p.Flex<typeof AntdCheckbox>;
-  captionReplies2?: p.Flex<"div">;
-  captionReplies?: p.Flex<"div">;
-  sectionDatePosted?: p.Flex<"div">;
-  sectionTitle3?: p.Flex<"div">;
-  datePosted?: p.Flex<typeof AntdRadioGroup>;
-  sectionSearch?: p.Flex<"div">;
-  sectionTitle4?: p.Flex<"div">;
-  searchBar?: p.Flex<typeof AntdInput>;
-  sectionLanguages?: p.Flex<"div">;
-  sectionTitle5?: p.Flex<"div">;
-  language?: p.Flex<typeof AntdRadioGroup>;
-  reset?: p.Flex<typeof AntdButton>;
-  showFiltered?: p.Flex<typeof AntdButton>;
-  button?: p.Flex<"button">;
-  svg?: p.Flex<"svg">;
+  root?: Flex__<"div">;
+  mainNavigation?: Flex__<typeof MainNavigation>;
+  content?: Flex__<"div">;
+  header?: Flex__<"div">;
+  pathBreadcrumb?: Flex__<typeof PathBreadcrumb>;
+  basicInfo?: Flex__<"div">;
+  companyLogo?: Flex__<typeof PlasmicImg__>;
+  companyName?: Flex__<"div">;
+  reviews?: Flex__<"div">;
+  reviews2?: Flex__<"div">;
+  averageRating?: Flex__<"div">;
+  trustScore?: Flex__<"div">;
+  websiteAddressCard?: Flex__<typeof WebsiteAddressCard>;
+  writeAReview?: Flex__<typeof WriteAReview>;
+  reviewsSummary?: Flex__<typeof ReviewsSummary>;
+  reviewsList?: Flex__<"div">;
+  reviewCard?: Flex__<typeof ReviewCard>;
+  pagination?: Flex__<typeof AntdPagination>;
+  companyActivity?: Flex__<typeof Card>;
+  link?: Flex__<"a"> & Partial<LinkProps>;
+  companyActivityTags?: Flex__<typeof CompanyActivityTags>;
+  companyInfo?: Flex__<typeof Card>;
+  trustpilotExperience?: Flex__<typeof Card>;
+  footer?: Flex__<typeof Footer>;
+  drawer?: Flex__<typeof AntdDrawer>;
+  sectionRating?: Flex__<"div">;
+  sectionTitle?: Flex__<"div">;
+  options2?: Flex__<"div">;
+  rating1?: Flex__<typeof Label>;
+  rating2?: Flex__<typeof Label>;
+  rating3?: Flex__<typeof Label>;
+  rating4?: Flex__<typeof Label>;
+  rating5?: Flex__<typeof Label>;
+  sectionRecommended?: Flex__<"div">;
+  sectionTitle2?: Flex__<"div">;
+  options?: Flex__<"div">;
+  checkboxVerified?: Flex__<"div">;
+  verified?: Flex__<typeof AntdCheckbox>;
+  captionVerified2?: Flex__<"div">;
+  captionVerified?: Flex__<"div">;
+  checkboxReplies?: Flex__<"div">;
+  replies?: Flex__<typeof AntdCheckbox>;
+  captionReplies2?: Flex__<"div">;
+  captionReplies?: Flex__<"div">;
+  sectionDatePosted?: Flex__<"div">;
+  sectionTitle3?: Flex__<"div">;
+  datePosted?: Flex__<typeof AntdRadioGroup>;
+  sectionSearch?: Flex__<"div">;
+  sectionTitle4?: Flex__<"div">;
+  searchBar?: Flex__<typeof AntdInput>;
+  sectionLanguages?: Flex__<"div">;
+  sectionTitle5?: Flex__<"div">;
+  language?: Flex__<typeof AntdRadioGroup>;
+  reset?: Flex__<typeof AntdButton>;
+  showFiltered?: Flex__<typeof AntdButton>;
+  button?: Flex__<"button">;
+  svg?: Flex__<"svg">;
 };
 
 export interface DefaultCompanyReviewsProps {}
@@ -171,16 +194,16 @@ function PlasmicCompanyReviews__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "pagination.currentPage",
@@ -188,10 +211,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 1,
 
-        onMutate: p.generateOnMutateForSpec(
-          "currentPage",
-          AntdPagination_Helpers
-        )
+        onMutate: generateOnMutateForSpec("currentPage", AntdPagination_Helpers)
       },
       {
         path: "pagination.pageSize",
@@ -199,7 +219,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 10,
 
-        onMutate: p.generateOnMutateForSpec("pageSize", AntdPagination_Helpers)
+        onMutate: generateOnMutateForSpec("pageSize", AntdPagination_Helpers)
       },
       {
         path: "pagination.startIndex",
@@ -207,10 +227,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec(
-          "startIndex",
-          AntdPagination_Helpers
-        )
+        onMutate: generateOnMutateForSpec("startIndex", AntdPagination_Helpers)
       },
       {
         path: "pagination.endIndex",
@@ -218,7 +235,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("endIndex", AntdPagination_Helpers)
+        onMutate: generateOnMutateForSpec("endIndex", AntdPagination_Helpers)
       },
       {
         path: "reviewsSummary._5StarChecked",
@@ -319,7 +336,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         path: "drawer.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => true
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "datePosted.value",
@@ -333,7 +350,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdInput_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
         path: "language.value",
@@ -493,7 +510,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
@@ -610,7 +627,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
               data-plasmic-override={overrides.header}
               className={classNames(projectcss.all, sty.header)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__umnrs)}
@@ -621,7 +638,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   className={classNames("__wab_instance", sty.pathBreadcrumb)}
                 />
 
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"basicInfo"}
                   data-plasmic-override={overrides.basicInfo}
@@ -634,7 +651,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     <div
                       className={classNames(projectcss.all, sty.column__aoNkV)}
                     >
-                      <p.Stack
+                      <Stack__
                         as={"div"}
                         hasGap={true}
                         className={classNames(
@@ -642,7 +659,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                           sty.freeBox__d9OIg
                         )}
                       >
-                        <p.PlasmicImg
+                        <PlasmicImg__
                           data-plasmic-name={"companyLogo"}
                           data-plasmic-override={overrides.companyLogo}
                           alt={""}
@@ -688,7 +705,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               })()}
                             </React.Fragment>
                           </div>
-                          <p.Stack
+                          <Stack__
                             as={"div"}
                             hasGap={true}
                             className={classNames(
@@ -729,7 +746,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                             >
                               {"average rating"}
                             </div>
-                          </p.Stack>
+                          </Stack__>
                           <div
                             data-plasmic-name={"trustScore"}
                             data-plasmic-override={overrides.trustScore}
@@ -742,7 +759,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                             {"trustScore"}
                           </div>
                         </div>
-                      </p.Stack>
+                      </Stack__>
                     </div>
                     <div
                       className={classNames(projectcss.all, sty.column__qmDeR)}
@@ -786,15 +803,15 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       ) : null}
                     </div>
                   </div>
-                </p.Stack>
-              </p.Stack>
+                </Stack__>
+              </Stack__>
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               hasGap={true}
               className={classNames(projectcss.all, sty.columns__eZj0D)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.column__g5NqW)}
@@ -836,23 +853,23 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                 <ReviewsSummary
                   data-plasmic-name={"reviewsSummary"}
                   data-plasmic-override={overrides.reviewsSummary}
-                  _1StarChecked={p.generateStateValueProp($state, [
+                  _1StarChecked={generateStateValueProp($state, [
                     "reviewsSummary",
                     "_1StarChecked"
                   ])}
-                  _2StarChecked={p.generateStateValueProp($state, [
+                  _2StarChecked={generateStateValueProp($state, [
                     "reviewsSummary",
                     "_2StarChecked"
                   ])}
-                  _3StarChecked={p.generateStateValueProp($state, [
+                  _3StarChecked={generateStateValueProp($state, [
                     "reviewsSummary",
                     "_3StarChecked"
                   ])}
-                  _4StarChecked={p.generateStateValueProp($state, [
+                  _4StarChecked={generateStateValueProp($state, [
                     "reviewsSummary",
                     "_4StarChecked"
                   ])}
-                  _5StarChecked={p.generateStateValueProp($state, [
+                  _5StarChecked={generateStateValueProp($state, [
                     "reviewsSummary",
                     "_5StarChecked"
                   ])}
@@ -881,7 +898,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            p.set(objRoot, variablePath, value);
+                            $stateSet(objRoot, variablePath, value);
                             return value;
                           })?.apply(null, [actionArgs]);
                         })()
@@ -897,7 +914,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     }
                   }}
                   on1StarCheckedChange={async (...eventArgs: any) => {
-                    p.generateStateOnChangeProp($state, [
+                    generateStateOnChangeProp($state, [
                       "reviewsSummary",
                       "_1StarChecked"
                     ]).apply(null, eventArgs);
@@ -924,8 +941,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               }
                               const { objRoot, variablePath } = variable;
 
-                              const oldValue = p.get(objRoot, variablePath);
-                              p.set(objRoot, variablePath, !oldValue);
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
                               return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
@@ -944,7 +961,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     }).apply(null, eventArgs);
                   }}
                   on2StarCheckedChange={async (...eventArgs: any) => {
-                    p.generateStateOnChangeProp($state, [
+                    generateStateOnChangeProp($state, [
                       "reviewsSummary",
                       "_2StarChecked"
                     ]).apply(null, eventArgs);
@@ -971,8 +988,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               }
                               const { objRoot, variablePath } = variable;
 
-                              const oldValue = p.get(objRoot, variablePath);
-                              p.set(objRoot, variablePath, !oldValue);
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
                               return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
@@ -991,7 +1008,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     }).apply(null, eventArgs);
                   }}
                   on3StarCheckedChange={async (...eventArgs: any) => {
-                    p.generateStateOnChangeProp($state, [
+                    generateStateOnChangeProp($state, [
                       "reviewsSummary",
                       "_3StarChecked"
                     ]).apply(null, eventArgs);
@@ -1018,8 +1035,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               }
                               const { objRoot, variablePath } = variable;
 
-                              const oldValue = p.get(objRoot, variablePath);
-                              p.set(objRoot, variablePath, !oldValue);
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
                               return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
@@ -1038,7 +1055,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     }).apply(null, eventArgs);
                   }}
                   on4StarCheckedChange={async (...eventArgs: any) => {
-                    p.generateStateOnChangeProp($state, [
+                    generateStateOnChangeProp($state, [
                       "reviewsSummary",
                       "_4StarChecked"
                     ]).apply(null, eventArgs);
@@ -1065,8 +1082,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               }
                               const { objRoot, variablePath } = variable;
 
-                              const oldValue = p.get(objRoot, variablePath);
-                              p.set(objRoot, variablePath, !oldValue);
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
                               return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
@@ -1085,7 +1102,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     }).apply(null, eventArgs);
                   }}
                   on5StarCheckedChange={async (...eventArgs: any) => {
-                    p.generateStateOnChangeProp($state, [
+                    generateStateOnChangeProp($state, [
                       "reviewsSummary",
                       "_5StarChecked"
                     ]).apply(null, eventArgs);
@@ -1112,8 +1129,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                               }
                               const { objRoot, variablePath } = variable;
 
-                              const oldValue = p.get(objRoot, variablePath);
-                              p.set(objRoot, variablePath, !oldValue);
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
                               return !oldValue;
                             })?.apply(null, [actionArgs]);
                           })()
@@ -1224,7 +1241,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   })()}
                 />
 
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"reviewsList"}
                   data-plasmic-override={overrides.reviewsList}
@@ -1312,7 +1329,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   {(() => {
                     const child$Props = {
                       className: classNames("__wab_instance", sty.pagination),
-                      current: p.generateStateValueProp($state, [
+                      current: generateStateValueProp($state, [
                         "pagination",
                         "currentPage"
                       ]),
@@ -1320,19 +1337,19 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       defaultPageSize: 10,
                       hideOnSinglePage: false,
                       onChange: async (...eventArgs: any) => {
-                        p.generateStateOnChangePropForCodeComponents(
+                        generateStateOnChangePropForCodeComponents(
                           $state,
                           "currentPage",
                           ["pagination", "currentPage"],
                           AntdPagination_Helpers
                         ).apply(null, eventArgs);
-                        p.generateStateOnChangePropForCodeComponents(
+                        generateStateOnChangePropForCodeComponents(
                           $state,
                           "startIndex",
                           ["pagination", "startIndex"],
                           AntdPagination_Helpers
                         ).apply(null, eventArgs);
-                        p.generateStateOnChangePropForCodeComponents(
+                        generateStateOnChangePropForCodeComponents(
                           $state,
                           "endIndex",
                           ["pagination", "endIndex"],
@@ -1340,13 +1357,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         ).apply(null, eventArgs);
                       },
                       onShowSizeChange:
-                        p.generateStateOnChangePropForCodeComponents(
+                        generateStateOnChangePropForCodeComponents(
                           $state,
                           "pageSize",
                           ["pagination", "pageSize"],
                           AntdPagination_Helpers
                         ),
-                      pageSize: p.generateStateValueProp($state, [
+                      pageSize: generateStateValueProp($state, [
                         "pagination",
                         "pageSize"
                       ]),
@@ -1380,7 +1397,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       })()
                     };
-                    p.initializeCodeComponentStates(
+                    initializeCodeComponentStates(
                       $state,
                       [
                         {
@@ -1413,9 +1430,9 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       />
                     );
                   })()}
-                </p.Stack>
-              </p.Stack>
-              <p.Stack
+                </Stack__>
+              </Stack__>
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.column__kctQ5)}
@@ -1425,7 +1442,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-override={overrides.companyActivity}
                   className={classNames("__wab_instance", sty.companyActivity)}
                   title={
-                    <p.Stack
+                    <Stack__
                       as={"div"}
                       hasGap={true}
                       className={classNames(projectcss.all, sty.freeBox__glx7E)}
@@ -1439,7 +1456,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       >
                         {"Company activity"}
                       </div>
-                      <p.PlasmicLink
+                      <PlasmicLink__
                         data-plasmic-name={"link"}
                         data-plasmic-override={overrides.link}
                         className={classNames(
@@ -1453,8 +1470,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         platform={"nextjs"}
                       >
                         {"See all"}
-                      </p.PlasmicLink>
-                    </p.Stack>
+                      </PlasmicLink__>
+                    </Stack__>
                   }
                 >
                   <CompanyActivityTags
@@ -1471,7 +1488,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-override={overrides.companyInfo}
                   className={classNames("__wab_instance", sty.companyInfo)}
                   title={
-                    <p.Stack
+                    <Stack__
                       as={"div"}
                       hasGap={true}
                       className={classNames(
@@ -1497,7 +1514,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       >
                         {"Information written by the company"}
                       </div>
-                    </p.Stack>
+                    </Stack__>
                   }
                 />
 
@@ -1520,8 +1537,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     </div>
                   }
                 />
-              </p.Stack>
-            </p.Stack>
+              </Stack__>
+            </Stack__>
           </div>
           <Footer
             data-plasmic-name={"footer"}
@@ -1606,7 +1623,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            p.set(objRoot, variablePath, value);
+                            $stateSet(objRoot, variablePath, value);
                             return value;
                           })?.apply(null, [actionArgs]);
                         })()
@@ -1637,20 +1654,17 @@ function PlasmicCompanyReviews__RenderFunc(props: {
               </div>
             }
             forceRender={false}
-            onOpenChange={p.generateStateOnChangeProp($state, [
-              "drawer",
-              "open"
-            ])}
-            open={p.generateStateValueProp($state, ["drawer", "open"])}
+            onOpenChange={generateStateOnChangeProp($state, ["drawer", "open"])}
+            open={generateStateValueProp($state, ["drawer", "open"])}
             title={"Filter by"}
           >
-            <p.Stack
+            <Stack__
               as={"div"}
               hasGap={true}
               className={classNames(projectcss.all, sty.freeBox__yyQbp)}
               id={"drawer-filters"}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"sectionRating"}
                 data-plasmic-override={overrides.sectionRating}
@@ -1668,7 +1682,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                 >
                   {"Rating"}
                 </div>
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"options2"}
                   data-plasmic-override={overrides.options2}
@@ -1679,13 +1693,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     data-plasmic-name={"rating1"}
                     data-plasmic-override={overrides.rating1}
                     className={classNames("__wab_instance", sty.rating1)}
-                    isSelected={p.generateStateValueProp($state, [
+                    isSelected={generateStateValueProp($state, [
                       "rating1",
                       "isSelected"
                     ])}
                     label={"1"}
                     onIsSelectedChange={async (...eventArgs: any) => {
-                      p.generateStateOnChangeProp($state, [
+                      generateStateOnChangeProp($state, [
                         "rating1",
                         "isSelected"
                       ]).apply(null, eventArgs);
@@ -1712,8 +1726,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                const oldValue = p.get(objRoot, variablePath);
-                                p.set(objRoot, variablePath, !oldValue);
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
                                 return !oldValue;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -1731,7 +1748,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     }}
-                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                    onLabelValueChange={generateStateOnChangeProp($state, [
                       "rating1",
                       "labelValue"
                     ])}
@@ -1754,13 +1771,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     data-plasmic-name={"rating2"}
                     data-plasmic-override={overrides.rating2}
                     className={classNames("__wab_instance", sty.rating2)}
-                    isSelected={p.generateStateValueProp($state, [
+                    isSelected={generateStateValueProp($state, [
                       "rating2",
                       "isSelected"
                     ])}
                     label={"2"}
                     onIsSelectedChange={async (...eventArgs: any) => {
-                      p.generateStateOnChangeProp($state, [
+                      generateStateOnChangeProp($state, [
                         "rating2",
                         "isSelected"
                       ]).apply(null, eventArgs);
@@ -1787,8 +1804,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                const oldValue = p.get(objRoot, variablePath);
-                                p.set(objRoot, variablePath, !oldValue);
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
                                 return !oldValue;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -1806,7 +1826,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     }}
-                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                    onLabelValueChange={generateStateOnChangeProp($state, [
                       "rating2",
                       "labelValue"
                     ])}
@@ -1829,13 +1849,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     data-plasmic-name={"rating3"}
                     data-plasmic-override={overrides.rating3}
                     className={classNames("__wab_instance", sty.rating3)}
-                    isSelected={p.generateStateValueProp($state, [
+                    isSelected={generateStateValueProp($state, [
                       "rating3",
                       "isSelected"
                     ])}
                     label={"3"}
                     onIsSelectedChange={async (...eventArgs: any) => {
-                      p.generateStateOnChangeProp($state, [
+                      generateStateOnChangeProp($state, [
                         "rating3",
                         "isSelected"
                       ]).apply(null, eventArgs);
@@ -1862,8 +1882,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                const oldValue = p.get(objRoot, variablePath);
-                                p.set(objRoot, variablePath, !oldValue);
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
                                 return !oldValue;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -1881,7 +1904,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     }}
-                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                    onLabelValueChange={generateStateOnChangeProp($state, [
                       "rating3",
                       "labelValue"
                     ])}
@@ -1904,13 +1927,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     data-plasmic-name={"rating4"}
                     data-plasmic-override={overrides.rating4}
                     className={classNames("__wab_instance", sty.rating4)}
-                    isSelected={p.generateStateValueProp($state, [
+                    isSelected={generateStateValueProp($state, [
                       "rating4",
                       "isSelected"
                     ])}
                     label={"4"}
                     onIsSelectedChange={async (...eventArgs: any) => {
-                      p.generateStateOnChangeProp($state, [
+                      generateStateOnChangeProp($state, [
                         "rating4",
                         "isSelected"
                       ]).apply(null, eventArgs);
@@ -1937,8 +1960,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                const oldValue = p.get(objRoot, variablePath);
-                                p.set(objRoot, variablePath, !oldValue);
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
                                 return !oldValue;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -1956,7 +1982,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     }}
-                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                    onLabelValueChange={generateStateOnChangeProp($state, [
                       "rating4",
                       "labelValue"
                     ])}
@@ -1979,13 +2005,13 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     data-plasmic-name={"rating5"}
                     data-plasmic-override={overrides.rating5}
                     className={classNames("__wab_instance", sty.rating5)}
-                    isSelected={p.generateStateValueProp($state, [
+                    isSelected={generateStateValueProp($state, [
                       "rating5",
                       "isSelected"
                     ])}
                     label={"5"}
                     onIsSelectedChange={async (...eventArgs: any) => {
-                      p.generateStateOnChangeProp($state, [
+                      generateStateOnChangeProp($state, [
                         "rating5",
                         "isSelected"
                       ]).apply(null, eventArgs);
@@ -2012,8 +2038,11 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                const oldValue = p.get(objRoot, variablePath);
-                                p.set(objRoot, variablePath, !oldValue);
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
                                 return !oldValue;
                               })?.apply(null, [actionArgs]);
                             })()
@@ -2031,7 +2060,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     }}
-                    onLabelValueChange={p.generateStateOnChangeProp($state, [
+                    onLabelValueChange={generateStateOnChangeProp($state, [
                       "rating5",
                       "labelValue"
                     ])}
@@ -2049,9 +2078,9 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       }
                     })()}
                   />
-                </p.Stack>
-              </p.Stack>
-              <p.Stack
+                </Stack__>
+              </Stack__>
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"sectionRecommended"}
                 data-plasmic-override={overrides.sectionRecommended}
@@ -2069,7 +2098,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                 >
                   {"Recommended"}
                 </div>
-                <p.Stack
+                <Stack__
                   as={"div"}
                   data-plasmic-name={"options"}
                   data-plasmic-override={overrides.options}
@@ -2084,12 +2113,12 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     <AntdCheckbox
                       data-plasmic-name={"verified"}
                       data-plasmic-override={overrides.verified}
-                      checked={p.generateStateValueProp($state, [
+                      checked={generateStateValueProp($state, [
                         "verified",
                         "checked"
                       ])}
                       className={classNames("__wab_instance", sty.verified)}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "verified",
                         "checked"
                       ])}
@@ -2135,12 +2164,12 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     <AntdCheckbox
                       data-plasmic-name={"replies"}
                       data-plasmic-override={overrides.replies}
-                      checked={p.generateStateValueProp($state, [
+                      checked={generateStateValueProp($state, [
                         "replies",
                         "checked"
                       ])}
                       className={classNames("__wab_instance", sty.replies)}
-                      onChange={p.generateStateOnChangeProp($state, [
+                      onChange={generateStateOnChangeProp($state, [
                         "replies",
                         "checked"
                       ])}
@@ -2176,9 +2205,9 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                       </div>
                     </div>
                   </div>
-                </p.Stack>
-              </p.Stack>
-              <p.Stack
+                </Stack__>
+              </Stack__>
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"sectionDatePosted"}
                 data-plasmic-override={overrides.sectionDatePosted}
@@ -2200,7 +2229,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"datePosted"}
                   data-plasmic-override={overrides.datePosted}
                   className={classNames("__wab_instance", sty.datePosted)}
-                  onChange={p.generateStateOnChangeProp($state, [
+                  onChange={generateStateOnChangeProp($state, [
                     "datePosted",
                     "value"
                   ])}
@@ -2224,7 +2253,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     __composite["4"]["label"] = "Last 12 months";
                     return __composite;
                   })()}
-                  value={p.generateStateValueProp($state, [
+                  value={generateStateValueProp($state, [
                     "datePosted",
                     "value"
                   ])}
@@ -2258,8 +2287,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     </div>
                   </AntdRadio>
                 </AntdRadioGroup>
-              </p.Stack>
-              <p.Stack
+              </Stack__>
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"sectionSearch"}
                 data-plasmic-override={overrides.sectionSearch}
@@ -2281,7 +2310,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   const child$Props = {
                     allowClear: true,
                     className: classNames("__wab_instance", sty.searchBar),
-                    onChange: p.generateStateOnChangePropForCodeComponents(
+                    onChange: generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
                       ["searchBar", "value"],
@@ -2289,12 +2318,12 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     ),
                     placeholder: "Search by keyword",
                     type: "text",
-                    value: p.generateStateValueProp($state, [
+                    value: generateStateValueProp($state, [
                       "searchBar",
                       "value"
                     ])
                   };
-                  p.initializeCodeComponentStates(
+                  initializeCodeComponentStates(
                     $state,
                     [
                       {
@@ -2315,8 +2344,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     />
                   );
                 })()}
-              </p.Stack>
-              <p.Stack
+              </Stack__>
+              <Stack__
                 as={"div"}
                 data-plasmic-name={"sectionLanguages"}
                 data-plasmic-override={overrides.sectionLanguages}
@@ -2338,7 +2367,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                   data-plasmic-name={"language"}
                   data-plasmic-override={overrides.language}
                   className={classNames("__wab_instance", sty.language)}
-                  onChange={p.generateStateOnChangeProp($state, [
+                  onChange={generateStateOnChangeProp($state, [
                     "language",
                     "value"
                   ])}
@@ -2348,10 +2377,7 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     __composite["0"]["label"] = "All languages";
                     return __composite;
                   })()}
-                  value={p.generateStateValueProp($state, [
-                    "language",
-                    "value"
-                  ])}
+                  value={generateStateValueProp($state, ["language", "value"])}
                 >
                   <AntdRadio
                     className={classNames("__wab_instance", sty.radio__iGg5R)}
@@ -2382,8 +2408,8 @@ function PlasmicCompanyReviews__RenderFunc(props: {
                     </div>
                   </AntdRadio>
                 </AntdRadioGroup>
-              </p.Stack>
-            </p.Stack>
+              </Stack__>
+            </Stack__>
           </AntdDrawer>
         </div>
       </div>
@@ -2635,7 +2661,7 @@ type NodeDefaultElementType = {
   header: "div";
   pathBreadcrumb: typeof PathBreadcrumb;
   basicInfo: "div";
-  companyLogo: typeof p.PlasmicImg;
+  companyLogo: typeof PlasmicImg__;
   companyName: "div";
   reviews: "div";
   reviews2: "div";
@@ -2747,14 +2773,14 @@ function withPlasmicPageGuard<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const PageGuard: React.FC<P> = props => (
-    <p.PlasmicPageGuard
+    <PlasmicPageGuard__
       minRole={null}
       appId={"uzL7MLDrNkZiDQaUBve1wf"}
       authorizeEndpoint={"https://studio.plasmic.app/authorize"}
       canTriggerLogin={true}
     >
       <WrappedComponent {...props} />
-    </p.PlasmicPageGuard>
+    </PlasmicPageGuard__>
   );
 
   return PageGuard;
@@ -2770,7 +2796,7 @@ function withUsePlasmicAuth<P extends object>(
     });
 
     return (
-      <p.PlasmicDataSourceContextProvider
+      <PlasmicDataSourceContextProvider__
         value={{
           ...dataSourceCtx,
           isUserLoading,
@@ -2779,7 +2805,7 @@ function withUsePlasmicAuth<P extends object>(
         }}
       >
         <WrappedComponent {...props} />
-      </p.PlasmicDataSourceContextProvider>
+      </PlasmicDataSourceContextProvider__>
     );
   };
   return WithUsePlasmicAuthComponent;
